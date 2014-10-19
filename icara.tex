@@ -40,11 +40,11 @@
 \begin{document}
 \title{Intrusion Detection of a Wireless Sensor Network\\Over the Air Update Protocol}
 \author{
-		\IEEEauthorblockN{	A S M Ashraful Alam\IEEEauthorrefmark{1} and
-							David Eyers\IEEEauthorrefmark{1} and 
-							Zhiyi Huang\IEEEauthorrefmark{1} and 
+		\IEEEauthorblockN{	A S M Ashraful Alam\IEEEauthorrefmark{1},  % and
+							David Eyers\IEEEauthorrefmark{1},  % and 
+							Zhiyi Huang\IEEEauthorrefmark{1} 
 						}
-	\IEEEauthorblockA{\IEEEauthorrefmark{1}Department of Computer Science, University of Otago, New Zealand, Email: \{aalam,dme,hzy\}@cs.otago.ac.nz} 
+	\IEEEauthorblockA{\IEEEauthorrefmark{1}Department of Computer Science, University of Otago, New Zealand, Email: \{aalam, dme, hzy\}@cs.otago.ac.nz} 
 }
 
 
@@ -63,13 +63,13 @@ The IDS in association with the IDS Transport Client (ITC) in the sink analyses 
 motes in the network and computes a `Intrusion Warning Score' through an algorithmic function to indicate a possible intrusion i.e., a probable illegitimate update.
 \end{abstract}
 
-\begin{keyword}
-\kwd{Wireless Sensonrs}
-\kwd{WSN}
-\kwd{Intrusion Detection System}
-\kwd{Security}
-\kmw{Robotics}
-\end{keyword}
+%\begin{keyword}
+%\kwd{Wireless Sensonrs}
+%\kwd{WSN}
+%\kwd{Intrusion Detection System}
+%\kwd{Security}
+%\kmw{Robotics}
+%\end{keyword}
 
 % no keywords
 % For peer review papers, you can put extra information on the cover
@@ -85,28 +85,131 @@ Security of sensed environmental data external to the robots
 %ICARA does accept papers on sensors. With collaborative robotics increasing rapidly, security of inter-robot communication over wireless media is of great importance. Your proposed paper would be of interest to ICARA attendees and we look forward to receiving your paper by 27th October.
 
 \section{Introduction}
+\label{sec:intro}
 %	\subsection{Subsection Heading Here}
 %		\subsubsection{Subsubsection Heading Here}
-\paragraph{Application of Sensors in Robotics. How important is WSN in robotics}
-\paragraph{Why WSN communication in robotics/any application need to be secured. }
-If inputs from wireless sensors are forged, then catastrophic errorneous results are expected			
-\paragraph{Why it is important to secure updates? How WSN updates can be forged to impede the capabilities of robotics}
-\paragraph{Why it is necessary to have IDS not encryption in case of WSN}
-\paragraph{Security if WSN and Update needs. what are the problems. How do I plan to handle them (How do I do it). > Contributions} \\
-Organisation of the paper
 
-\subsection{Literature Review}
+%\paragraph{Application of Sensors in Robotics. How important is WSN in robotics}
+Wireless Sensor Network (WSN) has attracted many robotics researchers because of the potentials for many problem solving applications, such as robot localisation, path finding, sensing, mapping. 
+The wireless sensors and robotics can be coined to offer great advantages in many fields like ambient assisted living, environmental monitoring, vine pruning, and so on.
+Mission critical robotic applications in military, mining industry, team collaboration, or companion for older adults employ wireless sensors as well.
+Conversely, robotics can be utilised to solve WSN problems like sensor deployment/relocation in hostile environment, data aggregation, acting a data mules.
+Connecting WSNs with group of robots can extend the capability of each other.
+A technology that made this possible in recent days, is known as Internet of Things (IoT) .
+Integrated WSNs and robotics applications augment a robot's interaction and decision making capabilities and services where WSNs can be deployed in the environment.
+
+Devices in WSN are known as nodes or motes, are generally self-powered with inbuilt limited processing hardware.
+A mote has an embedded microprocessor, a radio and one or more sensors.
+The manager node, which is connected to a workstation with greater processing capability is called a sink or base station. 
+Motes and sinks together dynamically form an autonomous networked environment where all sensor nodes within range and sharing the same radio channel and protocols take part.
+Data exchange in WSN takes place only locally using an autonomous relay mechanism that does not have any routing table. 
+A WSN is ultimately employed for sensing and detecting certain physical phenomena, on which basic processing is performed at the individual mote, the processed information is relayed back to a computing device  through the sink for further processing.
+WSNs are generally deployed for long-term monitoring at scales and resolutions that are difficult to manage. 
+They may necessitate reprogramming after deployment to accommodate alteration in the environment, sensing applications, or scientific requirements \cite{ISI:000253439700120}.
+
+%\paragraph{What is intrusion}
+Intrusion is the ability to disrupt or degrade the intended functionality of the network or a part of it; it  may or may not be intentional.
+Intrusion in software update primarily means uploading inappropriate software that performs undesired actions, clandestinely replacing the  sensor operating system (OS) software, and so on.
+An adversary may also employ  the suppression to prevent the update propagation, waste network resources, disrupt the normal operation of code dissemination. 
+He may even be able to inject malicious codes to pollute the network and deny intended function.
+%Advertisements are not authenticated in deluge protocol, any node in the WSNs may advertise any message. 
+So an adversary can launch several attacks on WSn by  injecting bogus or modified software or updates. 
+
+
+Sensors have huge limitation in their capability to be independently useful.
+Sensors can sense, they cannot react. 
+They have resource constraints like with respect to processing power, tiny memory and storage, and most important of all low energy.
+While it is possible to perform limited computing in motes, it is actually not suitable for heavy computational tasks.
+On the other hand, robots have greater capabilities.
+Some of the most important capabilities of a robot include mobility, performing resource intensive tasks, operating in unfavourable environments.
+Combining the capabilities of WSN and robots are therefore very conducive in a unified fashion.
+
+%\paragraph{Why WSN communication in robotics/any application need to be secured. }
+%If inputs from wireless sensors are forged, then catastrophic errorneous results are expected			
+%\paragraph{Why it is important to secure updates? How WSN updates can be forged to impede the capabilities of robotics}
+Security is one of the major concerns for adopting WSN technology. 
+Keeping WSNs secure is a challenging task because of the wireless environment and possible  wide variety of applications.
+Security techniques developed for other wireless technologies cannot readily be employed in WSN for the limited resources.
+A robot may be fed with wrong kind of stimuli from the environmental WSN sources that might  lead to undesired robotic responses. 
+Various possible attacks on WSNs have been explained in \cite{roosta2006taxonomy}, \cite{roosta2008attacks}.
+
+%\paragraph{Why it is necessary to have IDS not encryption in case of WSN}
+Security schemes in WSNs have two main approaches --- using cryptography (crypto) to secure communication and  employing Intrusion Detection System (IDS) to oversee activities.
+Crypto techniques are active approaches through use of cryptographic keys, encryption and decryption schemes, algorithms, policies and procedures.
+Because  of the absence of the session and presentation layers, and resource constraints like processing capability, energy, memory, designing crypto based security solutions for wireless sensors are complicated, expansive and yet may not be effective.
+An adversary can employ much greater computing resources to break in through the protection provided by crupto solutions.
+Absence of switches and gateways in WSN hampers monitoring of information flow.
+On the other hand, an IDS detects suspicious behaviour in the network, provides useful information like identification and location of the intruder, extent of intrusion and likewise.
+
+
+%\paragraph{Security of WSN and Update needs. what are the problems. }
+Software update in WSN is a vulnerable process.
+It implies effects beyond the updates only.
+The process is particularly vulnerable because the running OS and application need to switch from old version to new one. 
+At one stage during this process, crypto measures and IDS running on the sensor motes are deactivated or unavailable for a short period of time.
+This opens up a vulnerable window in time when it is easier to intrude.
+From network point of view, the update process contributes to a significant increase in traffic that an adversary may exploit to  mask his undesired actions. 
+
+
+%\paragraph{How do I plan to handle them (How do I do it). > Contributions} \\
+A suitable IDS can detect  break in events. 
+However, an IDS does not prevent the break in, but alerts following some predefined procedures in case of a security breach.
+Research in WSN security with respect to IDS has lots of potentials for new discovery and implementation. 
+We propose a novel algorithm that requires minor modification of the OTA update protocol by incorporating Active Message (AM). 
+AM is a single-hop, unreliable packet used for network abstraction in TinyOS. 
+It has a destination address, a type field, provides synchronous acknowledgements \cite{tep116}. 
+AM equips the IDS with a centralised view of a network-wide knowledge that is processed and analysed to work out a score function according to indicate a possible intrusion.
+This work's contributions are two fold.
+\begin{inparaenum}
+\item  The IDS identifies anomalies in software update patterns and scores them quantitatively;
+\item The scheme i.e., the IDS expectations can provide useful insight for designing secure WSN.
+\end{inparaenum}
+
+%\paragraph{Organisation of the paper }
+The rest of this paper is structured in the following way. In
+Section~\ref{sec:lit}, we provide an overview of intrusion related research works in WSN software update protocols. 
+We look up for  security aspects not addressed by the present WSN security researchers and the reasons behind any security deficiencies. 
+In Section~\ref{sec:meth}, we describe the experiment methodology and an overview of the system  design. 
+We then present the findings from the experiments, analyse the result and present our evaluation in Section~\ref{sec:eval}.  
+Finally, we conclude our arguments in Section~\ref{sec:concl}.
+
+
+
+
+\section{Literature Review}
+\label{sec:lit}
 \paragraph{WSN and robotics works and what they mainly address and what they do not}
 \paragraph{WSN update security lit review. What approaches are taken in WSN}
 \paragraph{IDSs in WSN}
+
+Two main security challenges in secure data aggregation are confidentiality and integrity of data. While traditionally encryption is used to provide end to end confidentiality in Wireless Sensor Network (WSN), the aggregators in a secure data aggregation scenario need to decrypt the encrypted data to perform aggregation. This exposes the plaintext at the aggregators, making the data vulnerable to attacks from an adversary. Similarly an aggregator can inject false data into the aggregate and make the base station accept false data. Thus, while data aggregation improves energy efficiency of a network, it complicates the existing security challenges.[4]
+
+The IDS identifies the anomaly in software update pattern in terms of quantitative score. The higher score indicates a higher probability of intrusion at some point in the WSN. The score can be deterministically classified when some additional information is available.
+
+An
+IDS architectures for static WSNs has been suggested that
+watches over the communications in the neighbourhood .
+Such an IDS is not capable to identify a malicious update that
+has been effected by an adversary in the WSN.
+
+\section{Methodology}
+\label{sec:meth}
+
+
+
+ki kotha
+
+\section{Results and Evaluation}
+\label{sec:eval}
+this part contains the innovative results and a brief comparison with the literature. Although projected 
+future results may be discussed, this section must deal primarily with achieved findings, not projections. Novelty 
+should be stressed.
+
+
 \section{Conclusion}
+ \label{sec:concl}
 
 
-
-\section{Introduction}
-	\subsection{Subsection Heading Here}
-		\subsubsection{Subsubsection Heading Here}
-			\paragraph{}
 %\begin{figure}[!t]
 %\centering
 %\includegraphics[width=2.5in]{myfigure}

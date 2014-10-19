@@ -1,0 +1,81 @@
+19 October 2015
+Purpose: Submission to The 6th International Conference on Automation, Robotics and Applications
+Date: 17-19 February 2015
+Venue: Rydges Lakeland Resort, Queenstown, New Zealand
+http://icara.massey.ac.nz/call_for_papers.asp
+
+Please submit your proposal to ICARA2015@massey.ac.nz
+
+Date:
+Review Manuscript Submission 27 October 2014
+Acceptance Notification  7 November 2014
+Final Manuscript Submission 14 November 2014
+Advance Registration  5 January 2015
+
+
+For further details, please contact:
+G. Sen Gupta	Eric Matson		Donald Bailey	Dong-Han Kim
+
+********************************** Files **********************************
+README                 - This file.
+icara.tex              - The main article file for conference papers.
+icara.bib              - Bibliography file
+IEEEtran.cls           - The IEEEtran LaTeX class file.
+IEEEtran.bst           - The standard IEEEtran BibTeX style file. For use with IEEE work.
+IEEEtranS.bst          - A version of IEEEtran.bst that sorts the entries.  Some IEEE conferences/publications may use/allow sorted bibliographies.
+***************************************************************************
+
+Call for Papers
+School of Engineering and Advanced Technology (SEAT), Massey University, is pleased to announce that the 6th International Conference on Automation, Robotics and Applications (ICARA 2015) will be held in Queenstown, New Zealand, in February, 2015.
+
+ICARA 2015 is intended to provide a stimulating forum for researchers, scientists, engineers and practitioners to present their latest research findings, ideas, developments and applications in all aspects of automation, robotics and sensors. ICARA 2015 will include keynote addresses by eminent scientists as well as plenary, special and regular presentation sessions. Peer review of all the papers will use a blind process and acceptance will be based on quality, originality and relevance. All accepted papers will be submitted for publication to IEEE Xplore.
+
+Authors of selected papers will be invited to submit an extended version of their paper for review and post conference publication in the Springer book series "Studies in Systems, Decision and Control" (http://www.springer.com/series/13304) and another reputable journal.. Topics will include, but are not limited to:
+Networked and Distributed Intelligent Control
+Real Time Supervisory Control
+Adaptive Control Systems
+Embedded Systems
+Mobile and Autonomous Systems
+Virtual Systems
+Multi-Agent Collaborative Systems (MACS)
+Biorobotics, Biomechatronics
+Space and Underwater Robotics
+Cooperative and Network Robotics
+Entertainment Robotics
+Rescue Robotics
+Agriculture and Field Robotics
+Service and Security Robotics
+Biped and Humanoid Robots
+Human-Machine Interfaces and Interaction
+Factory and Home Automation
+Robotics and Industrial Monitoring
+Simulation and Modelling of Robotic Systems
+Novel Robotic Locomotion
+Navigation, Mapping and Path Planning
+Tele-robotics and Tele-operation
+Fuzzy Systems, Neuro-Fuzzy Systems
+Artificial Neural Networks in robotics or automation
+Artificial Intelligence in Biosystems
+Genetic Algorithm (GA)
+Evolutionary Computation (EC) and Algorithms
+DNA Computing for Autonomous Agents
+Environmental and Food sensors
+Vision Systems for Automation and Robotics
+Smart Sensors and Sensor Fusion
+Implantable Sensors for Robotic Applications
+Sensors for Factory and Home Automation
+Instrumentation for Robotics and Automation
+Virtual Systems for Training and Education
+Mechatronics or Robotics Education
+
+Paper Submission
+
+Authors are invited to submit technical papers on their research relevant to the conference theme. Papers should be formatted according to the conference guidelines and consist of a minimum of 4 and a maximum of 6 pages including references. Papers in PDF format may be uploaded via the web using EDAS paper management system at www.edas.info/N18287.
+
+In submitting a paper, the author(s) agree that, upon acceptance, they will incorporate reviewer comments in time for inclusion into the proceedings and will present the paper at the conference. Advance registration is required for the paper to be published.
+
+The MS Word templates are available. Final manuscripts will be limited to six (6) A4 size pages. The conference proceedings will be published on USB Flash Drive and submitted for publication to IEEE Xplore.
+
+Special Sessions
+
+ICARA solicits special session proposals. The special sessions are intended to stimulate in-depth discussions on niche topics relevant to the conference theme. The session organizers will coordinate the review process for their session papers. The conference proceedings will include all papers from the special sessions.

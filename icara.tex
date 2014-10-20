@@ -63,10 +63,9 @@
 \begin{abstract}
 Robotics and  Wireless Sensor Network (WSN) collaborations is an emerging research field in which both the technologies can benefit from integrated implementations.
 In this paper, an Intrusion Detection System (IDS) for WSN  software update protocol is designed and simulated. 
-The IDS is designed to protect software updates using over the air (OTA) update protocols, specifically the Deluge protocol.
-As an OTA update protocol modifies the running software in a mote, the mote sends necessary information to the sink. 
-The IDS in association with the IDS Transport Client (ITC) in the sink analyses the update phenomena of each of the
-motes in the network and computes a `Intrusion Warning Score' through an algorithmic function to indicate a possible intrusion i.e., a probable illegitimate update.
+The IDS protects WSN software updates that use over the air (OTA) update protocols, specifically the Deluge protocol.
+When the protocol modifies the running software in a mote, the mote sends related  information to the sink. 
+The IDS in association with an IDS Transport Client (ITC) in the sink analyse the update phenomena of each of the motes in the network and computes a `Intrusion Warning Score' (IWS) through an algorithmic function to indicate a possible intrusion i.e., a probable illegitimate update.
 \end{abstract}
 
 %\begin{keyword}
@@ -98,16 +97,16 @@ Security of sensed environmental data external to the robots
 %\subsection{Application of Sensors in Robotics. How important is WSN in robotics}
 Wireless Sensor Network (WSN) has attracted many robotics researchers because of the potentials for many problem solving applications, such as robot localisation, path finding, sensing, mapping. 
 The wireless sensors and robotics can be coined to offer great advantages in many fields like ambient assisted living, environmental monitoring, vine pruning, and so on.
-Mission critical robotic applications in military, mining industry, team collaboration, or companion for older adults employ wireless sensors as well.
+Mission critical robotics applications in military, mining industry, team collaboration, or companion for older adults employ wireless sensors as well.
 Conversely, robotics can be utilised to solve WSN problems like sensor deployment/relocation in hostile environment, data aggregation, acting a data mules.
 Connecting WSNs with group of robots can extend the capability of each other.
-A technology that made this possible in recent days, is known as Internet of Things (IoT) .
 Integrated WSNs and robotics applications augment a robot's interaction and decision making capabilities and services where WSNs can be deployed in the environment.
 
 Devices in WSN are known as nodes or motes, are generally self-powered with inbuilt limited processing hardware.
 A mote has an embedded microprocessor, a radio and one or more sensors.
 The manager node, which is connected to a workstation with greater processing capability is called a sink or base station. 
-Motes and sinks together dynamically form an autonomous networked environment where all sensor nodes within range and sharing the same radio channel and protocols take part.
+All sensor nodes in a WSN has an unique identification number called `Node ID'.
+Motes and sinks, using the same radio channel and protocols,  dynamically form an autonomous networked environment where all sensor nodes within range take part.
 Data exchange in WSN takes place only locally using an autonomous relay mechanism that does not have any routing table. 
 A WSN is ultimately employed for sensing and detecting certain physical phenomena, on which basic processing is performed at the individual mote, the processed information is relayed back to a computing device  through the sink for further processing.
 WSNs are generally deployed for long-term monitoring at scales and resolutions that are difficult to manage. 
@@ -115,21 +114,55 @@ They may necessitate reprogramming after deployment to accommodate alteration in
 The update time is the time when any mote begin executing a new version of the software image.
 
 %\subsection{What is intrusion}
-Intrusion is the ability to disrupt or degrade the intended functionality of the network or a part of it; it  may or may not be intentional.
+Intrusion is an illegitimate act that aims to disrupt or degrade the intended functionality of the network or a part of it; it  may or may not be intentional.
 Intrusion in software update primarily means uploading inappropriate software that performs undesired actions, clandestinely replacing the  sensor operating system (OS) software, and so on.
-An adversary may also employ  the suppression to prevent the update propagation, waste network resources, disrupt the normal operation of code dissemination. 
-He may even be able to inject malicious codes to pollute the network and deny intended function.
-%Advertisements are not authenticated in Deluge protocol, any node in the WSNs may advertise any message. 
-So an adversary can launch several attacks on WSn by  injecting bogus or modified software or updates. 
+An intruder may also prevent the update propagation, waste network resources, disrupt the normal operation of code dissemination, inject malicious codes to pollute the network and deny intended function by  injecting bogus or modified software or updates. 
 
 
 Sensors have huge limitation in their capability to be independently useful.
 Sensors can sense, they cannot react. 
-They have resource constraints like with respect to processing power, tiny memory and storage, and most important of all low energy.
-While it is possible to perform limited computing in motes, it is actually not suitable for heavy computational tasks.
-On the other hand, robots have greater capabilities.
-Some of the most important capabilities of a robot include mobility, performing resource intensive tasks, operating in unfavourable environments.
+They have resource constraints like with respect to processing power, tiny memory, storage, and severe energy.
+The motes are not suitable for heavy computational tasks.
+On the other hand, robots have greater capabilities like mobility, performing resource intensive tasks, operating in unfavourable environments.
 Combining the capabilities of WSN and robots are therefore very conducive in a unified fashion.
+
+
+Reprogramming of the sensors is one of the most important management tasks.
+It is not easy to round up all the deployed sensors in order to reprogramme them. 
+Hence automatic over the air (OTA) reprogramming of sensors becomes an important issue.
+OTA software update poses two main security challenges: maintaining confidentiality and integrity of data. 
+An attacker quite easily may pickup and read the motes deployed in the environment.
+Similarly, he can inject false data into the sensor that can infect the network using epidemic protocols. 
+Thus, adding wireless sensors add additional security challenges in robotics.
+
+
+
+%\subsection{Security of WSN and Update needs. what are the problems. }
+Software update in WSN is a vulnerable process.
+It implies effects beyond the updates only.
+The process is particularly vulnerable because the running OS and application need to switch from old version to new one. 
+At one stage during this process, security  measures on the sensor motes are deactivated or unavailable for a short period of time.
+This opens up a vulnerable window in time when it is easier to intrude.
+From network point of view, the update process contributes to a significant increase in traffic that an adversary may exploit to  mask his actions. 
+
+
+%An IDS architectures for static WSNs has been suggested that watches over the communications in the neighbourhood . Such an IDS is not capable to identify a malicious update that has been effected by an adversary in the WSN.
+
+%Data dessemination protocols
+Several OTA network data dissemination protocols for WSNs have been implemented, which target at attaining efficiency, throughput and conserve energy.
+They generally do not cater cryptographic protection for source authentication, integrity verification and likewise. 
+The program binary authentication technique using a hash is not very useful in to resource-constrained sensors. 
+Deluge, which is a protocol for disseminating data objects in the network, uses density aware epidemic property for its operation \cite{1031506}. 
+Deluge incorporates digitally signed initial advertisement  and authenticated broadcast scheme. 
+However, we contend that it is possible for a malicious intruder to replicate an authentic image source and advertise new programme version which the motes cannot repudiate. 
+Even though,  Deluge incorporates on-chip hardware based encryption,
+Cryptography alone cannot completely prevent attacks. %on WSNs confidentiality, authenticity, availability due to resource limitation.
+Constrained computational capacity and resources make it possible to compromise the cryptographic measures incorporated in the implemented WSN OSs.
+The other vulnerability of such epidemic protocol is breach at any one point does the job of weakening the whole network for the attacker. 
+An attacker may appear somewhere in the network, pretend to be an authentic source and disappear after successful introduction of the illegitimate image to one mote in the network. 
+The security mechanisms provided by Deluge would be unable to detect the initial breach in such cases and would allow the network to be flooded by a totally new version of the application that performs completely different function~\cite{Karlof:2004:TLL:1031495.1031515}.
+While the reprogramming protocols are essential for the WSNs, they could act as carriers of rapid spread of malicious code in the network.
+
 
 %\subsection{Why WSN communication in robotics/any application need to be secured. }
 %If inputs from wireless sensors are forged, then catastrophic errorneous results are expected			
@@ -141,87 +174,51 @@ A robot may be fed with wrong kind of stimuli from the environmental WSN sources
 Various possible attacks on WSNs have been explained in~\cite{roosta2006taxonomy}, \cite{roosta2008attacks}.
 
 
+
 %\subsection{Why it is necessary to have IDS not encryption in case of WSN}
 Security schemes in WSNs have two main approaches --- using cryptography (crypto) to secure communication and  employing Intrusion Detection System (IDS) to oversee activities.
 Crypto techniques are active approaches through use of cryptographic keys, encryption and decryption schemes, algorithms, policies and procedures.
-Because  of the absence of the session and presentation layers, and resource constraints like processing capability, energy, memory, designing crypto based security solutions for wireless sensors are complicated, expansive and yet may not be effective.
-An adversary can employ much greater computing resources to break in through the protection provided by crupto solutions.
-Absence of switches and gateways in WSN hampers monitoring of information flow.
-On the other hand, an IDS detects suspicious behaviour in the network, provides useful information like identification and location of the intruder, extent of intrusion and likewise.
+Because  of the absence of the session and presentation layers, and resource constraints, designing crypto based security solutions for wireless sensors are complicated, expansive and often may not be effective.
+An adversary can employ much greater computing resources to break in through the protection provided by crypto solutions.
+Moreover, absence of switches and gateways in WSN hampers monitoring of information flow.
+Thus it is useful to employ some passive security measures alongside crypto solution.
+An IDS detects suspicious behaviour in the network, provides useful information like identification and location of the intruder, extent of intrusion and likewise.
 
 %\subsection{Lit Review} % Heading to be commented out
-Despite the requirement of huge security research in WSN, only few previous studies have considered IDS approach in recent years.
-Anomaly based approach works in a distributed manner using support vector machine that minimizes communication overhead while performing in-network anomaly detection proposed by~\cite{ISI:000257882502160}.
-A standalone rule based approach to detects anomalies at all layers of a network stack in WSN has been suggested~\cite{ISI:000232429900067}.
+Despite the need of huge security research in WSN, only few previous studies have considered IDS approach in recent years.
+An anomaly based IDS approach that works in a distributed manner and uses support vector machine to minimise communication overhead while performing in-network anomaly detection has been proposed by~\cite{ISI:000257882502160}.
+A standalone rule based approach to detect anomalies at all layers of a network stack in WSN has been suggested by ~\cite{ISI:000232429900067}.
 Rule based  techniques rely on monitoring of group of nodes and routing tables for detection~\cite{ISI:000298891500099, Chen:2009:NMI:1516241.1516282, 1424814, Strikos_afull}.
-Spontaneous watchdog technique uses the sensor broadcast, density of deployed sensors for its detection~\cite{1593102}.
-Specification based  IDS has been proposed that relies on data clustering and uses standard deviation from the average inter-cluster distance~\cite{Chen:2009:NMI:1516241.1516282, 1424814, Strikos_afull, 4085803}. 
+On the other hand, spontaneous watchdog technique uses the sensor broadcast, density of deployed sensors for its detection~\cite{1593102}.
+Specification based  IDS has been proposed that relies on data clustering and uses standard deviation from the average inter-cluster distance~\cite{Chen:2009:NMI:1516241.1516282, 1424814, Strikos_afull, 4085803}.
+ 
 Statistical based anomaly  detection looks for anomalies in routing pattern~\cite{4024996}.
-Statistical methods that use hidden Markov model focus on the accuracy of the gathered data, rather than the security of the nodes or the links~\cite{1290173}.
-Such a model monitors data arrival process in real time traffic on the nodes, analyses short term dynamic statistics using a multi-level sliding window event storage scheme that works on each node. The detection algorithms performs locally and individual nodes are not aware of the network-wide attacks~\cite{1515559}.
-Some other statistical based procedure exploits the stability of the neighbourhood information of the WSN nodes depending on average receive power and average packet arrival rate~\cite{1512911}.
+A serious weakness with this methods, however, is that  it uses hidden Markov model to focus on the accuracy of the gathered data, rather than the security of the nodes or the links~\cite{1290173}.
+The model monitors data arrival process in real time traffic on the nodes, analyses short term dynamic statistics using a multi-level sliding window event storage scheme.% that works on each node. 
+The detection algorithms performs locally and individual nodes are not aware of the network-wide attacks~\cite{1515559}.
+In contrast, some other statistical procedures exploit the stability of the neighbourhood information of the WSN nodes depending on average receive power and average packet arrival rate~\cite{1512911}.
+
 Game theory based IDS utilise Markov chain for its decision making process can monitor only one of the clusters of the network at a time, which leaves the rest of the network unprotected~\cite{1347798}, \cite{Das07preventingdos}, \cite{Reddy:2009:GTA:1607720.1607944}.
 Reputation based IDS relies on heuristic ranking algorithms to identify most likely bad nodes in the network.
 Such IDSs use high scalable cluster-based hierarchical trust management protocol to effectively identifying the selfish and malicious nodes~\cite{6174485}.
 
-Although very good results have been obtained from some of these approaches, only few of them specifically address the security issues related to software update in WSN.
-It is not easy to round up all the deployed sensors in order to reprogramme them. 
-Hence, several specific protocols have been implemented  to enable reprogramming over the air (OTA).
-OTA software update poses two main security challenges: maintaining confidentiality and integrity of data. 
-Motes deployed in the environment can be easily picked up and read by an adversary.
-Similarly an adversary can inject false data into the sensor that can infect the network using epidemic protocols. 
-Adding wireless sensors add additional security challenges in robotics.
-
-
-
-%An IDS architectures for static WSNs has been suggested that watches over the communications in the neighbourhood . Such an IDS is not capable to identify a malicious update that has been effected by an adversary in the WSN.
-
-%Data dessemination protocols
-Several OTA network data dissemination protocols have been implemented in sensor/embedded systems OSs.
-All of these protocols are targeted at attaining efficiency, throughput and conserve energy.
-The  OTA reprogramming systems, in general, do not provide cryptographic protection for source authentication, integrity verification and likewise. 
-Limitations of various techniques that can be used in WSN reprogramming has been elaborated in~\cite{1127826}. 
-The program binary authentication technique using a hash is not very useful in to resource-constrained sensors. 
-Deluge has been enhanced to handle security that we have elaborately discussed in [REFERNCE to MY OTHER PAPER in AINA]. 
-Deluge uses digital signatures for codes signing and authenticated broadcast scheme. 
-It incorporates digitally signed initial advertisement, which in turn authenticates the following messages in a chained fashion much like the CBC methods used in public key cryptography.
-However, we contend that it is possible for a malicious intruder to replicate an authentic image source and advertise new programme version which the motes cannot repudiate. 
-Even though,  Deluge incorporates on-chip hardware based AES-128 encryption,
-Cryptography cannot completely prevent attacks.%on WSNs confidentiality, authenticity, availability due to resource limitation.
-Constrained computational capacity and resources make it possible to compromise the cryptographic measures incorporated in the implemented WSN operating systems.
-The other vulnerability of such epidemic protocol is breach at any one point does the job of weakening the whole network for the attacker. 
-It is possible for him to appear somewhere in the network, pretend to be an authentic source and disappear after successful transfer of the complete image to only one of the motes in the network. 
-The security mechanisms provided by Deluge would be unable to detect the initial breach in such cases and would allow the network to be flooded by a totally new version of the application that performs completely different function~\cite{Karlof:2004:TLL:1031495.1031515}.
-While the reprogramming protocols are essential for the WSNs, they could act as carriers of rapid spread of malicious code in the network.
-Hence, we propose an analytical tool that can have valuable insight into the propagation characteristics of OTA reprogramming protocol. 
-The tool should be flexible for comparative studies of different protocols. 
-
-There is no previous works available that targets to secure update process using an IDS.
+Although very good results have been obtained from some of the approaches described above, only few of them are able to specifically address the security issues related to software update in WSN.
 The security countermeasures available in WSN systems is predominately cryptographic.
-None of the well-known WSN operating systems have ever incorporated an IDS due to the reality that such an employment would cut down on the resources, especially power.
+The WSN OSs do not incorporate an IDS approach due to the reality that such an employment would cut down on the resources, especially power.
 An IDS residing on the sensors is ideally need to be avoided by design.
 
-Hence,we propose an IDS that can primarily be applied on OTA protocol.
-The technique has been tested successfully on Deluge.
+Hence, we propose an analytical tool that sits outside the network and yet can have valuable insight into the propagation characteristics of OTA reprogramming protocol. 
+%The tool should be flexible for comparative studies of different protocols. 
+The tool, which is essentially an IDS, can primarily be applied on OTA protocol.
+The technique has been tested on Deluge.
 We have exploited services from other existing standard protocols a to gather timing information outside the WSN and then process the timing information for intrusion detection.
-Use of timing analysis approach is a new technique in IDS for WSN.
-The technique may further be extended for use with broad range of intrusion detection motives specially in WSN and also in MANET.
+Use of timing analysis approach is a novel technique in IDS for WSN.
+%The technique may further be extended for use with broad range of intrusion detection motives specially in WSN and also in MANET.
 The technique is centrally controlled, resides outside the WSN, gathers processed information from the sensors in WSN.
-However, an IDS with that broad spectrum is out of scope of this paper.
-We shall limit ourselves within its application on WSN, specifically on Deluge only.
-Before one understands how the IDS works and is able to focus on its  mechanism, one needs some prior knowledge about Deluge and its security techniques.
-
-
+%However, an IDS with that broad spectrum is out of scope of this paper.
+%We shall limit ourselves within its application on WSN, specifically on Deluge only.
+%Before one understands how the IDS works and is able to focus on its  mechanism, one needs some prior knowledge about Deluge and its security techniques.
 The IDS identifies the anomaly in software update pattern in terms of quantitative score. The higher score indicates a higher probability of intrusion at some point in the WSN. The score can be deterministically classified when some additional information is available.
-
-
-%\subsection{Security of WSN and Update needs. what are the problems. }
-Software update in WSN is a vulnerable process.
-It implies effects beyond the updates only.
-The process is particularly vulnerable because the running OS and application need to switch from old version to new one. 
-At one stage during this process, crypto measures and IDS running on the sensor motes are deactivated or unavailable for a short period of time.
-This opens up a vulnerable window in time when it is easier to intrude.
-From network point of view, the update process contributes to a significant increase in traffic that an adversary may exploit to  mask his undesired actions. 
 
 
 %\subsection{How do I plan to handle them (How do I do it). > Contributions} \\
@@ -237,6 +234,8 @@ This work's contributions are two fold.
 \item  The IDS identifies anomalies in software update patterns and scores them quantitatively;
 \item The scheme i.e., the IDS expectations can provide useful insight for designing secure WSN.
 \end{inparaenum}
+%% <Ashraf> is this paragraph a repeatation of the previous one. But there are some useful info here
+
 
 %\subsection{Organisation of the paper }
 The rest of this paper is structured in the following way. 
@@ -250,6 +249,7 @@ Finally, we conclude our arguments in this Section.
 
 
 %%\subsection{WSN and robotics works and what they mainly address and what they do not}
+%% <Ashraf>  What to do with this paar
 I DONT KNOW IF I WANT TO KEEP THIS PARA.
 Mobile robot navigation is an emerging research field where robotics and wireless sensors collaborate.
 Nodes in WSN can greatly enhance the perception capabilities of robots with robust communication coverage.

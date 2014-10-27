@@ -72,8 +72,8 @@ The IDS in association with an IDS Transport Client (ITC) in the sink analyse th
 \notedme{Mentioning robots more than just in the first word would be good}
 \end{abstract}
 
-Theme: \textbf{Security of sensed environmental data external to the robots}\\
-NEED to include Key words here\\
+%Theme: \textbf{Security of sensed environmental data external to the robots}\\
+%NEED to include Key words here\\
 
 %\begin{keyword}
 %\kwd{Wireless Sensonrs}
@@ -97,317 +97,352 @@ NEED to include Key words here\\
 
 \section{Introduction}
 \label{sec:intro}
-%	\subsection{Subsection Heading Here}
-%		\subsubsection{Subsubsection Heading Here}
 
-%\subsection{Application of Sensors in Robotics. How important is WSN in robotics}
-\notedme{This section is too long. You should be onto section 2 by page 2 or 3, I'd say. Where's the background section? Seems it starts half-way through current section 1...}
-Wireless Sensor Networks (WSN) have attracted many robotics researchers\notedme{evidence?} because of the potentials for many problem solving applications, such as robot localisation, path finding, sensing, mapping. 
-The wireless sensors and robotics can be coined\notedme{?} to offer great advantages in many fields like ambient assisted living, environmental monitoring, vine pruning, and so on.\notedme{needs citations}
-Mission critical robotics applications in military, mining industry, team collaboration, or companion for older adults employ wireless sensors as well.
-Conversely, robotics can be utilised to solve WSN problems like sensor deployment/relocation in hostile environment, data aggregation, acting a data mules.\notedme{citations needed, but I like these examples!}
-Connecting WSNs with group of robots can extend the capability of each other.
-Integrated WSNs and robotics applications augment a robot's interaction and decision making capabilities and services where WSNs can be deployed in the environment.
+Wireless Sensor Networks (WSN) have attracted robotics
+researchers because of the problem solving potentials, such as
+robot localisation, path finding, sensing, mapping. Integrated
+WSNs and robotics applications augment a robot's interaction,
+decision making capabilities and services where WSNs can be
+deployed in the environment. Mission critical robotics applications in military, mining, team collaboration, or companion
+for older adults employ wireless sensors as well. Conversely,
+robotics can also be utilised to solve WSN problems like
+sensor deployment/relocation in hostile environment, data aggregation, acting as data mules~\cite{Shue13}.
+WSN can greatly enhance
+the perception capabilities of robots and provide infrastructure
+for robust inter-robot communication. Mobile robot navigation is another emerging research area where robotics and
+wireless sensors collaborate. Multiple robots can benefit from
+navigating in a WSN assisted environment without depending
+on GPS signals. Robots can also dynamically change the
+sensor applications over the air (OTA) to suit its changes
+in environmental sensing requirements. However, security of
+technologies is one of the major concerns in such collaborative
+approach.
 
-Devices in WSN are known as nodes or motes, are generally self-powered with inbuilt limited processing hardware.\notedme{grammar: not a sentence}
-A mote has an embedded microprocessor, a radio and one or more sensors.
-The manager node, which is connected to a workstation with greater processing capability is called a sink or base station. 
-All sensor nodes in a WSN have a unique identification number called `Node ID'.
-Motes and sinks, using the same radio channel and protocols,  dynamically form an autonomous networked environment where all sensor nodes within range take part.
-Data exchange in WSN takes place only locally using an autonomous relay mechanism that does not have any routing table. 
-A WSN is ultimately employed for sensing and detecting certain physical phenomena, on which basic processing is performed at the individual mote, the processed information is relayed back to a computing device  through the sink for further processing.
-WSNs are generally deployed for long-term monitoring at scales and resolutions that are difficult to manage. 
-They may necessitate reprogramming\notedme{not grammatically correct} after deployment to accommodate alteration in the environment, sensing applications, or scientific requirements~\cite{ISI:000253439700120}.
-The update time is the time when any mote begin executing a new version of the software image.\notedme{too obvious?}
+Wireless sensor devices in WSN are known as nodes or
+motes. The manager node, which is generally connected to
+a workstation and long lasting power source is called a sink
+or base station. All sensor nodes in a WSN have a unique
+identification number called ‘Node ID’. Intrusion in software
+update primarily indicates uploading inappropriate software
+that performs undesired actions, clandestinely replacing the
+sensor operating system (OS) software, and so on. Update time
+is the time when any mote begin executing a new version
+of the software image.Data exchange in WSN takes place
+locally using a neighbourhood discovery process, following
+an autonomous relay mechanism without a routing table.
 
-%\subsection{What is intrusion}
-Intrusion is an illegitimate act that aims to disrupt or degrade the intended functionality of the network or a part of it; it  may or may not be intentional.
-Intrusion in software update primarily means uploading inappropriate software that performs undesired actions, clandestinely replacing the  sensor operating system (OS) software, and so on.
-An intruder may also prevent the update propagation, waste network resources, disrupt the normal operation of code dissemination, inject malicious codes to pollute the network and deny intended function by  injecting bogus or modified software or updates. 
+WSNs usually require updating after deployment to accommodate bug-fixes, changes in requirement, alteration in
+the environment, sensing applications, or scientific requirements~\cite{ISI:000253439700120}.
+Certain protocols like Deluge can solve this problem
+by updating OTA. Deluge is an efficient and reliable protocol.
+It addresses several network programming issues e.g., deals
+with program objects larger than the sensor memory, environments with high packet loss rate, variable node density
+and asymmetric links~\cite{1031506}.
+Deluge is an interesting protocol
+to investigate any phenomena related to OTA reprogramming.
 
+Software update in WSN is a vulnerable process that has
+effects beyond the updates. Software update process require
+the running OS to reboot to the new application. During
+this, security measures on the sensor motes are deactivated or
+unavailable for a short period of time. Additionally, the update
+process across the whole WSN contributes to a significant
+increase in traffic that an adversary may exploit to mask his
+actions. An attacker can target this time to clandestinely initiate
+an illegitimate update and inject his own program image
+to serve his intended purpose. This enables an adversary to
+steal sensitive information, log network events, even complete
+denial of service.
 
-Sensors have huge limitation in their capability to be independently useful.
-Sensors can sense, they cannot react.\notedme{depends on the sensor---it's such a general term. This sounds like an over-generalisation.}
-They have resource constraints like with respect to processing power, tiny memory, storage, and severe energy.
-The motes are not suitable for heavy computational tasks.
-On the other hand, robots have greater capabilities like mobility, performing resource intensive tasks, and can operate in unfavourable environments.
-Combining the capabilities of WSN and robots is appealing. %are therefore very conducive in a unified fashion.
+Implementation of security techniques in WSN are critical
+and challenging because of constrained resources in the sensor.
+Moreover, capability of devices that can compromise security
+computationally grows at enormous speed in comparison to
+sensors. In addition to that, WSNs have special vulnerabilities
+that do not exist in wired networks. Wireless channels are
+inherently considered to be less secure. Secure mechanisms
+like WPS, PKM and likewise are inappropriate in WSNs.
+Reliability and safety critics, and other researchers, have
+frequently pointed out that security issues in WSNs have not
+been sufficiently addressed, and that WSNs are not yet secure
+enough for deployment within mission critical applications like
+robotics.
 
+In contrast to the problems described above, relatively
+simple communication protocols and the design of WSNs
+makes it easy to perform intrusion detection in them~\cite{quing09}.
+An Intrusion Detection System (IDS) does not prevent the
+break-in, but it can detect break-in events and raise alert. It
+may also be able to report the location and extent of breakin. In this paper we present an algorithm, which considers a
+centralised approach to detect the intrusion in case of WSN
+software update. The algorithm requires a minor modification
+of the OTA update protocol to send back a datagram packet
+containing the update time~\cite{tep116}.
 
-Reprogramming of the sensors is one of the most important management tasks.
-It is not easy to round up all the deployed sensors in order to reprogramme\notedme{I'd probaby use `reprogram' throughout... even if it is an American English form} them. 
-Hence automatic over the air (OTA) reprogramming of sensors becomes an important issue.
-OTA software update poses two main security challenges: maintaining confidentiality and integrity of data. 
-An attacker quite easily may pickup and read the motes deployed in the environment.
-Similarly, he can inject false data into the sensor that can infect the network using epidemic protocols. 
-Thus, adding wireless sensors add additional security challenges in robotics.\notedme{How does this follow logically?}
-
-
-
-%\subsection{Security of WSN and Update needs. what are the problems. }
-Software update in WSN is a vulnerable process.\notedme{... but you have the problem that robots are computationally capable, therefore update verification using cryptography would be within their reach. If the robots and the WSN were really working together, then you wouldn't necessarily have the resource constraints needed to justify the current IDS approach.}
-It implies effects beyond the updates only.
-The process is particularly vulnerable because the running OS and application need to switch from old version to new one. 
-At one stage during this process, security  measures on the sensor motes are deactivated or unavailable for a short period of time.
-This opens up a vulnerable window in time when it is easier to intrude.\notedme{why?}
-From network point of view, the update process across the whole WSN contributes to a significant increase in traffic that an adversary may exploit to  mask his actions. 
-
-
-%An IDS architectures for static WSNs has been suggested that watches over the communications in the neighbourhood . Such an IDS is not capable to identify a malicious update that has been effected by an adversary in the WSN.
-
-%Data dessemination protocols
-Several OTA network data dissemination protocols for WSNs have been implemented, which target at attaining efficiency, throughput and conserve energy.
-They generally do not cater cryptographic protection for source authentication, integrity verification and likewise. 
-The program binary authentication technique using a hash is not very useful in to resource-constrained sensors. 
-Deluge, which is a protocol for disseminating data objects in the network, uses density aware epidemic property for its operation \cite{1031506}. 
-Deluge incorporates digitally signed initial advertisement  and authenticated broadcast scheme. 
-However, we contend that it is possible for a malicious intruder to replicate an authentic image source and advertise new programme version which the motes cannot repudiate. \notedme{This needs to be explained. It isn't convincing at the moment IMO.}
-Even though,  Deluge incorporates on-chip hardware based encryption,
-Cryptography alone cannot completely prevent attacks. %on WSNs confidentiality, authenticity, availability due to resource limitation.
-Constrained computational capacity and resources make it possible to compromise the cryptographic measures incorporated in the implemented WSN OSs.\notedme{needs citation or other evidence.}
-The other vulnerability of such epidemic protocol is breach at any one point does the job of weakening the whole network for the attacker. 
-An attacker may appear somewhere in the network, pretend to be an authentic source and disappear after successful introduction of the illegitimate image to one mote in the network. 
-The security mechanisms provided by Deluge would be unable to detect the initial breach in such cases and would allow the network to be flooded by a totally new version of the application that performs completely different function~\cite{Karlof:2004:TLL:1031495.1031515}.
-While the reprogramming protocols are essential for the WSNs, they could act as carriers of rapid spread of malicious code in the network.
-
-
-%\subsection{Why WSN communication in robotics/any application need to be secured. }
-%If inputs from wireless sensors are forged, then catastrophic errorneous results are expected			
-%\subsection{Why it is important to secure updates? How WSN updates can be forged to impede the capabilities of robotics}
-Security is one of the major concerns for adopting WSN technology. 
-Keeping WSNs secure is a challenging task because of the wireless environment and possible  wide variety of applications.
-Security techniques developed for other wireless technologies cannot readily be employed in WSN for the limited resources.
-A robot may be fed with wrong kind of stimuli from the environmental WSN sources that might  lead to undesired robotic responses. 
-Various possible attacks on WSNs have been explained in~\cite{roosta2006taxonomy}, \cite{roosta2008attacks}.
-
-
-
-%\subsection{Why it is necessary to have IDS not encryption in case of WSN}
-Security schemes in WSNs have two main approaches --- using cryptography (crypto) to secure communication and  employing Intrusion Detection System (IDS) to oversee activities.
-Crypto techniques are active approaches through use of cryptographic keys, encryption and decryption schemes, algorithms, policies and procedures.
-Because  of the absence of the session and presentation layers, and resource constraints, designing crypto based security solutions for wireless sensors are complicated, expansive and often may not be effective.\notedme{needs evidence}
-An adversary can employ much greater computing resources to break in through the protection provided by crypto solutions.
-Moreover, absence of switches and gateways in WSN hampers monitoring of information flow.
-Thus it is useful to employ some passive security measures alongside crypto solution.
-An IDS detects suspicious behaviour in the network, provides useful information like identification and location of the intruder, extent of intrusion and likewise.
-
-%\subsection{Lit Review} % Heading to be commented out
-Despite the need for security research within WSNs, only few previous studies have considered IDS approach in recent years.\notedme{Why is there a need but not action? This seems odd...}
-An anomaly based IDS approach that works in a distributed manner and uses support vector machine to minimise communication overhead while performing in-network anomaly detection has been proposed by~\cite{ISI:000257882502160}.
-A standalone rule based approach to detect anomalies at all layers of a network stack in WSN has been suggested by ~\cite{ISI:000232429900067}.
-Rule based  techniques rely on monitoring of group of nodes and routing tables for detection~\cite{ISI:000298891500099, Chen:2009:NMI:1516241.1516282, 1424814, Strikos_afull}.
-On the other hand, spontaneous watchdog technique uses the sensor broadcast, density of deployed sensors for its detection~\cite{1593102}.
-Specification based  IDS has been proposed that relies on data clustering and uses standard deviation from the average inter-cluster distance~\cite{Chen:2009:NMI:1516241.1516282, 1424814, Strikos_afull, 4085803}.
-\notedme{What does this mean? Sounds almost exactly like what you're doing, no?} 
-
-Statistical based anomaly  detection looks for anomalies in routing pattern~\cite{4024996}.
-A serious weakness with these methods, however, is that  they use hidden Markov models to focus on the accuracy of the gathered data, rather than the security of the nodes or the links~\cite{1290173}.\notedme{??}
-The model monitors data arrival process in real time traffic on the nodes, analyses short term dynamic statistics using a multi-level sliding window event storage scheme. % that works on each node. 
-The detection algorithms performs locally and individual nodes are not aware of the network-wide attacks~\cite{1515559}.
-In contrast, some other statistical procedures exploit the stability of the neighbourhood information of the WSN nodes depending on average receive power and average packet arrival rate~\cite{1512911}.
-
-An IDS based on game theory that utilises Markov chains for its decision making process can monitor only one of the clusters of the network at a time, which leaves the rest of the network unprotected~\cite{1347798}, \cite{Das07preventingdos}, \cite{Reddy:2009:GTA:1607720.1607944}.\notedme{why?}
-Reputation based IDS relies on heuristic ranking algorithms to identify most likely bad nodes in the network.
-Such IDSs use high scalable cluster-based hierarchical trust management protocol to effectively identifying the selfish and malicious nodes~\cite{6174485}.
-
-Although very good results have been obtained from some of the approaches described above, only few of them are able to specifically address the security issues related to software update in WSN.\notedme{Evidence? The timing-based approaches sound like they'd work for addressing security issues in software updates...}
-The security countermeasures available in WSN systems is predominately cryptographic.
-The WSN OSs do not incorporate an IDS approach due to the reality that deploying such software would cut down on the resources, especially power.
-An IDS residing on the sensors is ideally need to be avoided by design.
-
-Hence, we propose an analytical tool that sits outside the network and yet can have valuable insight into the propagation characteristics of OTA reprogramming protocol. \notedme{Although you need to contrast what you lose by not having it within the WSN.}
-%The tool should be flexible for comparative studies of different protocols. 
-The tool, which is essentially an IDS, can primarily be applied on OTA protocol.\notedme{Weird sentence. What are you trying to say? It is an IDS, it is applied on OTA, what's your point?}
-The technique has been tested on Deluge.
-We have exploited services from other existing standard protocols a to gather timing information outside the WSN and then process the timing information for intrusion detection.
-Use of timing analysis approach is a novel technique in IDS for WSN.\notedme{What about the related work that talks about timing analysis?}
-%The technique may further be extended for use with broad range of intrusion detection motives specially in WSN and also in MANET.
-The technique is centrally controlled, resides outside the WSN, gathers processed information from the sensors in WSN.
-%However, an IDS with that broad spectrum is out of scope of this paper.
-%We shall limit ourselves within its application on WSN, specifically on Deluge only.
-%Before one understands how the IDS works and is able to focus on its  mechanism, one needs some prior knowledge about Deluge and its security techniques.
-The IDS identifies the anomaly in software update pattern in terms of quantitative score. The higher score indicates a higher probability of intrusion at some point in the WSN. The score can be deterministically classified when some additional information is available.
-
-
-%\subsection{How do I plan to handle them (How do I do it). > Contributions} \\
-A suitable IDS can detect  break-in events. 
-However, an IDS does not prevent the break-in, but raises an alert following some predefined procedures in case of a security breach.
-Research in WSN security with respect to IDS has lots of potentials for new discovery and implementation. \empty{empty sentence}
-We propose an algorithm that requires a minor modification of the OTA update protocol to send back a message indicating update timing. %by incorporating Active Message (AM). 
-Specifically a TinyOS Active Message (AM) is used to acieve this. Such messages 
-%AM is a single-hop, unreliable packet used for network abstraction in TinyOS. 
-%It 
-have a destination address, a type field, and are used to provide synchronous acknowledgements~\cite{tep116}.\notedme{The AM text still strikes me as weird. I've tried to rewrite it a bit. In a computer OS, if you wanted to say you sent back a datagram containing the update time, that's just what you'd say. It makes Active Messages sound like something special, when you haven't presented anything that's special about them. It's also not clear whether you're talking about the AM facility itself, or the data contained with the particular AM you send.} 
-The AM equips the IDS with a centralised view of a network-wide knowledge that is processed and analysed to work out a score function according to indicate a possible intrusion.
-This work's contributions are two fold.
+The information carried by the
+datagram is processed and analysed to work out a `Surprise
+Score' or `Intrusion Warning Score' (IWS) to indicate a
+possible intrusion. 
+This work's contributions are two fold: 
 \begin{inparaenum}
-\item  The IDS identifies anomalies in software update patterns and scores them quantitatively;
-\item It is demonstrated that simulation can indicate the positions of WSN nodes that will best support the ability of the IDS to detect anomalies.
+\item  The IDS identifies anomalies in software update patterns
+and scores them quantitatively;
+\item It is demonstrated that the IDS
+can indicate the location of intrusion point and possible extent
+of intrusion.
 %scheme i.e., the IDS expectations can provide useful insight for designing secure WSN.
 \end{inparaenum}
-%% <Ashraf> is this paragraph a repeatation of the previous one. But there are some useful info here
 
 
 %\subsection{Organisation of the paper }
 The rest of this paper is structured in the following way. 
-%In Section~\ref{sec:lit}, we provide an overview of intrusion related research works in WSN software update protocols. 
-%We look up for  security aspects not addressed by the present WSN security researchers and the reasons behind any security deficiencies. 
-In Section~\ref{sec:meth}, we describe the experiment methodology and an overview of the system  design. 
-We then present the findings from the experiments, analyse the result and present our evaluation in Section~\ref{sec:eval}.  
-Finally, we conclude our arguments in this Section.
-\notedme{How many papers have you seen that have three sections? I'd expect five, usually.}
+In Section~\ref{sec:lit},  this paper is structured in the following way.
+In Section II, we provide an overview of our findings from
+intrusion related research works in WSN. We seek software
+update security aspects not addressed by the present WSN
+security research and the reasons behind this.  
+In Section~\ref{sec:meth}, we describe a brief overview of the system design and the experiment methodology. Then we present the findings from the
+experiments, analyse the result and present our evaluation in
+Section~\ref{sec:eval}.  
+Finally, we conclude our arguments in Section~\ref{sec:concl}.
+
+\section{Research in WSN Intrusion Detection}
+\label{sec:lit}
+
+The following section describes the earlier research effort
+in the field and relates it to motivation of the study.
+
+Software update process using OTA protocols is vulnerable
+and a lucrative attack target because of several reasons. First,
+the ability to infect a software update process implies effects
+beyond the updates only. Secondly, cryptographic protection in
+sensors is inadequate. Constrained computational capacity and
+resources make it possible to compromise the cryptographic
+measures incorporated in the implemented WSN OSs~\cite{aes2011}.
+There is no mechanism to perform the integrity of the entire
+image object, because when the size of the object exceeds
+the size of available sensor memory, it becomes infeasible.
+Additionally, a malicious intruder can replicate as an authentic
+image source and advertise new program version which the
+other motes cannot repudiate. Thirdly, even if an OTA update protocol incorporates on-chip hardware based encryption,
+cryptography alone cannot prevent all attacks. Techniques of
+different types of attacks on WSN have been described by~\cite{DBLP:journals/corr/abs-1301-3022}. Countermeasure against these attacks are computationally
+expansive, energy intensive. It implies employing them exposes
+WSN to some other new kinds of attacks, such as DoS through
+resource exhaustion. Fourthly, an attacker can extract valuable
+information about the network from a physically compromised
+node. He can utilise the knowledge to initiate Sybil attack, even
+can replace the nodes with the illegitimate and malicious ones,
+which can imitate a legal update process.Considering these
+reasons, some researchers strongly suggest complete redesign
+of security mechanism in WSN~\cite{quing09}.
 
 
+The OTA update protocols may act as carriers of malicious
+code in the network. For example, Deluge achieves reliability
+using density aware epidemic property that works on a state
+machine principle and follows few local rules to achieve global
+behaviour~\cite{1031506}.
+It follows that breach at any one point weakens
+the whole WSN. An attacker may pretend to be an authentic
+source and disappear after successful introduction of the illegitimate image to one mote in the network. OTA protocol security
+mechanisms, which are cryptographic, would be unable to
+detect the breach and would allow the network to be flooded
+by a malicious application~\cite{Karlof:2004:TLL:1031495.1031515}.
+In recent years, researchers
+have suggested several intrusion or anomaly detection means
+to secure WSN, alongside the other cryptographic approaches.
+Thus it is useful to employ some other security measures, for
+example: an IDS. Purpose of an IDS is to detect suspicious
+behaviour in the network, to provides useful information about
+information.
+%\marginnote{Ease of attacking OTA protocol}[2cm]
 
-%%\subsection{WSN and robotics works and what they mainly address and what they do not}
-%% <Ashraf>  What to do with this paar
-I DONT KNOW IF I WANT TO KEEP THIS PARA.\notedme{It doesn't read well enough for me to tell, at the moment, although it looks like evidence is missing...}
-Mobile robot navigation is an emerging research field where robotics and wireless sensors collaborate.
-Nodes in WSN can greatly enhance the perception capabilities of robots with robust communication coverage.
-Security is one of the main concerns in such collaborative approach.
-There are security issues with use of cryptography in WSN due to the nature of the hardware~\cite{1710}.
-Usually, an IDS detects suspicious behaviour in the WSN.
-Butun, Morgera, and Sankar authoritatively discussed the constraints and challenges in WSN IDS design~\cite{6517052}.
-An IDS can use distrbuted , cooperative architecture with a hierarchical or centralised approach.
+%%%%I WANT TO CHANGE THIS PORTION
+The proposed techniques varies greatly in their idea and approach.
+
+Misused  detection  techniques identifies undesired activities basing on signature.
+They aim to detect known attacks.
+However, they are ineffective against novel attack.
+Additionally, they may wrongly identify legitimate activities as intrusion because of similarity with the signature~\cite{372146, 1515559, ISI:000298891500099, Chen:2009:NMI:1516241.1516282, 1424814, Strikos_afull}.
+In response to this difficulty, anomaly based IDS builds the signature based on defined normal activity.
+They use statistical probability and significance to identify anomalies. Unfortunately, a system may display previously unknown behaviour.
+For example: rare critical activities like earthquake or tsunami may raise false positive intrusion alert in sensors employed for other environmental monitoring.
+On the other hand, an intrusion that masks its pattern under hood of normal behaviour, for example: increased packet traffic during OTA update, would go undetected~\cite{ISI:000257882502160, 1593102, 1593102, 1290173, 4024996}.
+The techniques described above use different kinds of machine learning algorithm including support vector machine.
+In contrast, specification-based and reputation-based techniques rely on manual input for defining normal and anomalous behaviour with less reliance on automation.
+However, these techniques also have not been proved to be very effective because human interaction are more prone to errors and require more learning time~\cite{Chen:2009:NMI:1516241.1516282, 4085803, Ko2001}. 
+
+
+IDS mechanisms are either centrally controlled or distributed in nature.
+They employ techniques like key management, encryption and authentication to protect services like localisation, data agregation, cluster formation, time synchronisation.
+It is considered that specific services are protected against specific attacks e.g, forwarding, sinkhole, wormhole under certain conditions~\cite{1639675, 6096939, sink08, 5172466}.
+Although approaches described above are innovative, only few of them are able to specifically address the security issues related to software update in WSN.
+Hence, we propose an analytical tool that is passive in nature and can provide valuable insight into the propagation characteristics of OTA reprogramming protocol. 
+The technique has been tested on Deluge.
+We have exploited services from other existing standard protocols to gather timing information from motes in  the WSN and then process the timing information for intrusion detection.
+Use of timing analysis approach is a novel technique in IDS for WSN.
+The IDS  gathers processed information from the sensors, is centrally controlled and resides outside the WSN and .
+It  identifies anomaly in software update pattern in terms of quantitative score. 
+The higher score indicates a higher probability of intrusion at some point in the WSN. 
+
+While timing analysis mechanism is non-existent in the WSN, some of the IDSs use traffic analysis or packet inspection  techniques.
+It can be argued that traffic analysis approach is potentially comparable to proposed timing analysis.
+The argument can be quite intense because traffic analysis considers both throughput and latency, and latency is essentially about timing.
+Onat and Miri presented an IDS approach which considers statistical treatment similar to the one we proposed, yet the techniques have subtle differences.
+The IDS deals with node impersonation and resource depletion attacks only.
+In this approach, each node build an expectation statistics of received packets based on the last N packets received from each neighbour.
+If packets received from any neighbour displays anomalous patterns after a predefined number of consecutive packets, intrusion alarms may be raised \cite{1512911}.
+Unfortunately, the  packet count statistics is not suitable in OTA software update scenario.
+There is a significant increase in packet traffic owing to software update process. 
+This puts the mechanism off balance.
+However, the mechanism of statistical treatment on information over a time period motivates us to employ timing analysis approach on the context of OTA update protocol.
+
 
 
 \section{Methodology}
 \label{sec:meth}
-In this section, we describe the study environment, procedures, and the design of the system.
-%It's helpful to both writer and reader to organize this section chronologically: that is, describe each procedure in the order it was performed. For example, DNA-extraction, purification, amplification, assay, detection. Or, study area, study population, sampling technique, variables studied, analysis method.
-The proposed IDS and its techniques were evaluated using a set of simulations. %in comprehensive simulations.
+In this section, we provide a brief overview of the system design and describe the evaluation environment. % and procedures.
+%The original system design is quite elaborate, but details have been left out to accommodate the space limitation.
+% <dme> I don't understand why you think it's elaborate. It's actually really simple!
+%It's helpful to both writer and reader to organise this section chronologically: that is, describe each procedure in the order it was performed. For example, DNA-extraction, purification, amplification, assay, detection. Or, study area, study population, sampling technique, variables studied, analysis method.
+The proposed IDS will be evaluated using a set of simulations. %in comprehensive simulations.
 %While the system has been elaborately designed and aimed at testbed evaluation, it has not yet been performed at this stage of the research. 
-\notedme{Dropped sentence here. What does ``aimed at testbed evaluation'' mean?}
+%\notedme{Dropped sentence here. What does ``aimed at testbed evaluation'' mean?}
+% <Ashraf>> I meant evaluation using a testbed implementation
 %The testbed implementation will be evaluated at some point in the future.
-The simulation environment allows the software update pattern to be observed, by each WSN node reporting the time at which the new software update completes and starts executing.
-This raw data is processed to determine an IWS.\notedme{You should redefine the term IWS in the body text I think. My rule of thumb is that you introduce abbreviations independently in the abstract and in the body text. Of course if you don't use an abbreviation subsequently, you shouldn't introduce it.}
+
+%\notedme{You should redefine the term IWS in the body text I think. My rule of thumb is that you introduce abbreviations independently in the abstract and in the body text. Of course if you don't use an abbreviation subsequently, you shouldn't introduce it.}
 %The raw data generated from simulation logs were processed, related and  analysed to produce the IWS.
+%<Ashraf>>That is done now
 
-\subsection*{Simulation Environment}
-\label{subsec:sim_env}
-The IDS requires Deluge protocol to be able to report the time of executing  a new version of its software.
-The protocol was originally implemented in TinyOS and later has been ported to other embedded operating systems including Contiki. 
-We used Deluge protocol implemented in Contiki v2.7 on a system running on Ubuntu 12.04.
-%[So this will eventually need citation and a self-contained description.]
-`Cooja', a network simulator for Contiki, was used to simulate the software update pattern associated with Deluge protocol.\notedme{Best to give academic citations, or footnote URLs for these technologies.}
-%We also used a plugin for Contiki called Mobility to aid our experiential setup.
-%Although the plugin was designed to deal with positions over time for the nodes in the simulation, we used it to load the exact location of the sensor motes into the `Cooja' simulator. 
 
-\subsection*{Design of Experiments}
-\label{subsec:exp_des}
 
-%The simulations were cautiously designed and planned to evaluate the proposed IDS in different topologies and variable parameters like power level.
-The simulations evaluated the proposed IDS in different WSN topologies and explored the effect of parameters like power level.
-\notedme{Compare the commented and rewritten sentences here. Terms like `cautiously' are not useful unless the context is clear.}
-Evaluating the IDS on each of the topologies consisted of several test runs.
-The test runs were of two kinds: 
+\subsection*{System Overview}
+\label{subsec:sysdeg}
+The proposed IDS resides on an external computing system that is physically connected to the sink.
+%The system  relies on existing protocols for its operations.
+% <dme> ! (a new abbreviation for me---approximately "Why are you saying this? Isn't it obvious?")
+Information necessary for IDS operations are collected utilising standard transport layer protocols. 
+The IDS analyses the update time of  each of the motes in the WSN and computes the IWS using Equation~\ref{eqn2}.
+% and indicates the cases of a possible intrusion, i.e., a probable illegitimate update.
+The IWS, update time and image version information can be utilised to indicate location and extent of intrusion. 
+
+The intrusion detection algorithm requires some modification of the update protocol to enable an automatic reporting service in the mote by using AM packets to carry latest update information to the sink.
+It is assumed that all motes have time synchronisation accurate to 1~$\mu$s, e.g., achieved using the TSMP\footnote{Time Synchronized Mesh Protocol}~\cite{Pister08tsmp:time}.
+% devices e.g., motes stay synchronized to each other} protocol 
+% <dme> !
+The timing information carried by the datagram is therefore synchronised with other nodes in the WSN and can be used readily for processing by the IDS.
+
+\subsubsection*{IDS Framework}
+\label{ssc:ids_fw}
+\begin{figure}[btp]
+    \centering
+    \includegraphics[width=0.5\textwidth]{IDS_fw}	
+    \caption{IDS Framework}
+    \label{fig:ids_fw}
+\end{figure}
+The IDS framework components and chronology of the activities associated with the IDS has been shown in Figure~\ref{fig:ids_fw}.
+The IDS has three types of components:
 \begin{inparaenum}
-\item Test runs aimed as establishing baseline data consisted of 20 individual simulations which were initiated from the sink; and
-\item Simulations that replicated an intrusion at different points of the WSN were initiated once from each of the nodes except the sink.
+\item the motes in the WSN radio network that are subject to legitimate or illegitimate update e.g., intrusion attempt; 
+\item an IDS transport client (ITC) application that runs on the sink and works in coordination with the IDS to assists in intrusion detection; and
+%The sink is protected from all kinds of security breaches whether it is physical or logical. 
+\item an IDS application that runs on a system with higher computing resources e.g., a server, which is physically attached to the sink, and houses a network database (NDB).
 \end{inparaenum}
-Results obtained from all these simulations were utilised to model the expected pattern for a particular topology.
 
-\subsection*{Topologies}
-\label{subsec:topos}
-The topologies were designed based on different design considerations that were established using number of trial and error test runs to meet specific requirements like shape, distance, range and power level.
-\notedme{Not clear what you're talking about, specifically.}
+%%% <ashraf> strike out
+%\begin{inparaenum}
+%\item Updates are initiated using Deluge protocol;
+%\item Deluge disseminates the new software image using the motes enroute to reach all the motes using a relay mechanism; 
+%\item The nodes deliver their timing information to the sink using an AM packet;
+%\item AM packets from the distant nodes rely on the other nodes enroute to reach the sink using a relay mechanism; and
+%\item The ITC application in the sink delivers revelent information to the IDS for processing. 
+%\end{inparaenum}
+%The IDS analyses the acquired timing information to arrive at decision.
+\begin{figure}[btp]
+    \centering
+    \includegraphics[width=0.5\textwidth]{IDS}
+    \caption{IDS Modelling}
+    \label{fig:ids_model}
+\end{figure}
 
-\begin{table*}[t!]
-\centering
-\notedme{why is this table interesting or significant?}
-\begin{tabular}{|l|*{8}{r|}r}
-\hline
-\bd{Topologies}           & \bd{Linear} & \bd{Circular} & \bd{Elliptical} & \bd{Double Rings} & \bd{Wide Line} & \bd{Grid} & \bd{Tree} & \bd{Owheo WSN}   \\
-\hline
-\bd{Number}           & 20 & 20 & 20 & 46 & 45 & 72 & 25 & 37   \\
- \bd{of Motes}           &  &  &  &  &  &  &  &    \\
-\hline
-\end{tabular}
-\caption{Number of motes used in each topological deployment}
-\label{tab:topos}
-\end{table*}
+\subsubsection*{Determining IWS}
+\label{ssc:cal_iws}
+%% <ashraf> We cannot go into these details in this paper; space limitation
+The intrusion detection activity begins with the action of motes by endorsing update time and initiating a datagram to the sink. 
+%An AM packet initiated for the IDS has several fields: destination address, type identifier that indicates the update time information and the protocol for IDS, timing information and a checksum value.
+%[DO WE WANT TO INCLUDE THE PATH TAGGING; MAY BE LATER - IT INCREASES RELIABILITY, NOT DIRECTLY $IDS$ ACTIVITY?]
+%[path tagging is good, but in all cases, what’s the risk from intruders messing with the reported data?]
+%[PATH TAGGING CAN BE USED AS HEART-BEAT MESSAGE]
+The packet travels to the sink using a synchronous acknowledgement mechanism in transport layer protocols~\cite{tep116}.
+%When it arrives at the sink, the checksum value is examined by the ITC to ensure that the packet content has not been altered enroute.
+After checking for correctness, the ITC then inserts the update time, mote ID and related information to the NDB in the IDS.
+The IDS maintains an identifier to differentiate among different update times from different runs for the same mote.
+%
+%The first software update run in the WSN is considered to be legitimate and the IDS takes this timing information as baseline.
+%It is possible and desirable that the IDS is trained with several other update runs.
+%More training improved the ability of the IDS to detect intrusion more accurately.
+%Utilising multiple runs are useful and beneficial as it increases accuracy and dependency.
+%However, the IDS needs to be manually controlled to enable multiple training runs.
+%Outcome from these runs are statistically treated to build the baseline.
 
-%The shape of the experiential topologies were designed as linear, circular, elliptical, double rings, wide line, grid, tree and other random topologies.
-%The names of the topologies here indicate that in each case the motes were deployed along the circumference of the geometrical shape that enabled packet propagation to take place according to a designed fashion.\notedme(1){drop---too obvious to justify saying.}
-%In each topology, minimum 20 nodes were deployed for a test to take place. 
-%More motes were necessary to replicate certain topologies.
-Table~\ref{tab:topos} shows the number of motes used in experiments in corresponding topological  deployments.
-The motes were placed at a distance of 30--35 meter to allow  multiple transmission paths to all the motes along the circumference of the intended topological shape. % <dme> en-dash for number ranges, not em-dash	% <ashraf> I am trying to increase my English and LaTeX vocabulary
-For most experiments, the radio transmission power level was set at 100\% which has an approximate maximum effective transmission range of 50 meters and is able to interfere other motes upto 100 meters away.
-The Owheo WSN topology was additionally tested at 50\%  to quickly\notedme{?} observe the difference from the parameter change.
+The authenticated initial software update runs are considered to be legitimate and the IDS uses these timing measurements to build its baseline.
+The subsequent updates are liable to scrutiny by the IDS.
+The time analyser module in the IDS inspects the NDB once an update activity has been detected.
+It determines the changes in the statistics of the update time and calculates IWS based on following utility function:
 
+\begin{equation}
+\label{eqn2} 
+	\mathit{IWS} = \sum \limits_{i=0}^{n} \frac{\left| \mu_i - t_i \right|}{\sigma_i + 1}
+\end{equation}
+where, 
+\begin{inparaenum}
+\item $\mathit{i}$---mote index;%\notedme{Why were you using capital letters all through here?} 
+\item $\mathit{t_i}$---image update time at mote $\mathit{i}$;  
+\item $\mathit{\mu_i}$---mean update time at mote $\mathit{i}$;  
+\item $\mathit{\sigma_i}$---standard deviation of update time at mote $\mathit{i}$. 
+\end{inparaenum}	
 
-\subsection*{Procedure}
-\label{subsec:proc}
+\subsubsection*{Building Intrusion Warning Zone}
+\label{ssc:iw_zone}
+The IDS can build a scale of possible expected range of IWS for a topology and can classify the IWS in different zones to imply certain warning levels.
+While reporting severity or likelihood of an intrusion in quantitative term like the IWS is useful, it is more beneficial if the quantity is associated with some kind of interpretation.
+The technique of associating such interpretation has been established by identifying Intrusion Warning Zone (IWZ) from a scale built from maximum expected IWS in a topology.
+We have used a heuristic trial and error method to build the IWZ.
+Threshold for building of Intrusion Warning Zone (IWZ) depends on the assumed ability of the IDS having IWS knowledge of all possible intrusions in the network.
+%\notedme{This is not clear: you're jumping to talking about thresholds before describing what they are or why you want them.}
+Such knowledge can be built by replicating intrusion activity from all nodes in the network.
+In situations where it is not possible, replicating intrusion activity from the furthest few nodes may serve the purpose.
+The heuristics follows from statistical techniques and feasibility of finding easily identifiable boundary.
+%%<Ashraf>> I need to work more on this, I agree.
+The IDS considers an IWS up to 10\% from the scale to be safe and marks as `GREEN' zone, an IWS above 30\% to be possible intrusion and is marked as `RED' zone.
+%\notedme{Why? Where's the science here?}
+However, an IWS within the range of 10\%---30\% can neither be considered safe, nor an intrusion, hence is marked as `GREY' to indicate a situation where rules are not known.
+However, the thresholds are not conclusive and may require some variation based on the density, power level used in the WSN and scale of deployment.
+%\notedme{This does not read strongly. It sounds like you're trying to make too much out of this: just state that for convenience of discussion, you define these zones. They seem entirely subjective to me: useful for discussion, but no more than that.}
 
-Experiment procedure  was a combination of activities such as running simulation, analysing system log and processing data to arrive at a conclusion. 
-\notedme{I'd just list the three steps if there are only three steps. Too simple to be worth using text to introduce subsequent short blocks of text.}
-
-
-\subsubsection*{Processing  of Individual Test Run}
-\label{ssc:test_runs}
-%Step 1: Running simulation
-In the environmental set up described above , all motes in the WSN were booted up at same time running one version of a diagnostic application. 
-The diagnostic application would necessarily report its time, version number and mote ID on the serial terminal every second at its serial port. 
-
-
-%Step 2: Stopping the simulation
-The base station dynamically began the update process and propagated another version of the software (also called image) using Deluge protocol. %, which is also called 
-Whenever new image transfer to a mote was complete, the image would replace its old version and reboot to begin executing the new one.
-The new application also necessarily allowed the motes to report their time, version number and mote ID on the serial terminal. 
-The simulator continued until all the motes in the WSN were updated and the reported events were logged. 
-%Step 3: Filtering out mote update time and distance
-The update time of each mote were filtered out  and were sorted In ascending order of update time.
-
-%Step 4: Calculating the euclidean distance and sorting
-%A cpp application was used to take input from this semi-processed information and another file that preserved the position information of the motes in the deployment.
-%The application processed the data to find out the euclidean distance of the motes from the sink.
-%It additionally sorted the rows based on update time in ascending order.
-%At this instance, we preserved the processed information in a file in following fashion:
-%\begin{verbatim}
-%--------------------------------------------
-%| 	Time (in ms)	|	Mote ID	| Distance |
-%--------------------------------------------
-%\end{verbatim}
-
-%Step 5: Calculating baseline data
-\subsubsection*{Building the Baseline Data}
-\label{ssc:build_baseline}
-Processed data from 20 simulations, initiated from the sink, were considered for each topology.
-Any change in variables in the environment or in the topology would necessitate recalibrating the baseline.
-Mean and standard deviation of mote update times were statistically calculated to build the baseline.
-These were the inputs to the IDS to calculate the IWS according to the utility function shown in Equation~\ref{eqn2}. 
-
-%Step 6: Calculating IWS
-\subsubsection*{Calculating IWS}
-\label{ssc:calc_iws}
-
-Intrusion attacks at different nodes were replicated in simulations.
-The individual simulations runs were treated in a fashion  similar to~\ref{ssc:test_runs}.
-The update time recorded at each of the motes were mathematically treated according to the utility function in Equation~\ref{eqn2}, which performed the following computations:
-\begin{itemize}
-\item Subtract the new update time from the corresponding mean of reference update time for each of the motes to calculate the absolute difference. For example, new update time of updated mote `$n$'(new) is subtracted from mean update time found from the baseline data for mote `$n$' and its absolute value was calculated.
-\item The absolute difference is divided by a function of standard deviation to avoid the possibility of division by zero. This also smooths the data to avoid unrelated variations.\notedme{what's an unrelated variation?}
-\item Sum up the resulting scores at all individual nodes in the WSN to find out the total IWS for the update.
-\end{itemize}
-The resulting numbers  presented an approximation of abnormality of the new update pattern. The higher the score, the more dissimilar was the pattern. 
-
-\subsection{Overview of the System}
-\label{sec:des}
-\notedme{...}
-
-\subsection{Threat Model}
+\subsection*{Threat Model}
 %What are the security aspects it does not handle?
 %Why does not it handle them?
 
-\notedme{This is a start, but it's not very clearly written. Talking about the expected capabilities of attackers and vulnerabilities of the system would be good.}
-The threat model is directed towards injection of unauthorised program image to infect the entire WSN.
-The IDS is also expected to handle malicious node update, node compromise, node failures.
+%\notedme{This is a start, but it's not very clearly written. Talking about the expected capabilities of attackers and vulnerabilities of the system would be good.}
+The threat model is directed towards injection of unauthorised program images to infect the entire WSN.
+The IDS is expected to handle malicious node update, node compromise, node failure.
 In addition to this, the IDS also considers a threat model where a new node pops up and injects the new software image by compromising existing WSN security mechanism.
-
 %The main threat scenario that the IDS is expected to handle is compromise of a particular node in the WSN and then attacker being able to utilise the same node or replicate the node to inject a new software image using Deluge protocol in the WSN.
 %However, once the new image transfer has been injected, the node may remain alive or disappear.
 %In case the compromised mote disappears, WSN would consider it as a node failure instead of node compromise.
+
+We assume that an  attacker  can take over one or more nodes deployed in hostile environment, and can access the code in a compromised node. 
+%He is able to access the code in a compromised node by employing superior computing power. 
+In addition, he can also use cryptanalysis to represent a false identity without physically compromising a node.
+%this information even without compromising nodes physically.
+%Using the knowledge gained from compromised node, he can represent a false identity.
+%The attacker can also write his own or use existing protocols, utilise gained knowledge to initiate a software update to propagate in the network.
+% <dme> a lot of this text doesn't make much sense.
+However, he has  no special  access to  the  network and is unable to modify the underlying protocols running in the uncompromised nodes.
+%attacks  are  either  launched  from  compromised  sensor  nodes  running  malicious  code  or  unauthorised systems using stolen data (cryptographic keys & code) from legitimate nodes.
 %Actually, the node was hijacked to infect the WSN and create more confusion in determining how the incident took place.
 %\begin{itemize}
 %\item Node failure
@@ -416,16 +451,11 @@ In addition to this, the IDS also considers a threat model where a new node pops
 %\item Popping up of intruder node
 %\end{itemize}
 
-%Cases that it cannot handle. 
-The IDS cannot identify an intrusion in certain scenarios.
-For example, when an intrusion takes place in close vicinity of the sink, this IWS may not always be significantly large to be identified as an intrusion. 
-%Moreover, due to node compromise in one of the motes and intrusion initiated from another mote may result into unsurprising score due to fact that the effects may cancel each others contribution to the score.
-The deployment should consider additional security measures to handle such scenarios.
 
 
-\subsection{Assumptions} %Should I put it here or in discussio section.
-\label{sc:assump}
-\notedme{Misleading subsection heading---there are assumptions in other places, so make it clear which assumptions you're talking about.}
+%\subsubsection*{Assumptions} %Should I put it here or in discussio section.
+%\label{sc:assump}
+%\notedme{Misleading subsection heading---there are assumptions in other places, so make it clear which assumptions you're talking about.}
 
 %Assumptions that are discussed in-text are discussed in the context of the limitations of your study, which is typically in the discussion section. This is important, because both assumptions and limitations affect the inferences you can draw from your study. - See more at: http://phdstudent.com/Choosing-a-Research-Design/stating-the-obvious-writing-assumptions-limitations-and-delimitations
 %The system is expected to achieve a time synchronisation. 
@@ -434,8 +464,9 @@ The deployment should consider additional security measures to handle such scena
 
 
 The paper assumes several WSN settings and capabilities.
-One of the most important assumption is: there is only one sink in the network. While WSN with multiple sinks are also possible, the IDS needs to be designed differently and are have not been studied at this stage of the research. 
-It further assumes that the sink is protected from all kind attacks and cannot be compromised. 
+One of the most important assumptions is that there is a single  sink. 
+%While WSNs with multiple sinks are also possible, the IDS needs to be designed differently and has not been studied at this stage of the research. 
+It further assumes that the sink is protected from all kinds of attacks and cannot be compromised. 
 The system do not consider mote mobility scenario and assumes a static WSN.
 %The system operates in a fashion that whenever a new image updates a mote, it sends an AM to all the base stations in the WSN, thus the software update behaviour in the WSN is transparent to the IDS.
 
@@ -462,196 +493,148 @@ The system do not consider mote mobility scenario and assumes a static WSN.
 
 
 
-\subsection{System Design}
-\label{subsec:sysdeg}
 
+\subsection*{Experiment Settings}
+\label{subsec:sim_env}
 
-The proposed IDS resides on a computing system that is physically connected to the sink.
-It relies on existing protocols for its operations.
-Related information is collected utilising standard transport layer protocols. 
-The IDS analyses the update time of  each of the motes in the WSN and computes a `Surprise Score' or `Intrusion Warning Score' (IWS) using utility function in Equation~\ref{eqn2} and indicates the cases of a possible intrusion, i.e., a probable illegitimate update.
+% \begin{table*}[t!]
+% \centering
+% %\notedme{why is this table interesting or significant?}
+% %<Ashraf>> This is the result that I've presented
+% %\begin{tabular}{|l|*{8}{r|}r|}
+% \begin{tabular}{|p{2.5cm}|c |c |c |c |c |c |c |c |}
+% \hline
+% \bd{Topologies}           & \bd{Linear} & \bd{Circular} & \bd{Elliptical} & \bd{Double Rings} & \bd{Wide Line} & \bd{Grid} & \bd{Tree} & \bd{Owheo WSN}   \\
+% \hline
+% \bd{Number of Motes}           & 20 & 20 & 20 & 46 & 45 & 72 & 25 & 37   \\
+% % \bd{of Motes}           &  &  &  &  &  &  &  &    \\
+% \hline
+% \end{tabular}
+% \caption{Number of motes used in each topological deployment}
+% \label{tab:topos}
+% \end{table*}
 
-The intrusion detection algorithm suggests some modification of the update protocol. 
-An AM can be used to carry update information to the sink.
-All motes in a WSN share a sense of time synchronisation which is accurate to 1~$\mu$s  and  is typically achieved using TSMP protocol \cite{Pister08tsmp:time}.
-The timing information carried by the AM is therefore synchronised with other nodes in the WSN and can be used readily for processing by the IDS.
+The IDS requires Deluge protocol to be able to report the time of executing  a new version of its software.
+The protocol was originally implemented in TinyOS and later has been ported to other embedded operating systems including Contiki\footnote{\url{http://www.contiki-os.org}}. 
+We used Deluge protocol implemented in Contiki v2.7 on a system running on Ubuntu 12.04.
+%[So this will eventually need citation and a self-contained description.]
+`Cooja'\footnote{\url{https://github.com/contiki-os/contiki/wiki/An-Introduction-to-Cooja}}, a network simulator for Contiki, was used to simulate the software update pattern associated with Deluge protocol.
+%\notedme{Best to give academic citations, or footnote URLs for these technologies.}
+%We also used a plugin for Contiki called Mobility to aid our experiential setup.
+%Although the plugin was designed to deal with positions over time for the nodes in the simulation, we used it to load the exact location of the sensor motes into the `Cooja' simulator. 
 
-\subsubsection{IDS Framework}
-\label{ssc:ids_fw}
+%\subsection*{Design of Experiments}
+%\label{subsec:exp_des}
 
-\begin{figure}[btp]
-    \centering
-    \includegraphics[width=0.5\textwidth]{IDS_fw}	
-    \caption{IDS Framework}
-    \label{fig:ids_fw}
-\end{figure}
-The IDS framework components has been shown in \ref{fig:ids_fw}.
-The IDS has three kinds of components:
+The simulation environment allows the software update pattern to be observed, by each WSN node reporting the time at which the new software update completes and starts executing.
+The simulations evaluated the proposed IDS in different WSN topologies and explored the effect of parameters like power level.
+%\notedme{Compare the commented and rewritten sentences here. Terms like `cautiously' are not useful unless the context is clear.} %<Ashraf>> Thanks
+Evaluating the IDS on each of the topologies consisted of several test runs.
+The test runs were of two kinds: 
 \begin{inparaenum}
-\item the motes in the WSN that are subject to legitimate or illegitimate update; 
-\item an IDS transport client (ITC) application that runs on the sink and works in coordination with the IDS to assists in intrusion detection; and
-%The sink is protected from all kinds of security breaches whether it is physical or logical. 
-\item an IDS application that runs on a system with higher computing resources which is physically attached to the sink, and houses a network database (NDB).
+\item test runs aimed at establishing baseline data consisted of 20 individual simulations that were initiated from the sink; and
+\item simulations that replicated intrusion initiated at different nodes except the sink.
 \end{inparaenum}
-The chronology of the activities associated with the IDS  are shown in  \ref{fig:ids_fw}.
-%%% <ashraf> strike out
-%\begin{inparaenum}
-%\item Updates are initiated using Deluge protocol;
-%\item Deluge disseminates the new software image using the motes enroute to reach all the motes using a relay mechanism; 
-%\item The nodes deliver their timing information to the sink using an AM packet;
-%\item AM packets from the distant nodes rely on the other nodes enroute to reach the sink using a relay mechanism; and
-%\item The ITC application in the sink delivers revelent information to the IDS for processing. 
-%\end{inparaenum}
-%The IDS analyses the acquired timing information to arrive at decision.
-\begin{figure}[btp]
-    \centering
-    \includegraphics[width=0.5\textwidth]{IDS}
-    \caption{IDS Modelling}
-    \label{fig:ids_model}
-\end{figure}
-
-\subsubsection{Determining IWS}
-\label{ssc:cal_iws}
-
-
-%% <ashraf> We cannot go into these details in this paper; space limitation
-The intrusion detection activity begins with the action of motes by endorsing update time and initiating AM to the sink. 
-%An AM packet initiated for the IDS has several fields: destination address, type identifier that indicates the update time information and the protocol for IDS, timing information and a checksum value.
-%[DO WE WANT TO INCLUDE THE PATH TAGGING; MAY BE LATER - IT INCREASES RELIABILITY, NOT DIRECTLY $IDS$ ACTIVITY?]
-%[path tagging is good, but in all cases, what’s the risk from intruders messing with the reported data?]
-%[PATH TAGGING CAN BE USED AS HEART-BEAT MESSAGE]
-The packet travels to the sink using existing transport layer protocols.
-%When it arrives at the sink, the checksum value is examined by the ITC to ensure that the packet content has not been altered enroute.
-After checking for correctness, the ITC then inserts the update time, mote ID and related information to the NDB in the IDS.
-The IDS maintains an identifier to differentiate among different update times from different runs for the same mote.
+Results obtained from all these simulations were utilised to model the expected pattern for a particular topology.
 %
-%The first software update run in the WSN is considered to be legitimate and the IDS takes this timing information as baseline.
-%It is possible and desirable that the IDS is trained with several other update runs.
-%More training improved the ability of the IDS to detect intrusion more accurately.
-%Utilising multiple runs are useful and beneficial as it increases accuracy and dependency.
-%However, the IDS needs to be manually controlled to enable multiple training runs.
-%Outcome from these runs are statistically treated to build the baseline.
+%\subsection*{Topologies}
+%\label{subsec:topos}
+The topologies were designed to observe the performance and effectiveness %of the  that were established using number of trial and error test runs 
+of the proposed system in different environmental scenarios. 
+In addition to this, effects of changes in parameters like power level on the IDS behaviour were also observed.
+%\notedme{Not clear what you're talking about, specifically.}
 
-The authenticated initial software update runs are considered to be legitimate and the IDS takes this timing information as baseline.
-The subsequent updates are liable to scrutiny by the IDS.
-The timing analyser module in the IDS inspects the NDB once an update activity has been detected.
-It determines the changes in the statistics of the update time and calculates IWS based on following utility function:
 
-\begin{equation}
-\label{eqn2} 
-	\mathit{IWS} = \sum \limits_{i=0}^{n} \frac{\left| \mu_i - t_i \right|}{\sigma_i + 1}
-%	f_1 = \sum\limits_{i=0}^{n} \left( \mu_i - t_i \right)
-	\end{equation}
-where, 
-\begin{inparaenum}
-\item $\mathit{i}$---mote index;\notedme{Why were you using capital letters all through here?}
-\item $\mathit{t_i}$---image update time at mote $\mathit{i}$; 
-\item $\mathit{\mu_i}$---mean update time at mote$\mathit{i}$; 
-\item $\mathit{\sigma_i}$---standard deviation of update time at mote \emph{i}.
-\end{inparaenum}	
+We used topologies in experiments that had many shapes such as: linear, circular, elliptical, double rings, wide line, grid, tree and other random topologies, but do not have space to describe all of them here.
+%The names of the topologies here indicate that in each case the motes were deployed along the circumference of the geometrical shape that enabled packet propagation to take place according to a designed fashion.\notedme(1){drop---too obvious to justify saying.}
+%In each topology, minimum 20 nodes were deployed for a test to take place. 
+%More motes were necessary to replicate certain topologies.
+% Table~\ref{tab:topos} shows the number of motes used in experiments in corresponding topological  deployments.
+The motes were placed at a distance of 30--35 meter to allow  multiple transmission paths to all motes. % <dme> en-dash for number ranges, not em-dash	% <ashraf> I am trying to increase my English and LaTeX vocabulary
+For most experiments, the radio transmission power level was set at 100\% which has an approximate maximum effective transmission range of 50 meters and is able to interfere with other motes up to 100 meters away.
+The Owheo WSN topology (based on the WSN in our building) was additionally tested at 50\%  to %quickly\notedme{?} 
+observe the difference from the parameter change.
 
-\subsubsection{Building Intrusion Warning Zones}
-\label{ssc:iw_zone}
 
-Threshold for building of Intrusion Warning Zone (IWZ) depends on the assumed ability of the IDS having IWS knowledge of all possible intrusions in the network.\notedme{This is not clear: you're jumping to talking about thesholds before describing what they are or why you want them.}
-Such knowledge can be built by replicating intrusion activity from all nodes in the network once.
-However, in case where it is not possible, replicating intrusion activity from the furthest few nodes may serve the purpose.
-IDS can build a scale of possible expected range of IWS for the deployed topology and can classify the IWS in different zones to imply certain warning level.
+\subsection*{Procedure}
+\label{subsec:proc}
+%
+%Experiment procedure  was a combination of activities such as running simulation, analysing system log and processing data to arrive at a conclusion. 
+%\notedme{I'd just list the three steps if there are only three steps. Too simple to be worth using text to introduce subsequent short blocks of text.}
+%
+%
+%\subsubsection*{Processing  of Individual Test Run}
+%\label{ssc:test_runs}
+%Step 1: Running simulation
+\subsubsection*{Step 1} 
+In the environmental set up described above, all motes in the WSN were booted up at same time running one version of a diagnostic application. 
+The diagnostic application would necessarily report its time, version number and mote ID on the serial terminal every second at its serial port. 
 
-The IDS considers an IWS up to 10\% from the scale to be safe and marks as `GREEN' zone, an IWS above 30\% to be possible intrusion and is marked as `RED' zone.\notedme{Why? Where's the science here?}
-However, an IWS within the range of 10\%---30\% can neither be considered safe, nor an intrusion, hence is marked as `GREY' that indicates a situation where rules are not known.
-However, the thresholds are not conclusive and may require some variation based on the density, power level used in the WSN and scale of deployment.\notedme{This does not read strongly. It sounds like you're trying to make too much out of this: just state that for convenience of discussion, you define these zones. They seem entirely subjective to me: useful for discussion, but no more than that.}
 
-%% <Ashraf> We shall not include this portion in this paper
-%\subsubsection{Database Structure}
-%\label{ssc:db}
-%The NDB stores the statistics of the update time of all the motes in the WSN for each update applied.
-%It consists of three flat tables that performs as storage.
-%The tables have been  designed to improve the IDS performance. 
-%First, In-Network Activity Table (INT) consists of the  following fields:
+%Step 2: Stopping the simulation
+\subsubsection*{Step 2} 
+The base station dynamically began the update process and propagated another version of the software image using Deluge protocol. %, which is also called 
+Whenever the transfer to a mote was complete, the new image would replace its the one and reboot to begin executing itself.
+The  new application causes the motes to report their time, version number and mote ID on the serial terminal. 
+In real system, the suggested modified Deluge protocol that runs with the OS would report the information to the sink using datagram.
+The simulator continued until all the motes in the WSN were updated and the reported events were logged. 
+%Step 3: Filtering out mote update time and distance
+The update time of each mote were filtered out  and were sorted In ascending order of update time.
+
+%Step 4: Calculating the euclidean distance and sorting
+%A cpp application was used to take input from this semi-processed information and another file that preserved the position information of the motes in the deployment.
+%The application processed the data to find out the euclidean distance of the motes from the sink.
+%It additionally sorted the rows based on update time in ascending order.
+%At this instance, we preserved the processed information in a file in following fashion:
 %\begin{verbatim}
-%mote_id, timestamp, id_seq, 
-%upd_seq, upd_type, zone_type
+%--------------------------------------------
+%| 	Time (in ms)	|	Mote ID	| Distance |
+%--------------------------------------------
 %\end{verbatim}
-%where, $mote\_id$ is the source node ID, $timestamp$ is the time when the new software image starts executing, $id_seq$ is the number of times an update arrived from same $mote\_id$, $upd\_seq$ is the number of time an update has been initiated from the sink.
-%The unique key for INT is $mote\_id$, $upd\_seq$ pair.
-%$upd\_type$ indicates if the record belonged to a baseline update.
-%For a baseline update type, the $zone_type$ is zero, while for others it is updated to indicate if the update related to that particular mote from that particular run was processed as GREEN, GREY or RED.
-%
-%Secondly, the Baseline Table (BLT) holds the processed information from the legitimate runs and has the following fields:
-%\begin{verbatim}
-%mote_id, mu, sigma
-%\end{verbatim}
-%where, $mote\_id$ is the source node ID, $mu$ is the mean time and $sigma$ is the standard deviation for each $mote\_id$ from all legitimate runs.
-%
-%Finally, the Intrusion Activity Table (IAT) filters out necessary information from INT about most recent software update and contributes to the performance of the IDS.
-%The table has two fields:
-%\begin{verbatim}
-%mote_id, timestamp
-%\end{verbatim}
-%where, $mote\_id$  and $timestamp$ are same as the corresponding fields in INT.
-%Every time a decision on an update has been made and a new update is detected, this table is flashed.
-%
-%\subsubsection{Activities in the Network}
-%\label{ssc:actnet}
-%As part of enhancement into the Deluge protocol, the motes are enriched with the prior knowledge of the sink or sinks in the WSN.
-%Whenever an update takes place in a mote, it reboots with the new software running and stores the bootup time in its memory.
-%I NEED TO CONFIRM IF THE TIME IS ALREADY SAVED WITH THE IMAGE AS PART OF Deluge PROTOCOL IMAGE/GOLDEN IMAGE.
-%The locally stored information  is used later in case it requires to recover from packet delivery failure.
-%The information $type$, $mote\_id$,  $time\_stamp$,$upd\_seq$ are packed along with an additional checksum in an AM packet and forwarded to the sink/sinks.
-%The AM has the following information in the packet:
-%\begin{verbatim}
-%|------------------------------------------|
-%|Source|-----------------------------------|
-%|  ID  |msgtype|timestamp|upd_seq|checksum||
-%|------|-----------------------------------|
-%
-%Figure: Need to draw a better picture
-%\end{verbatim}
-%The AM packet is relayed through the network to the sink.
-%
-%\subsubsection{Activities in the Sink}
-%\label{ssc:actsink}
-%As an AM arrives from the radio network to the sink, the ITC application running on the sink verifies the checksum.
-%If the checksum fails, the packet is discarded and failure recovery is initiated once only in coordination with the IDS.
-%However, if the AM passes checksum, the ITC application extracts the relevant information and populates the INT in the resident host system. 
-%
-%\subsubsection{Activities in the IDS}
-%\label{ssc:actids}
-%An update is typically initiated from the host system where the IDS resided.
-%The IDS constantly monitors the programming port and coordinates with the ITC. 
-%They automatically identify the first update as input for baseline training data.
-%It is possible to put the IDS in training mood for extended number of updates.
-%Result from all updates run during the training period are statistically treated to build the baseline.
-%Though the IDS can work theoretically with a single update, it is recommended to have minimum three updates for the training phase while running more training updates is desirable.
-%For our experiments, we have considered 20 runs for each topology.
-%
-%Once the training phase ends, the IDS calculates mean and standard deviations at each of the motes and stores the  information on BLT.
-%It also stores the number of update runs it considered for the BLT.
-%This number contributes two folds:
-%\begin{inparaenum}
-%\item it indicates the reliability of the training data / baseline; and
-%\item the number is used for statistical processing in case there is a need to increase the training data at a later time or data from an update is identified as acceptable is automatically included in baseline computation and the BLT is updated.
-%\end{inparaenum}
-%Once the BLT has been built, the IDS runs on active mood and all updates are subject to intrusion checks.
-%When an update is initiated in the WSN, data pushed into the INT are filtered and relevant information related to the ongoing update populates the  IAT.
-%The IDS waits upto a specific time, which is determined by the maximum time taken to complete a network-wide  update during the training phase, before it reports the findings about intrusion possibility.
-%While the procedure described above is quite straight forward, it gets complicated because of the unreliable packet transmission pattern experienced by WSN due to node failure, link failure and node reboot \cite{aro04}, \cite{bec04}.
-%IDS reports the findings with a provision of updating it later when an expected data from certain mote are not available within reasonable time.
-%In such case, the IDS employs a packet recovery mechanism to obtain necessary information.
-%
-%The packet recovery mechanism is initiated when a valid packet is not available form one or more motes within  the  determined maximum time from the updates  during the training phase.
-%Upon receiving signal from the IDS, the ITC initiates AM to the specific requesting a retransmission of the update time and waits further  triple time for the required AM packet. If the packet is available,  IWS is recomputed and decision is updated accordingly.
-%If the packet is still not available within specified time, the node is marked as compromised or failed and a notification is generated.
-%
-%
+
+%Step 5: Calculating baseline data
+%\subsubsection*{Building the Baseline Data}
+%\label{ssc:build_baseline}
+\subsubsection*{Step 3} 
+To build the baseline for each topology, processed data from 20 simulations initiated from the sink were considered for building the baseline.
+Any change in variable parameters or in the topology setup would necessitate recalibrating the baseline.
+Mean and standard deviation of mote update times, generally in seconds, were statistically calculated to build the baseline.
+These were the inputs to the IDS to calculate the IWS according to the utility function shown in Equation~\ref{eqn2}. 
+
+%Step 6: Calculating IWS
+%\subsubsection*{Calculating IWS}
+%\label{ssc:calc_iws}
+
+\subsubsection*{Step 4} 
+Intrusion attacks at different nodes were replicated in simulations.
+The individual simulations runs were treated in a fashion  similar to~Step 1 and Step 2.
+The update time recorded at each of the motes is then analysed using Equation~\ref{eqn2}.
+% , which performed the following computations:
+% \begin{itemize}
+% \item Subtract new update time from corresponding mean of reference update time for each of the motes to calculate the absolute difference. For example, new update time of mote `$m$' is subtracted from mean update time found from the baseline data for mote `$m$' and its absolute value was calculated.
+% \item Absolute value is divided by a function of standard deviation to avoid division by zero situation. 
+% This is the intrusion score for individual node `$m$'.
+% %This also smooths the data to avoid unrelated variations.\notedme{what's an unrelated variation?}
+% \item Sum up the resulting intrusion scores at all individual nodes in the WSN to find out the total IWS for the update.
+% \end{itemize}
+The resulting values from this function present an approximation of the abnormality of the new update pattern. The higher the score, the more unusual the pattern is. 
+
+
+%\paragraph*{Step 6:} Calculating IW Zone / Classification
+
+
+%\subsection*{Overview of the System}
+%\label{sec:des}
+%\notedme{...}
+
+
 
 \section{Results and Evaluation}
 \label{sec:eval}
 
 \begin{table*}[t!]
 \centering
-\begin{tabular}{|l|*{20}{r|}r}
+\begin{tabular}{|l|*{20}{r|}r|}
 \hline
 \bd{Node ID}           & \bd{1} & \bd{2} & \bd{3} & \bd{4} & \bd{5} & \bd{6} & \bd{7} & \bd{8} & \bd{9} & \bd{10} & \bd{11} & \bd{12} & \bd{13} & \bd{14} & \bd{15} & \bd{16} & \bd{17} & \bd{18} & \bd{19} & \bd{20} \\
 %Mote ID           & 1 & 2 & 3 & 4 & 5  & 6 & 7 & 8 & 9 & 10 & 11 & 12 & 13 & 14 & 15  & 16 & 17 & 18 & 19 & 20 \\
@@ -664,19 +647,19 @@ $\sigma$		 & 0 & 5 & 5 & 6 & 22 & 36& 37&43 &44 & 44 & 44 & 44 & 44 & 45 & 44  &
 \label{tab:stat_ellip}
 \end{table*}
 
-\begin{table*}[t!]
-\centering
-\begin{tabular}{|l|*{20}{r|}r}
-\hline
-\bd{Node ID}           & \bd{1} & \bd{2} & \bd{3} & \bd{4} & \bd{5} & \bd{6} & \bd{7} & \bd{8} & \bd{9} & \bd{10} & \bd{11} & \bd{12} & \bd{13} & \bd{14} & \bd{15} & \bd{16} & \bd{17} & \bd{18} & \bd{19} & \bd{20} \\
-\hline
-$\mathit{IWS}$
-                 &0.01&16 &19 &73 & 140 &203 &246 &336 &344 &396 &395 &535 &406 &332 &269 &237 &113 & 72& 16 & 16 \\
-\hline
-\end{tabular}
-\caption{Mote IWS in Elliptical topology. Further explained in Figure~\ref{fig:ellip}}
-\label{tab:iws_ellip}
-\end{table*}
+%\begin{table*}[t!]
+%\centering
+%\begin{tabular}{|l|*{20}{r|}r}
+%\hline
+%\bd{Node ID}           & \bd{1} & \bd{2} & \bd{3} & \bd{4} & \bd{5} & \bd{6} & \bd{7} & \bd{8} & \bd{9} & \bd{10} & \bd{11} & \bd{12} & \bd{13} & \bd{14} & \bd{15} & \bd{16} & \bd{17} & \bd{18} & \bd{19} & \bd{20} \\
+%\hline
+%$\mathit{IWS}$
+%                 &0.01&16 &19 &73 & 140 &203 &246 &336 &344 &396 &395 &535 &406 &332 &269 &237 &113 & 72& 16 & 16 \\
+%\hline
+%\end{tabular}
+%\caption{Mote IWS in Elliptical topology. Further explained in Figure~\ref{fig:ellip}}
+%\label{tab:iws_ellip}
+%\end{table*}
 
 \begin{figure*}[t!]
     \centering
@@ -693,17 +676,19 @@ $\mathit{IWS}$
         \caption{Comparison of IWS at different motes}
         \label{subfig:ellipgraph} % <dme> it's is the \caption that updates the \label counters. You had \caption/\label in the wrong order.
     \end{subfigure}
-    \caption{Relative position and comparison of IWS for intrusion at different motes from data in Table~\ref{tab:iws_ellip}}
+    \caption{Relative position of the motes and comparison of IWS }
     \label{fig:ellip} % <dme> this was in the wrong place too
 \end{figure*}
 
 In this section, we presents the data found in the course of this investigation, their interpretation and evaluate the contribution.
-While discussing the performance and effects of the proposed IDS in different topologies are useful, we shall concentrate our discussion on results and findings elliptical topology only.
-Discussing any of the topologies presents fair idea about the outcomes from the others. 
-We shall mention the cases when the outcome was considered to be exception and contrary to the expectations.\notedme{Put this earlier in the justification of discussing one topology in detail.}
-The space requirement also motivates us to limit the discussion to necessary details only.
+While discussing the performance and effects of the proposed IDS in different topologies are useful, discussing any of the topologies presents fair idea about the outcomes from the others and mentioning the cases when the outcome was considered  contrary to the expectations.
+%The space requirement also motivates us to limit the discussion to necessary details only.
+
+
+%\notedme{Put this earlier in the justification of discussing one topology in detail.}
+%<Ashraf>> This is the second sentence in the discussion section
 %\notedme(1){Is it closest to what you see in other papers? I'd not have thought so, in which case I'd think you need to justify why you're focusing on it... Also, there's unnecessary text repetition here.}
-%% <Ashraf> The discussion is taken this way because of the spacew limitation and otherwise introducing all the results would be repeatation of the same thing, I guess. I'll look for papers that describe similar things.
+%% <Ashraf> The discussion is taken this way because of the space limitation and otherwise introducing all the results would be reputation of the same thing, I guess. I'll look for papers that describe similar things.
 
 %\subsection{Data1 + Discussion}
 
@@ -716,13 +701,13 @@ The space requirement also motivates us to limit the discussion to necessary det
 % Because of these similarities, discussing elliptical topology is an interesting choice.
 %\notedme(1){Maybe...}
 %% <Ashraf> removed because of space
-
-The ellipse shaped deployment of 20 nodes, shown in Figure~\ref{subfig:elliptopo}, has been designed considering several requirements.
+We shall concentrate our discussion on results and findings of a single, elliptical topology only.
+The ellipse shaped deployment of 20 nodes, as shown in Figure~\ref{subfig:elliptopo}, has been designed considering several requirements.
 The motes on either side of minor axis remained within each others' transmission range, whereas motes on the either side of the major axis did not.
 %Total 20 nodes were deployed with the minor axis being 30 meter and the major axis being way larger than that.
-The transmission power level was set at 100\%. 
+%The transmission power level was set at 100\%. 
 % which allowed a  transmission range of 50 meter and nodes were  able to interfere other nodes at  up to 100 meter apart.
-The motes were placed at a spacing of 35 meters along the circumference of the ellipse to enable multiple transmission paths to all the motes.
+%The motes were placed at a spacing of 35 meters along the circumference of the ellipse to enable multiple transmission paths to all the motes.
 It contributed to achieve  redundancy and  reliable image transfer. 
 
 %The simulations proceeded without interruption and produced expected results.
@@ -732,8 +717,9 @@ It contributed to achieve  redundancy and  reliable image transfer.
 %The computation results have been presented in Table~\ref{tab:stat_ellip}.
 %\notedme(1){not yet clear enough what this table contains. Presumably `Node ID' should be explained to be the ID of the node from which to simulate injecting a malicious update so as to calculate the IWS? (+ broken ref)}
 %% <Ashraf> restructured
-Table~\ref{tab:stat_ellip} shows the statistical measurements obtained at different motes.
-The first row in Table~\ref{tab:stat_ellip} contain the Node IDs that are headers for the data displayed underneath.
+Table~\ref{tab:stat_ellip} shows the baseline statistical measurements obtained at different motes.
+The numbers indicate the measurements in time unit of seconds.
+The first row in Table~\ref{tab:stat_ellip} contains the Node IDs that are headers for the data displayed underneath.
 Node ID indicates the identification of each node in the deployment.
 The next two rows describe the baseline data i.e., mean and standard deviation computed from the 20 legitimate updates initiated from the sink.
 Analysing the baseline data shows that update time of the motes further away from the sink have higher mean and standard deviation.  
@@ -741,39 +727,25 @@ However, standard deviation raises gradually, though it varies little for relati
 The the stability of standard deviation results from availability of redundant paths, which makes the image transfer more efficient and reliable.
 Therefore, even remaining at considerably different distances from the sink, mote ID 8, 9, 10, 11, 12, 13, 14 and 15  have quite similar standard deviation of update time.
 In contrast to this, mean increases sharply as the motes are placed further from the sink.
-The result in baseline data shows that motes closer to the sink have lower mean which increases sharply with the increase in distance.
+The result in baseline data shows that motes closer to the sink have lower mean which follows a steep rise with the increase in distance.
 
-Results obtained from these simulated intrusions are reported in Table~\ref{tab:iws_ellip}.
-Cells in the last row contain the IWS calculated using  the utility function shown in Equation~\ref{eqn2} for the test runs initiated from the node indicated at top of the column.
-Each of the motes were considered as intrusion point to measure IWS.
-It can be clearly seen that IWS at different motes differ considerably.
-The data shown in the table can best be interpreted when related to Figure~\ref{fig:ellip}, which shows defined zones and IWS measured when intrusion was initiated at different motes.
-Figure~\ref{subfig:elliptopo} shows the actual relative positions of the motes with mote ID written at the centre of the tiny circle and IWS measured when an intrusion attempt has been initiated from the mote. 
-The figure additionally divides the region in GREEN, GREY and RED zones according to the technique discussed in Section~\ref{ssc:actids}.
-The graph in  Figure~\ref{subfig:ellipgraph} shows the relative measures of the IWS from the motes.
-
-IWS shown in Table~\ref{tab:iws_ellip} were used to build a scale that ranged from $0$ to maximum of $\mathit{IWS}$.
-Building this scale was crucial for the ability to classify the IWS to meaningful zones.
-%\notedme(1){I thought that there were difficulties determining these zones?}
-%% <Ashraf> I am not sure. Do you consider this description too simple?
-However, it is not possible to build the scale without the knowledge of the expected IWS from the furthest nodes in the network.
-Nevertheless, we established two threshold levels at 10\% and at 30\% that were useful in zone classification using intuitive heuristics.
-Details of the zoning has been discussed in Section~\ref{ssc:iw_zone}.
-
-
-%\section{Discussion}
-
-The utility function presented in Equation~\ref{eqn2} is designed to neutralise the undesired %/unexpected
-changes in mean and standard deviation which are expected to contribute to a near zero IWS.
-%\notedme(1){zero is just an English word. Why are you typesetting it differently? NB: if you were to typeset it in maths, this is not the correct way to do so: \LaTeX doesn't know that you mean zero to be a word, and thus will instead typeset it as a product of individual variables z, e, r, o, ...}
-%% <Ashraf> Addressed 
-A near zero IWS is further classified as GREEN zone to indicate a legitimate software update. 
-
+Figure~\ref{subfig:elliptopo} shows the relative positions of the motes with mote ID written at the centre of the tiny circle and IWS beneath the circle.
+IWS has been calculated using  the utility function shown in Equation~\ref{eqn2}.
+Each of the motes were considered as intrusion point in the process of measuring IWS.
 The IWS increases linearly with the increase in distance from the sink.
-The `distance' term can be misleading in the context of our discussion and demands further clarification.
+The `distance' term can be misleading without further clarification.
 Euclidean distance between a mote and the sink does not make useful sense as the packets in the network must travel using a relay mechanism through other motes in the network.
 Because of the availability of the multiple paths, it is not possible to quantify the exact distance that a packet would travel while transporting form a mote to the sink.
 However, an estimation of distance along the most probable link path based on the connectivity may be considered.
+
+
+IWSs shown in Figure~\ref{fig:ellip} were used to build a scale that ranged from $0$ to maximum of $\mathit{IWS}$.
+Building this scale was crucial for the ability to classify the IWS to meaningful zones.
+%\notedme(1){I thought that there were difficulties determining these zones?}
+%% <Ashraf> I am not sure. Do you consider this description too simple?
+It is not possible to build the scale without the knowledge of the expected IWS from the furthest nodes in the network.
+Nevertheless, we used intuitive heuristics to classify zones  with two threshold levels at 10\% and at 30\%.
+The IDS suggests different treatments for motes in different zones which are discussed bellow.
 
 IWS is considerably higher for intrusion at distant motes than ones which are close to the sink.
 This phenomena is topology dependent, which also implies  that it is connectivity dependent.
@@ -784,6 +756,13 @@ There is a relationship between the curvature/eccentricity of the original topol
 %This implication would be more evident once we discuss more topologies in the upcoming paragraphs. {Only if we discuss the other topologies}.
 However, establishing the relationship is beyond the scope of this paper.
 
+IWS at different motes differ considerably: the motes close to the sink have very low IWS in comparison to the distant motes.
+However, there are motes with IWS that can neither be considered low, nor too high.
+These classes of scores inevitably demand different interpretation and treatment to indicate intrusion warnings. 
+Accordingly, the Figure~\ref{subfig:elliptopo}  shows the region decided in GREEN, GREY and RED zones following to the technique discussed in Section~\ref{ssc:iw_zone}.
+The graph in  Figure~\ref{subfig:ellipgraph} shows the relative measures of the IWS from the motes.
+It also indicates the threshold among the GREEN, GREY and RED zones discussed above.
+
 %\subsection{discussion of contributions}
 
 
@@ -791,16 +770,14 @@ However, establishing the relationship is beyond the scope of this paper.
 \centering
 \begin{tabular}{|l|*{20}{r|}r|}
 \hline
-\bd{Node ID}           & \bd{1} & \bd{2} & \bd{3} & \bd{4} & \bd{5} & \bd{6} & \bd{7} & \bd{8} & \bd{9} & \bd{10} & \bd{11} & \bd{...} & \bd{31} & \bd{32} & \bd{33} & \bd{34} & \bd{35} & \bd{36} & \bd{37} & \bd{38} \\
+\bd{Node ID}           & \bd{1} & \bd{2} & \bd{3} & \bd{4} & \bd{5} & \bd{6} & \bd{7} & \bd{8} & \bd{9} & \bd{10} & \bd{11} & \bd{...} & \bd{33} & \bd{34} & \bd{35} & \bd{36} & \bd{37} & \bd{38} \\
 %Mote ID           & 1 & 2 & 3 & 4 & 5  & 6 & 7 & 8 & 9 & 10 & 11 & ...& 31 & 32 & 33  & 34 & 35 & 36 & 37 & 38 \\
 \hline		\hline
 
-Power	  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &   &  &  &  &  &  \\
-$100\% $          & 512 & 529 & 512 & 512 & 512  & 512 & 476 & 478 & 476 & 459 & 458 & ...& 49 & 47 & 53  & 48 & 49 & 51 & 47 & 29 \\
+Power 100\%	   & 512 & 529 & 512 & 512 & 512  & 512 & 476 & 478 & 476 & 459 & 458 & ...& 53  & 48 & 49 & 51 & 47 & 29 \\
 \hline
 
-Power	  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &   &  &  &  &  &  \\
-$50\%$            &31 & 59&254& 31& 31 &283& 32& 32& 254& 31 &253 & ...& 31 & 31 & 31  & 30 & 31 & 31 & 30 & 0 \\
+Power 50\%	  &31 & 59&254& 31& 31 &283& 32& 32& 254& 31 &253 & ... & 31  & 30 & 31 & 31 & 30 & 0 \\
 \hline
 \end{tabular}
 \caption{IWS from intrusion at motes in `Owheo Sensor Network'. Further explained in Figure~\ref{fig:owheo}}
@@ -839,18 +816,18 @@ However, for the distant motes, the IWS is quite high and the IDS can conclude s
 
 While reporting severity or likelihood of an intrusion in quantitative term like the IWS is useful, it is more beneficial if the quantity is associated with some kind of interpretation.
 The technique of associating such interpretation has been discussed in Section~\ref{ssc:iw_zone} and in this Section. 
-In the elliptical topology intrusion scenario, maximum IWS reported in the presented data in Table~\ref{tab:iws_ellip} was 535. 
+In the elliptical topology intrusion scenario, maximum IWS reported in the data presented in Figure~\ref{subfig:elliptopo} was 535. 
 Motes reporting 10\% of maximum IWS i.e., an IWS up to 53.5 would be considered in the GREEN zone.
 %\notedme(1){Why is this the IWS value for green? You've not explained.}
 %% <Ashraf> addressed
-For example, in figure~\ref{subfig:elliptopo}, mote ID 2, 3, 19, and 20 are in this zone.
+For example, in Figure~\ref{subfig:elliptopo}, mote ID 2, 3, 19, and 20 are in this zone.
 On the other hand, IWS above 53.5 and bellow 160.5, which is 10\% -- 30\% of the maximum, are considered to be in the GREY zone. 
 Motes in this zone are 4, 5, 17, and 18.
-They can neither be considered free from intrusion, nor it is possible to easily arrive at a decision that the scores indicate intrusion for sure.
+They can neither be considered free from intrusion, nor it is possible to easily arrive at a conclusion that the scores indicate intrusion for sure.
 In contrast to both the scenarios describes above, IWS above 160.5, which is beyond 30\% of the maximum, is considered to be an intrusion.
 All other motes in the topology have a IWS above this threshold level and hence are considered to be more easily detectable by the IDS. %\notedme(1){Eh? How does this follow?} %% <Ashraf> addressed
 
-The idea of zoning associated with the IWS is very beneficial in securing a WSN.
+The idea of zoning associated with the IWS can be  very beneficial in securing a WSN.
 It is useful in designing a secure network deployment, which is considered to be another major contribution of the research work.
 %\notedme(1){`immensely' is too over the top.} %% <Ashraf> `immensely' removed
 The motes which are found to be in the GREEN zone must be adequately secured by design with additional physical security as intrusion in these motes are not observed by the IDS.
@@ -860,20 +837,22 @@ The additional monitoring could be in the form of an algorithmic or physical obs
 The rest of the region, identified by the RED zone, is under the effective surveillance of the IDS and the IDS is expected give a reliable estimation of correct behaviour in this region.
 %\notedme(1){not secure really, but yes, where the IDS can give a reliable estimation of correct behaviour}
 
-The concept of zoning using the IDS is a very useful tool in designing secure WSN deployment.
+
 A network is more secure when it has a smaller GREEN and GREY zone.
 A smaller GREEN zone implies the requirement of lesser resources to impenetrably secure less number of motes.
 Similarly, a smaller or non-existent GREY zone would require lesser monitoring measures.
 Such a secure WSN can be designed by physically relocating some of the motes or even by varying the factors like power level.
 However, obtaining real world scenario by varying different sets design parameters e.g., power levels, position of nodes, etc is an impossible task for even a small WSN.
-The simulation environment used to design IDS can be effectively utilised to obtain expected IWS score range, and rank the sets based on how effectively they produce IWS values. 
-For example, we have simulated the IWS scenario of the `Owheo Sensor Network' at two different power levels in our quest to design a secure WSN using the IDS.
-`Owheo Sensor Network', which is the WSN deployed in the Department of Computer Science building at the University of Otago, is intended to be used for research purposes.
+The simulation environment used to design IDS can be effectively utilised to obtain expected IWS score range for different sets of parameters and then rank the sets based on how effectively they produce IWS values. 
+For example, we have simulated the IWS scenario of the `Owheo Sensor Network'\footnote{`Owheo Sensor Network' is a WSN (mote ID 26 does not exist) deployed in the Department of Computer Science building at the University of Otago. It is intended to be used for research purposes.}
+at two different power levels in our quest to design a secure WSN using the IDS.
+
+
 %\notedme(1){I don't think you're quite stating the contribution clearly enough yet: that for different sets of potential design parameters for the WSN (e.g. power levels, position of nodes, etc.) you would be able to simulate the IWS score range, and rank the sets based on how effectively they produce IWS values. For example, it's not clear that your shift into discussing the zones is just an indirect way of discussing the underlying IWS scores.}
 %% <Ashraf> addressed
 
 Table~\ref{tab:owheo} shows the IWS at different motes as intrusion points at 100\% and 50\% power levels. 
-In `Owheo Sensor Network', mote ID 38 was marked as the sink and mote ID 26 does not exist.
+In `Owheo Sensor Network', mote ID 38 was marked as the sink and.
 At 100\% power level, 19 nodes (mote ID 1, 4, 5, 7, 8, 10, 16, 17, 18, 28, 29, 30, 31, 32, 33, 34, 35, 36, and 37) were in GREEN zone, only one node (mote ID 2) was in GREY zone and the rest 16 nodes were in RED zone.
 The deployment and the zoning boundaries at 100\% power level has been shown in Figure~\ref{subfig:owheo_full}.
 When the same deployment was simulated at 50\% power level, only seven nodes (mote ID 30, 31, 32, 34, 35, 36, and 37) were in GREEN zone, two nodes (mote ID 29, and 33) were in GREY zone and rest 27 motes were in RED zone.
@@ -895,9 +874,9 @@ The IWS is also able to detect node failures in the WSN.
 %However, as this was not a design consideration, the contribution is not robust enough, yet it is worth mentioning.
 %\notedme(1){You've talked about this meta-point too much, now.}
 %% <Ashraf> Actually, a `not' before `robust' went missing. :)
-The case of a node not reporting its update time within a specified delay is handled by a error recovery procedure put in place by the IDS.
+The case of a node not reporting its update time within a specified delay is handled by an error recovery procedure put in place by the IDS.
 If the recovery procedure fails, the node is considered to have failed or have been compromised.
-A unusual update time chronology and resulting unusual IWS  indicates the probability of some other types of attacks in WSN like node relocation, node repudiation, node compromise, not just a transient failure whihc is something worth paying attention to.
+A unusual update time chronology and resulting unusual IWS  indicates the probability of some other types of attacks like node relocation, node repudiation, node compromise, not just a transient failure which is something worth paying attention to.
 % However, such failure resulting into contribution towards an IWS which is quite different for the update pattern detected from the timing information reported by the other nodes.
 % The IDS structure is such that it has an expected pattern and shape of IWS for an intrusion at some specific point.
 % If the shape is distorted to a great extent, it indicates some unusualness which can be attributed to some other phenomena like node failure or compromise.
@@ -908,108 +887,92 @@ A unusual update time chronology and resulting unusual IWS  indicates the probab
 %%<Ashraf> addressed
 
 
-\notedme{This should be in a conclusion section. How many papers have you read that don't have one?}
-In this paper, we have modelled a IDS solution to one of the weaknesses in WSN that can be capitalised by an adversary to invalidate a mission critical deployment of the technology in robotics.\notedme{rewrite---unclear}
-The proposed system watches over the software update pattern for over the air update protocol in WSN, computer an IWS that can quantitatively indicate a possible intrusion.\notedme{also unclear}
-In addition to this, the IDS environment can be used to design a secure WSN deployment.
-The IDS also can indicate some other kinds of anomalies such as node relocation, node repudiation, node compromise and so on.
-In future,  the IDS can be implemented to examine testbed performance including cases of multiple sink with mobile sensors which would be very useful in robotics applications.\notedme{testbed performance? Don't understand. The conclusion needs to be much more clearly written: some reviewers might stop reading at this point if they don't understand your contributions (i.e. they'll read the conclusion first, before even looking at the paper!).}
+\section{Conclusion}
+\label{sec:concl}
 
-%\subsection{Discuss other topologies}
+In this paper, we modelled an IDS solution to intrusion in WSN software update protocols.
+We discussed the potential danger that is associated with WSN OTA software update.
+While OTA update protocols make certain WSN management tasks easy, they also remain vulnerable to intrusion attempts.
+An adversary can take advantage of the resource constrained nature of the sensor motes and employ enough resources to break in through the limited protection the sensors are armed with.
+To deal with this problem, we have suggested a passive security mechanism---an IDS.
 
-%Not included in this paper. Already long enough.
-%Insight for secure deployment. which topologies would work better - idea
-%Insight for a deployment that would ensure better connectivity
-%
-%
-%Interpretation of the results.
-%Our argument in support of the results.
-%
-%Explanation of the results to answer the question - so what.
-%Why the result was important.
-%Why does this matter .
+The IDS is hosted on a server that remains physically connected to the  sink. 
+% The sink has an ITC application which in coordination with the IDS performs the detection activity.
+% <dme> ITC needs to be explained if included in the conclusion. Doesn't seem high value though.
+The system watches over the timing of software update patterns using a modified version of the Deluge protocol.
+Whenever a mote is updated, it sends an update related information to designated sink using a datagram.  
+Related information from the datagram is filtered by the ITC for further processing at IDS.
 
-%Constraints and limitations of the program
-%Opportunities for future work
+The first contribution of the research is quantifying intrusion through an IWS that indicates the location and extent of intrusion.
+The IWS is a quantitative indicator of possible intrusion.
+The utility function that computes IWS is designed to neutralise the undesired %/unexpected
+changes in mean and standard deviation which are expected to contribute to a near zero IWS.
 
-% Must explicitly state what is my contribution
-% If there are some recommendations, must include them here
-%What are my specific contributions to the academic society?
-%Do I have some recommendations about it?
+The other important contribution is related to classifying expected IWS into zones.
+The concept of zoning using the IDS is a very useful tool in designing secure WSN deployment.
+The IDS can be used to simulate all possible combinations of parameters and  to rank the sets based on intrusion vulnerability.
+For example, a WSN with known small insecure zone is much easier to protect than a larger zone.
+The ranking mechanism is useful in such scenario.
+Besides, the IDS also can indicate some other kinds of anomalies such as node relocation, node repudiation, node compromise and so on.
+
+The IDS has several limitations. 
+It assumes some special cases like a static WSN with a single sink.
+It also assumes that network-wide information will not be forged. %to have network wide transparent knowledge.
+These assumptions may not hold in a real WSN.
+In addition to this, assumptions about the attacker are: the attacker can employ enough resources to break in the cryptographic protections in sensors; however, he is not able to modify the protocols in an uncompromised sensor.
+The IDS has an obvious functional limitation.
+It cannot identify an intrusion in certain scenarios.
+For example, when an intrusion takes place in close vicinity of the sink, this IWS may not always be sufficiently large to be identified as an intrusion.
+The other limitation stems from the fact that the results are based on simulated data and needs support from real world implementation.
+In future,  the IDS can be implemented to examine real world performance including cases of multiple sinks with mobile sensors.
+
+\section{Conclusion}
+\label{sec:co}
+
+OTA software update poses certain security challenges. An
+attacker quite easily may pickup and read the motes deployed
+in the environment. Similarly, he can inject false data into
+the sensor that can infect the network using OTA protocols
+that work in an epidemic fashion. Protecting the software
+update process is certainly of great importance. In case of
+failures, reporting such incidents and identifying the extent of
+illegitimate software update are also equally important Security
+is considered an important aspect of WSN development due to
+the fact that security threats to the WSN are different in nature
+from those faced when using Internet technology.
+Combining the capabilities of WSN and robots is appeal
+ing. Sensors have huge limitation in their capability to be in
+dependently useful. They not suitable for heavy computational
+tasks and have resource constraints with respect to processing
+power, memory, storage, and severe energy. On the other
+hand, robots have greater capabilities like mobility, performing
+resource intensive tasks, and can operate in unfavourable
+environments.
+Thus, introducing wireless sensors add additional security
+challenges in robotics. With collaborative robotics increasing
+rapidly, security of inter-robot communication over wireless
+media is of great importance.
+Collaboration between wireless sensors and robotics can
+offer great advantages. Connecting WSNs with group of robots
+can extend the capability of each other. Sensors can sense, they
+cannot react. Updating the sensor is an important management
+tasks. In this paper, we have modelled a IDS solution to
+one of the weaknesses in WSN that can be capitalised by
+an adversary to invalidate a mission critical deployment of
+the technology in robotics. The proposed system watches over
+the software update pattern for over the air update protocol
+in WSN, computer an IWS that can quantitatively indicate a
+possible intrusion. In addition to this, the IDS environment
+can be used to design a secure WSN deployment. The IDS
+also can indicate some other kinds of anomalies such as node
+relocation, node repudiation, node compromise and so on.
+In future, the IDS can be implemented to examine testbed
+performance including cases of multiple sink with mobile
+sensors which would be very useful in robotics applications.
 
 
-
-% \section{Conclusion}
- % \label{sec:concl}
-
-
-%\begin{figure}[!t]
-%\centering
-%\includegraphics[width=2.5in]{myfigure}
-% where an .eps filename suffix will be assumed under latex, 
-% and a .pdf suffix will be assumed for pdflatex; or what has been declared
-% via \DeclareGraphicsExtensions.
-%\caption{Simulation Results}
-%\label{fig_sim}
-%\end{figure}
-
-% An example of a double column floating figure using two subfigures.
-%\begin{figure*}[!t]
-%\centerline{\subfloat[Case I]\includegraphics[width=2.5in]{subfigcase1}%
-%\label{fig_first_case}}
-%\hfil
-%\subfloat[Case II]{\includegraphics[width=2.5in]{subfigcase2}%
-%\label{fig_second_case}}}
-%\caption{Simulation results}
-%\label{fig_sim}
-%\end{figure*}
-% Note that often IEEE papers with subfigures do not employ subfigure
-% captions (using the optional argument to \subfloat), but instead will
-% reference/describe all of them (a), (b), etc., within the main caption.
-
-% An example of a floating table. Note that, for IEEE style tables, the 
-% \caption command should come BEFORE the table. Table text will default to
-% \footnotesize as IEEE normally uses this smaller font for tables.
-% The \label must come after \caption as always.
-%
-%\begin{table}[!t]
-%% increase table row spacing, adjust to taste
-%\renewcommand{\arraystretch}{1.3}
-% if using array.sty, it might be a good idea to tweak the value of
-% \extrarowheight as needed to properly center the text within the cells
-%\caption{An Example of a Table}
-%\label{table_example}
-%\centering
-%% Some packages, such as MDW tools, offer better commands for making tables
-%% than the plain LaTeX2e tabular which is used here.
-%\begin{tabular}{|c||c|}
-%\hline
-%One & Two\\
-%\hline
-%Three & Four\\
-%\hline
-%\end{tabular}
-%\end{table}
-% Note that IEEE does not put floats in the very first column - or typically
-% anywhere on the first page for that matter. Also, in-text middle ("here")
-% positioning is not used. Most IEEE journals/conferences use top floats
-% exclusively. Note that, LaTeX2e, unlike IEEE journals/conferences, places
-% footnotes above bottom floats. This can be corrected via the \fnbelowfloat
-% command of the stfloats package.
-
-%\section*{Acknowledgment}
-% trigger a \newpage just before the given reference
-% number - used to balance the columns on the last page
-% adjust value as needed - may need to be readjusted if
-% the document is modified later
-%\IEEEtriggeratref{8}
-% The "triggered" command can be changed if desired:
-%\IEEEtriggercmd{\enlargethispage{-5in}}
-
-% references section
 \bibliographystyle{IEEEtran}
 \bibliography{icara}
-
 
 
 % that's all folks

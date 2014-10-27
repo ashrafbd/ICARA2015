@@ -37,7 +37,7 @@
 % \newcommand{\red}[1]{\pdfmarkupcomment[markup=Highlight,color=red]{#1}}
 % \newcommand{\green}[1]{\pdfmarkupcomment[markup=Highlight,color=green]{#1}}
 % \newcommand{\grey}[1]{\pdfmarkupcomment[markup=Highlight,color=gray]{#1}}
-\newcommand*{\bd}[1]{\multicolumn{1}{|c}{\bfseries #1}}
+\newcommand*{\bd}[1]{\multicolumn{1}{|c|}{\bfseries #1}}
 
 
 % correct bad hyphenation here
@@ -45,15 +45,12 @@
 
 
 \begin{document}
-\title{Securing Robotic Operations in WSN Environment through Intrusion Detection of WSN Software Update}
+\title{Securing Robots in WSN Environment through Intrusion Detection of WSN Software Update}
 %\title{Securing Robotics in WSN Integrated Environment: Intrusion Detection of WSN Software Update}
 
 \author{
-		\IEEEauthorblockN{	A S M Ashraful Alam\IEEEauthorrefmark{1},  % and
-							David Eyers\IEEEauthorrefmark{1},  % and 
-							Zhiyi Huang\IEEEauthorrefmark{1} 
-						}
-	\IEEEauthorblockA{\IEEEauthorrefmark{1}Department of Computer Science, University of Otago, New Zealand, Email: \{aalam, dme, hzy\}@cs.otago.ac.nz} 
+		\IEEEauthorblockN{	A S M Ashraful Alam, David Eyers, Zhiyi Huang 	}
+	\IEEEauthorblockA{Department of Computer Science, University of Otago, New Zealand, Email: \{aalam, dme, hzy\}@cs.otago.ac.nz} 
 }
 
 
@@ -260,8 +257,7 @@ information.
 
 %%%%I WANT TO CHANGE THIS PORTION
 The proposed techniques varies greatly in their idea and approach.
-
-Misused  detection  techniques identifies undesired activities basing on signature.
+Misuse based  detection  techniques identifies undesired activities basing on signature.
 They aim to detect known attacks.
 However, they are ineffective against novel attack.
 Additionally, they may wrongly identify legitimate activities as intrusion because of similarity with the signature~\cite{372146, 1515559, ISI:000298891500099, Chen:2009:NMI:1516241.1516282, 1424814, Strikos_afull}.
@@ -328,8 +324,20 @@ The IDS analyses the update time of  each of the motes in the WSN and computes t
 % and indicates the cases of a possible intrusion, i.e., a probable illegitimate update.
 The IWS, update time and image version information can be utilised to indicate location and extent of intrusion. 
 
-The intrusion detection algorithm requires some modification of the update protocol to enable an automatic reporting service in the mote by using AM packets to carry latest update information to the sink.
-It is assumed that all motes have time synchronisation accurate to 1~$\mu$s, e.g., achieved using the TSMP\footnote{Time Synchronized Mesh Protocol}~\cite{Pister08tsmp:time}.
+\begin{equation}
+\label{eqn2} 
+	\mathit{IWS} = \sum \limits_{i=0}^{n} \frac{\left| \mu_i - t_i \right|}{\sigma_i + 1}
+\end{equation}
+where, 
+\begin{inparaenum}
+\item $\mathit{i}$---mote index;%\notedme{Why were you using capital letters all through here?} 
+\item $\mathit{t_i}$---image update time at mote $\mathit{i}$;  
+\item $\mathit{\mu_i}$---mean update time at mote $\mathit{i}$;  
+\item $\mathit{\sigma_i}$---standard deviation of update time at mote $\mathit{i}$. 
+\end{inparaenum}
+
+The intrusion detection algorithm requires some modification of the update protocol to enable an automatic reporting service in the mote by using a datagram packets to carry latest update information to the sink.
+All motes are assumed to have time synchronisation accurate to 1~$\mu$s, e.g., achieved using the TSMP~\cite{Pister08tsmp:time}.
 % devices e.g., motes stay synchronized to each other} protocol 
 % <dme> !
 The timing information carried by the datagram is therefore synchronised with other nodes in the WSN and can be used readily for processing by the IDS.
@@ -367,10 +375,11 @@ The IDS has three types of components:
     \label{fig:ids_model}
 \end{figure}
 
-\subsubsection*{Determining IWS}
-\label{ssc:cal_iws}
+\subsubsection*{Gathering Timing Information}
+\label{ssc:ga_info}
 %% <ashraf> We cannot go into these details in this paper; space limitation
-The intrusion detection activity begins with the action of motes by endorsing update time and initiating a datagram to the sink. 
+The intrusion detection activity begins when a software update takes place.
+The motes perform their part by endorsing update time, software version, mote ID  and initiating a datagram to the sink. 
 %An AM packet initiated for the IDS has several fields: destination address, type identifier that indicates the update time information and the protocol for IDS, timing information and a checksum value.
 %[DO WE WANT TO INCLUDE THE PATH TAGGING; MAY BE LATER - IT INCREASES RELIABILITY, NOT DIRECTLY $IDS$ ACTIVITY?]
 %[path tagging is good, but in all cases, what’s the risk from intruders messing with the reported data?]
@@ -387,40 +396,40 @@ The IDS maintains an identifier to differentiate among different update times fr
 %However, the IDS needs to be manually controlled to enable multiple training runs.
 %Outcome from these runs are statistically treated to build the baseline.
 
-The authenticated initial software update runs are considered to be legitimate and the IDS uses these timing measurements to build its baseline.
-The subsequent updates are liable to scrutiny by the IDS.
+\subsubsection*{Identifying Intrusion}
+\label{ssc:cal_iws} 
+The IDS builds anomaly signature or baseline data from authenticated initial software update runs.  are considered to be 
+The subsequent updates are subject to verification against signature.
 The time analyser module in the IDS inspects the NDB once an update activity has been detected.
-It determines the changes in the statistics of the update time and calculates IWS based on following utility function:
+It determines the changes in the statistics of the update time and calculates IWS based on following utility function in Equation~\ref{eqn2}. IWS indicates the possibility of an intrusion. If the IWS is high enough to be considered an intrusion, the IDS sorts the timing data for that run and identifies the source of intrusion as the mote reporting from lowest update time.
+The IDS also identifies the extent of intrusion from mote ID and version information in the database.
 
-\begin{equation}
-\label{eqn2} 
-	\mathit{IWS} = \sum \limits_{i=0}^{n} \frac{\left| \mu_i - t_i \right|}{\sigma_i + 1}
-\end{equation}
-where, 
-\begin{inparaenum}
-\item $\mathit{i}$---mote index;%\notedme{Why were you using capital letters all through here?} 
-\item $\mathit{t_i}$---image update time at mote $\mathit{i}$;  
-\item $\mathit{\mu_i}$---mean update time at mote $\mathit{i}$;  
-\item $\mathit{\sigma_i}$---standard deviation of update time at mote $\mathit{i}$. 
-\end{inparaenum}	
+\subsubsection*{Removing Intrusion Effects}
+\label{ssc:removing} 
+DO I WANT TO PUT THIS HERE OR IN THE CONCLUSION?????
+While identifying intrusion appears a difficult task, removing does not in certain conditions.
+Unless, an intrusion lead to DoS attack, the intrusion effect can be easily removed by initiating another update of the legitimate software from the sink.
+However, in case of DoS attack, generally the network is lost and needs major effort to recover, which is beyond the scope of this paper.
 
-\subsubsection*{Building Intrusion Warning Zone}
-\label{ssc:iw_zone}
-The IDS can build a scale of possible expected range of IWS for a topology and can classify the IWS in different zones to imply certain warning levels.
-While reporting severity or likelihood of an intrusion in quantitative term like the IWS is useful, it is more beneficial if the quantity is associated with some kind of interpretation.
-The technique of associating such interpretation has been established by identifying Intrusion Warning Zone (IWZ) from a scale built from maximum expected IWS in a topology.
-We have used a heuristic trial and error method to build the IWZ.
-Threshold for building of Intrusion Warning Zone (IWZ) depends on the assumed ability of the IDS having IWS knowledge of all possible intrusions in the network.
-%\notedme{This is not clear: you're jumping to talking about thresholds before describing what they are or why you want them.}
-Such knowledge can be built by replicating intrusion activity from all nodes in the network.
-In situations where it is not possible, replicating intrusion activity from the furthest few nodes may serve the purpose.
-The heuristics follows from statistical techniques and feasibility of finding easily identifiable boundary.
-%%<Ashraf>> I need to work more on this, I agree.
-The IDS considers an IWS up to 10\% from the scale to be safe and marks as `GREEN' zone, an IWS above 30\% to be possible intrusion and is marked as `RED' zone.
-%\notedme{Why? Where's the science here?}
-However, an IWS within the range of 10\%---30\% can neither be considered safe, nor an intrusion, hence is marked as `GREY' to indicate a situation where rules are not known.
-However, the thresholds are not conclusive and may require some variation based on the density, power level used in the WSN and scale of deployment.
-%\notedme{This does not read strongly. It sounds like you're trying to make too much out of this: just state that for convenience of discussion, you define these zones. They seem entirely subjective to me: useful for discussion, but no more than that.}
+
+%
+%\subsubsection*{Building Intrusion Warning Zone}
+%\label{ssc:iw_zone}
+%The IDS can build a scale of possible expected range of IWS for a topology and can classify the IWS in different zones to imply certain warning levels.
+%While reporting severity or likelihood of an intrusion in quantitative term like the IWS is useful, it is more beneficial if the quantity is associated with some kind of interpretation.
+%The technique of associating such interpretation has been established by identifying Intrusion Warning Zone (IWZ) from a scale built from maximum expected IWS in a topology.
+%We have used a heuristic trial and error method to build the IWZ.
+%Threshold for building of Intrusion Warning Zone (IWZ) depends on the assumed ability of the IDS having IWS knowledge of all possible intrusions in the network.
+%%\notedme{This is not clear: you're jumping to talking about thresholds before describing what they are or why you want them.}
+%Such knowledge can be built by replicating intrusion activity from all nodes in the network.
+%In situations where it is not possible, replicating intrusion activity from the furthest few nodes may serve the purpose.
+%The heuristics follows from statistical techniques and feasibility of finding easily identifiable boundary.
+%%%<Ashraf>> I need to work more on this, I agree.
+%The IDS considers an IWS up to 10\% from the scale to be safe and marks as `GREEN' zone, an IWS above 30\% to be possible intrusion and is marked as `RED' zone.
+%%\notedme{Why? Where's the science here?}
+%However, an IWS within the range of 10\%---30\% can neither be considered safe, nor an intrusion, hence is marked as `GREY' to indicate a situation where rules are not known.
+%However, the thresholds are not conclusive and may require some variation based on the density, power level used in the WSN and scale of deployment.
+%%\notedme{This does not read strongly. It sounds like you're trying to make too much out of this: just state that for convenience of discussion, you define these zones. They seem entirely subjective to me: useful for discussion, but no more than that.}
 
 \subsection*{Threat Model}
 %What are the security aspects it does not handle?
@@ -437,82 +446,18 @@ In addition to this, the IDS also considers a threat model where a new node pops
 We assume that an  attacker  can take over one or more nodes deployed in hostile environment, and can access the code in a compromised node. 
 %He is able to access the code in a compromised node by employing superior computing power. 
 In addition, he can also use cryptanalysis to represent a false identity without physically compromising a node.
-%this information even without compromising nodes physically.
-%Using the knowledge gained from compromised node, he can represent a false identity.
-%The attacker can also write his own or use existing protocols, utilise gained knowledge to initiate a software update to propagate in the network.
-% <dme> a lot of this text doesn't make much sense.
 However, he has  no special  access to  the  network and is unable to modify the underlying protocols running in the uncompromised nodes.
-%attacks  are  either  launched  from  compromised  sensor  nodes  running  malicious  code  or  unauthorised systems using stolen data (cryptographic keys & code) from legitimate nodes.
-%Actually, the node was hijacked to infect the WSN and create more confusion in determining how the incident took place.
-%\begin{itemize}
-%\item Node failure
-%\item Node compromise
-%\item Malicious node update
-%\item Popping up of intruder node
-%\end{itemize}
 
-
-
-%\subsubsection*{Assumptions} %Should I put it here or in discussio section.
-%\label{sc:assump}
-%\notedme{Misleading subsection heading---there are assumptions in other places, so make it clear which assumptions you're talking about.}
-
-%Assumptions that are discussed in-text are discussed in the context of the limitations of your study, which is typically in the discussion section. This is important, because both assumptions and limitations affect the inferences you can draw from your study. - See more at: http://phdstudent.com/Choosing-a-Research-Design/stating-the-obvious-writing-assumptions-limitations-and-delimitations
-%The system is expected to achieve a time synchronisation. 
-%That's entirely reasonable, but it needs to be stated as an assumption about the WSN under study.
-%I AM NOT SURE IF THIS PART IS AN ASSUMPTION> THIS IS A FACT.
 
 
 The paper assumes several WSN settings and capabilities.
 One of the most important assumptions is that there is a single  sink. 
-%While WSNs with multiple sinks are also possible, the IDS needs to be designed differently and has not been studied at this stage of the research. 
 It further assumes that the sink is protected from all kinds of attacks and cannot be compromised. 
 The system do not consider mote mobility scenario and assumes a static WSN.
-%The system operates in a fashion that whenever a new image updates a mote, it sends an AM to all the base stations in the WSN, thus the software update behaviour in the WSN is transparent to the IDS.
-
-%The IDS is aware of the topological information that has been setup in the WSN.
-%It knows the location of all nodes deployed in the network.
-%I AM NOT SURE IF IT SHOULD COME AS ASSUMPTION. THIS IS ALSO A DESIGN ISSUE.
-%However, assuming software update behaviour in the WSN transparent to the IDS enables fixing the scale for triggering warning.
-
-%\begin{itemize}
-%	\item	The WSN is of homogeneous nature and works in the same network.  - Too obvious
-%	\item 	All motes in the WSN runs same version of the software.  - Too obvious
-%	\item	IDS resides externally.  - A design issue, not an assumption
-%	\item	There is A single sink in the WSN. 
-%	\item	The sink is protected and cannot be compromised.
-%	\item	Whenever possible, there are more than one route to reach each of the motes
-%	\item	The WSN is static in nature- All motes in the WSN are static.
-%	\item	Whenever a new image is updated in a mote, it sends a conformation active message to all base stations in the WSN, thus The software update behaviour in the WSN is transparent to the IDS.
-%\end{itemize}
-
-%\subsection{Algorithm}
-%\label{subsec:alg}
-%NOT STATED / DISCUSSED IN THIS PAPER\\
-%This is a part in the original thesis though.
-
-
 
 
 \subsection*{Experiment Settings}
 \label{subsec:sim_env}
-
-% \begin{table*}[t!]
-% \centering
-% %\notedme{why is this table interesting or significant?}
-% %<Ashraf>> This is the result that I've presented
-% %\begin{tabular}{|l|*{8}{r|}r|}
-% \begin{tabular}{|p{2.5cm}|c |c |c |c |c |c |c |c |}
-% \hline
-% \bd{Topologies}           & \bd{Linear} & \bd{Circular} & \bd{Elliptical} & \bd{Double Rings} & \bd{Wide Line} & \bd{Grid} & \bd{Tree} & \bd{Owheo WSN}   \\
-% \hline
-% \bd{Number of Motes}           & 20 & 20 & 20 & 46 & 45 & 72 & 25 & 37   \\
-% % \bd{of Motes}           &  &  &  &  &  &  &  &    \\
-% \hline
-% \end{tabular}
-% \caption{Number of motes used in each topological deployment}
-% \label{tab:topos}
-% \end{table*}
 
 The IDS requires Deluge protocol to be able to report the time of executing  a new version of its software.
 The protocol was originally implemented in TinyOS and later has been ported to other embedded operating systems including Contiki\footnote{\url{http://www.contiki-os.org}}. 
@@ -551,9 +496,7 @@ We used topologies in experiments that had many shapes such as: linear, circular
 %More motes were necessary to replicate certain topologies.
 % Table~\ref{tab:topos} shows the number of motes used in experiments in corresponding topological  deployments.
 The motes were placed at a distance of 30--35 meter to allow  multiple transmission paths to all motes. % <dme> en-dash for number ranges, not em-dash	% <ashraf> I am trying to increase my English and LaTeX vocabulary
-For most experiments, the radio transmission power level was set at 100\% which has an approximate maximum effective transmission range of 50 meters and is able to interfere with other motes up to 100 meters away.
-The Owheo WSN topology (based on the WSN in our building) was additionally tested at 50\%  to %quickly\notedme{?} 
-observe the difference from the parameter change.
+The radio transmission power level was set at 100\% which has an approximate maximum effective transmission range of 50 meters and is able to interfere with other motes up to 100 meters away.
 
 
 \subsection*{Procedure}
@@ -634,81 +577,32 @@ The resulting values from this function present an approximation of the abnormal
 
 \begin{table*}[t!]
 \centering
-\begin{tabular}{|l|*{20}{r|}r|}
+\begin{tabular}{|l|*{21}{r|}r|}
 \hline
-\bd{Node ID}           & \bd{1} & \bd{2} & \bd{3} & \bd{4} & \bd{5} & \bd{6} & \bd{7} & \bd{8} & \bd{9} & \bd{10} & \bd{11} & \bd{12} & \bd{13} & \bd{14} & \bd{15} & \bd{16} & \bd{17} & \bd{18} & \bd{19} & \bd{20} \\
+\bd{Node ID}           & \bd{1} & \bd{2} & \bd{3} & \bd{4} & \bd{5} & \bd{7} & \bd{8} & \bd{9} & \bd{10} & \bd{11} & \bd{12} & \bd{14} & \bd{15} & \bd{16} & \bd{17} & \bd{19} & \bd{20} & \bd{21} & \bd{22} & \bd{23} & \bd{25}\\
 %Mote ID           & 1 & 2 & 3 & 4 & 5  & 6 & 7 & 8 & 9 & 10 & 11 & 12 & 13 & 14 & 15  & 16 & 17 & 18 & 19 & 20 \\
 \hline
-$\mu$            & 0 &19 & 19& 69&139 &213&276&344&377&432 &432 &432 &377 &335 &273 & 207&137 & 68 & 17 & 19 \\
-$\sigma$		 & 0 & 5 & 5 & 6 & 22 & 36& 37&43 &44 & 44 & 44 & 44 & 44 & 45 & 44  & 33 & 24 & 5 & 3 & 5 \\
+$\mu$            & 0 & 19 & 24 & 21 & 27 & 29 & 38 & 25 & 19 & 13 & 23 & 26 & 2 & 14 & 10 & 25 & 48 & 8 & 8 & 14 & 33\\
+$\sigma$		 & 0 & 28 & 31 & 80 & 84 & 146 & 38 & 32 & 29 & 77 & 87 & 192 & 18 & 26 & 74 & 208 & 96 & 73 & 73 & 131 & 201\\
 \hline
 \end{tabular}
-\caption{Time statistics of motes in Elliptical topology}
+\caption{Time statistics of motes in Tree topology. Data from node 6, 13, 18 and 24 omitted due to space limitation.}
 \label{tab:stat_ellip}
 \end{table*}
 
-%\begin{table*}[t!]
-%\centering
-%\begin{tabular}{|l|*{20}{r|}r}
-%\hline
-%\bd{Node ID}           & \bd{1} & \bd{2} & \bd{3} & \bd{4} & \bd{5} & \bd{6} & \bd{7} & \bd{8} & \bd{9} & \bd{10} & \bd{11} & \bd{12} & \bd{13} & \bd{14} & \bd{15} & \bd{16} & \bd{17} & \bd{18} & \bd{19} & \bd{20} \\
-%\hline
-%$\mathit{IWS}$
-%                 &0.01&16 &19 &73 & 140 &203 &246 &336 &344 &396 &395 &535 &406 &332 &269 &237 &113 & 72& 16 & 16 \\
-%\hline
-%\end{tabular}
-%\caption{Mote IWS in Elliptical topology. Further explained in Figure~\ref{fig:ellip}}
-%\label{tab:iws_ellip}
-%\end{table*}
-
-\begin{figure*}[t!]
-    \centering
-    \begin{subfigure}[b]{0.5\textwidth}
-        \centering
-        \includegraphics[height=1in, width=4in]{Elliptical}
-        \caption{IWS and Relative position of nodes}
-        \label{subfig:elliptopo} % <dme> it's is the \caption that updates the \label counters. You had \caption/\label in the wrong order.
-    \end{subfigure}%
-    ~ 
-    \begin{subfigure}[b]{0.5\textwidth}
-        \centering
-        \includegraphics[height=1.2in]{Elliptical_column}
-        \caption{Comparison of IWS at different motes}
-        \label{subfig:ellipgraph} % <dme> it's is the \caption that updates the \label counters. You had \caption/\label in the wrong order.
-    \end{subfigure}
-    \caption{Relative position of the motes and comparison of IWS }
-    \label{fig:ellip} % <dme> this was in the wrong place too
-\end{figure*}
-
 In this section, we presents the data found in the course of this investigation, their interpretation and evaluate the contribution.
 While discussing the performance and effects of the proposed IDS in different topologies are useful, discussing any of the topologies presents fair idea about the outcomes from the others and mentioning the cases when the outcome was considered  contrary to the expectations.
-%The space requirement also motivates us to limit the discussion to necessary details only.
 
+  
 
-%\notedme{Put this earlier in the justification of discussing one topology in detail.}
-%<Ashraf>> This is the second sentence in the discussion section
-%\notedme(1){Is it closest to what you see in other papers? I'd not have thought so, in which case I'd think you need to justify why you're focusing on it... Also, there's unnecessary text repetition here.}
-%% <Ashraf> The discussion is taken this way because of the space limitation and otherwise introducing all the results would be reputation of the same thing, I guess. I'll look for papers that describe similar things.
-
-%\subsection{Data1 + Discussion}
-
-% We have selected data from elliptical topology for several reasons.
-% Ellipse has a shape which is almost midway among the range of topologies between a circular and a linear one.
-% Extending the minor axis of the ellipse makes the topology equivalent to a circle, while contracting it is equivalent to a grid or even a linear topology.
-% Thickening the perimeter of the circle turns it into a double ring.
-% Again, the linear topology can be considered as a tree with one or two branches.
-% Extending it with more branches presents a fairly complex tree structure.
-% Because of these similarities, discussing elliptical topology is an interesting choice.
-%\notedme(1){Maybe...}
-%% <Ashraf> removed because of space
-We shall concentrate our discussion on results and findings of a single, elliptical topology only.
-The ellipse shaped deployment of 20 nodes, as shown in Figure~\ref{subfig:elliptopo}, has been designed considering several requirements.
-The motes on either side of minor axis remained within each others' transmission range, whereas motes on the either side of the major axis did not.
+We shall concentrate our discussion on results and findings of a single, tree topology only.
+The tree shaped deployment of 25 nodes with several branches as shown in Figure~\ref{fig:elliptopo}, has been designed considering several requirements.
+The motes are placed in a way that can be useful in robot navigation and localisation along the branches.
 %Total 20 nodes were deployed with the minor axis being 30 meter and the major axis being way larger than that.
 %The transmission power level was set at 100\%. 
 % which allowed a  transmission range of 50 meter and nodes were  able to interfere other nodes at  up to 100 meter apart.
 %The motes were placed at a spacing of 35 meters along the circumference of the ellipse to enable multiple transmission paths to all the motes.
-It contributed to achieve  redundancy and  reliable image transfer. 
+%It contributed to achieve  redundancy and  reliable image transfer. 
 
 %The simulations proceeded without interruption and produced expected results.
 % \notedme(1){This makes it sound like you're not going to present the results, which would be bad.}
@@ -720,16 +614,20 @@ It contributed to achieve  redundancy and  reliable image transfer.
 Table~\ref{tab:stat_ellip} shows the baseline statistical measurements obtained at different motes.
 The numbers indicate the measurements in time unit of seconds.
 The first row in Table~\ref{tab:stat_ellip} contains the Node IDs that are headers for the data displayed underneath.
-Node ID indicates the identification of each node in the deployment.
-The next two rows describe the baseline data i.e., mean and standard deviation computed from the 20 legitimate updates initiated from the sink.
-Analysing the baseline data shows that update time of the motes further away from the sink have higher mean and standard deviation.  
-However, standard deviation raises gradually, though it varies little for relatively small distance difference when multiple paths are present.
-The the stability of standard deviation results from availability of redundant paths, which makes the image transfer more efficient and reliable.
-Therefore, even remaining at considerably different distances from the sink, mote ID 8, 9, 10, 11, 12, 13, 14 and 15  have quite similar standard deviation of update time.
+The next two rows show the baseline data i.e., mean and standard deviation computed from the 20 legitimate updates initiated from the sink.
+It is observed that the motes further away from the sink have higher mean and standard deviation.  
+However, standard deviation increases gently.
+The the stability results from efficient and reliable image transfer effected by OTA protocol.
 In contrast to this, mean increases sharply as the motes are placed further from the sink.
 The result in baseline data shows that motes closer to the sink have lower mean which follows a steep rise with the increase in distance.
 
-Figure~\ref{subfig:elliptopo} shows the relative positions of the motes with mote ID written at the centre of the tiny circle and IWS beneath the circle.
+\begin{figure*}[tbph!]
+    \centering
+        \includegraphics[height=2.5in]{Tree}
+        \caption{IWS and Relative position of nodes}
+    \label{fig:elliptopo} 
+\end{figure*} 
+Figure~\ref{fig:elliptopo} shows the relative positions of the motes with mote ID written at the centre of the tiny circle and IWS beneath the circle.
 IWS has been calculated using  the utility function shown in Equation~\ref{eqn2}.
 Each of the motes were considered as intrusion point in the process of measuring IWS.
 The IWS increases linearly with the increase in distance from the sink.
@@ -738,142 +636,60 @@ Euclidean distance between a mote and the sink does not make useful sense as the
 Because of the availability of the multiple paths, it is not possible to quantify the exact distance that a packet would travel while transporting form a mote to the sink.
 However, an estimation of distance along the most probable link path based on the connectivity may be considered.
 
-
-IWSs shown in Figure~\ref{fig:ellip} were used to build a scale that ranged from $0$ to maximum of $\mathit{IWS}$.
-Building this scale was crucial for the ability to classify the IWS to meaningful zones.
-%\notedme(1){I thought that there were difficulties determining these zones?}
-%% <Ashraf> I am not sure. Do you consider this description too simple?
-It is not possible to build the scale without the knowledge of the expected IWS from the furthest nodes in the network.
-Nevertheless, we used intuitive heuristics to classify zones  with two threshold levels at 10\% and at 30\%.
-The IDS suggests different treatments for motes in different zones which are discussed bellow.
+\begin{figure}[tbph!]
+	\centering
+        \includegraphics[width=3.6in]{Tree_column}
+        \caption{Comparison of IWS at different motes}
+        \label{fig:ellipgraph}
+\end{figure}
 
 IWS is considerably higher for intrusion at distant motes than ones which are close to the sink.
 This phenomena is topology dependent, which also implies  that it is connectivity dependent.
-It is possible that if IWS in a network are organised in a specific order, it would represent/resemble   the original topology in some fashion.
-For example, in the elliptical topology, the link path between node 1 and node 11 through node 5 is represented by a curve with a positive slope or rise.
-On the other hand, the link path through node 15 is represented by a fall or a negative sloped curve.
-There is a relationship between the curvature/eccentricity of the original topology and the represented curve or  trend.
-%This implication would be more evident once we discuss more topologies in the upcoming paragraphs. {Only if we discuss the other topologies}.
-However, establishing the relationship is beyond the scope of this paper.
+It is possible that if IWS in a network are organised in a specific order, it would represent/resemble the original topology in some fashion.
+For example, in the tree topology, the major branches are represented by linear rising slope in Figure~\ref{fig:ellipgraph}.
+The branch along node ID 1 to 7 can be imagined as a line from point `A' to `B'. Similarly, distant point of other branches can also be imagined at points `C',`D',`E'.
 
 IWS at different motes differ considerably: the motes close to the sink have very low IWS in comparison to the distant motes.
-However, there are motes with IWS that can neither be considered low, nor too high.
-These classes of scores inevitably demand different interpretation and treatment to indicate intrusion warnings. 
-Accordingly, the Figure~\ref{subfig:elliptopo}  shows the region decided in GREEN, GREY and RED zones following to the technique discussed in Section~\ref{ssc:iw_zone}.
-The graph in  Figure~\ref{subfig:ellipgraph} shows the relative measures of the IWS from the motes.
-It also indicates the threshold among the GREEN, GREY and RED zones discussed above.
+The observation is also evident from Figure~\ref{fig:ellipgraph}.
 
-%\subsection{discussion of contributions}
+The main contribution of this research project comes from the fact that the IDS is able to report an anomaly from a software update in quantitative term like the IWS.
+For example:  a regular legitimate update, initiated from node ID 1, resulted into a IWS of 13.
+The result matched the theoretical expectation of very low IWS.
+In addition to this, when intrusion scenario were simulated from the nodes near the sink, the IWS reported was fairly low, e.g. 30 for mote ID 3, 8, 9, and 15
+ and 45 for node 2. 
+Because of the fact that IWS of the motes close to the sink are likely to be very low, which is in line with the theoretical expectation, it is quite difficult to conclude if such a IWS indicate an intrusion. 
+However, for the distant motes, the IWS is quite high and the IDS can conclude such cases as intrusion, e.g. IWS of 408 for mote ID 7, 390 for mote ID 14, 322 for mote ID 18, 277 for mote ID 23 and likewise indicate intrusion.
 
+
+While reporting severity or likelihood of an intrusion in quantitative term like the IWS is useful, the IDS can also detect the source of intrusion and its extent. 
+The IDS analyses update timing of all motes to identify the source of intrusion. 
+For example, Table~\ref{tab:tree_time_18} presents the update time recorded at different motes when intrusion was initiated from note 18.
+The timing data shows that lowest timing was recorded at node 17 and 19 which was equal to 15 seconds.
+Node 18 did not report any time because of three reasons: 
+\begin{inparaenum}
+\item node 18 initiated the update, so it was updated at $0$ second;
+\item it acted as a sink, according to the protocol it did not require notifying its update time any other mote; and 
+\item it is the compromised node whose protocol expected to be altered.
+\end{inparaenum}
+From this information, the IDS can conclude that node 18 was the intrusion point.
+The extent of intrusion, as specified earlier, is found out from reported version information.
 
 \begin{table*}[t!]
 \centering
-\begin{tabular}{|l|*{20}{r|}r|}
+\begin{tabular}{|l|*{17}{r|}r|}
 \hline
-\bd{Node ID}           & \bd{1} & \bd{2} & \bd{3} & \bd{4} & \bd{5} & \bd{6} & \bd{7} & \bd{8} & \bd{9} & \bd{10} & \bd{11} & \bd{...} & \bd{33} & \bd{34} & \bd{35} & \bd{36} & \bd{37} & \bd{38} \\
-%Mote ID           & 1 & 2 & 3 & 4 & 5  & 6 & 7 & 8 & 9 & 10 & 11 & ...& 31 & 32 & 33  & 34 & 35 & 36 & 37 & 38 \\
-\hline		\hline
-
-Power 100\%	   & 512 & 529 & 512 & 512 & 512  & 512 & 476 & 478 & 476 & 459 & 458 & ...& 53  & 48 & 49 & 51 & 47 & 29 \\
+\bd{Node ID}           & \bd{4} & \bd{7} & \bd{8} & \bd{9} & \bd{10} & \bd{11} & \bd{12} & \bd{14} & \bd{15} & \bd{16} & \bd{17} & \bd{19} & \bd{20} & \bd{21} & \bd{22} & \bd{23} & \bd{24} & \bd{25}\\
+%Mote ID           & 1 & 2 & 3 & 4 & 5  & 6 & 7 & 8 & 9 & 10 & 11 & 12 & 13 & 14 & 15  & 16 & 17 & 18 & 19 & 20 \\
 \hline
-
-Power 50\%	  &31 & 59&254& 31& 31 &283& 32& 32& 254& 31 &253 & ... & 31  & 30 & 31 & 31 & 30 & 0 \\
+\bd{Update Time}  &   277 	&  400 	& 231 	& 211 	& 231 &	 287 	& 318 &	 311 &	 139 & 72 &	 15 &	 15 &	 84 	& 72 	& 139 &	 185 &	185 & 273 \\
 \hline
 \end{tabular}
-\caption{IWS from intrusion at motes in `Owheo Sensor Network'. Further explained in Figure~\ref{fig:owheo}}
-\label{tab:owheo}
+\caption{Update Time of motes when intrusion was initiated from node 18. Data from node 1, 2, 3, 5, 6 and 13 omitted due to space limitation.}
+\label{tab:tree_time_18}
 \end{table*}
 
-
-\begin{figure*}[t!]
-    \centering
-    \begin{subfigure}[b]{0.5\textwidth}
-        \centering
-        \includegraphics[height=2.5in]{Owheo_full}
-        \caption{Zone boundary at Full Power Level}
-        \label{subfig:owheo_full}
-    \end{subfigure}%
-    ~ 
-    \begin{subfigure}[b]{0.5\textwidth}
-        \centering
-        \includegraphics[height=2.5in]{Owheo_half}
-        \caption{Zone boundary at Half Power Level}
-        \label{subfig:owheo_half}
-    \end{subfigure}
-    \caption{Comparison of Zone boundary for power level variations in `Owheo Sensor Network'. IWS of the motes at the power levels are shown in Table~\ref{tab:owheo}}
-\label{fig:owheo}
-\end{figure*}
-
-The main contribution of this research project comes from the fact that the IDS is able to report an anomaly from a software update in quantitative term like the IWS.
-For example:  a regular legitimate update, initiated from node ID 1, resulted into a IWS of 0.01.
-The result matched the theoretical expectation of a near zero IWS.
-In addition to this, when intrusion scenario were simulated from the nodes near the sink, the IWS reported was fairly low, e.g. 16 for mote ID 2, 19, and 20
- and 19 for node 3 
- and likewise.
-Because of the fact that IWS of the motes close to the sink are likely to be very low, which is in line with the theoretical expectation, it is quite difficult to conclude if such a IWS indicate an intrusion. 
-However, for the distant motes, the IWS is quite high and the IDS can conclude such cases as intrusion, e.g. IWS of 246 for mote ID 7, 269 for mote ID 15, 395 for mote ID 11, 535 for mote ID 12 and likewise indicate intrusion.
-
-
-While reporting severity or likelihood of an intrusion in quantitative term like the IWS is useful, it is more beneficial if the quantity is associated with some kind of interpretation.
-The technique of associating such interpretation has been discussed in Section~\ref{ssc:iw_zone} and in this Section. 
-In the elliptical topology intrusion scenario, maximum IWS reported in the data presented in Figure~\ref{subfig:elliptopo} was 535. 
-Motes reporting 10\% of maximum IWS i.e., an IWS up to 53.5 would be considered in the GREEN zone.
-%\notedme(1){Why is this the IWS value for green? You've not explained.}
-%% <Ashraf> addressed
-For example, in Figure~\ref{subfig:elliptopo}, mote ID 2, 3, 19, and 20 are in this zone.
-On the other hand, IWS above 53.5 and bellow 160.5, which is 10\% -- 30\% of the maximum, are considered to be in the GREY zone. 
-Motes in this zone are 4, 5, 17, and 18.
-They can neither be considered free from intrusion, nor it is possible to easily arrive at a conclusion that the scores indicate intrusion for sure.
-In contrast to both the scenarios describes above, IWS above 160.5, which is beyond 30\% of the maximum, is considered to be an intrusion.
-All other motes in the topology have a IWS above this threshold level and hence are considered to be more easily detectable by the IDS. %\notedme(1){Eh? How does this follow?} %% <Ashraf> addressed
-
-The idea of zoning associated with the IWS can be  very beneficial in securing a WSN.
-It is useful in designing a secure network deployment, which is considered to be another major contribution of the research work.
-%\notedme(1){`immensely' is too over the top.} %% <Ashraf> `immensely' removed
-The motes which are found to be in the GREEN zone must be adequately secured by design with additional physical security as intrusion in these motes are not observed by the IDS.
-%\notedme(1){OK, yep---I like this.} %% <Ashraf> addressed
-On the other hand, motes in the GREY zone need additional monitoring which would aid determining if the IWS indicated a real intrusion or a false positive.
-The additional monitoring could be in the form of an algorithmic or physical observation or listening post or even employing additional protocol.
-The rest of the region, identified by the RED zone, is under the effective surveillance of the IDS and the IDS is expected give a reliable estimation of correct behaviour in this region.
-%\notedme(1){not secure really, but yes, where the IDS can give a reliable estimation of correct behaviour}
-
-
-A network is more secure when it has a smaller GREEN and GREY zone.
-A smaller GREEN zone implies the requirement of lesser resources to impenetrably secure less number of motes.
-Similarly, a smaller or non-existent GREY zone would require lesser monitoring measures.
-Such a secure WSN can be designed by physically relocating some of the motes or even by varying the factors like power level.
-However, obtaining real world scenario by varying different sets design parameters e.g., power levels, position of nodes, etc is an impossible task for even a small WSN.
-The simulation environment used to design IDS can be effectively utilised to obtain expected IWS score range for different sets of parameters and then rank the sets based on how effectively they produce IWS values. 
-For example, we have simulated the IWS scenario of the `Owheo Sensor Network'\footnote{`Owheo Sensor Network' is a WSN (mote ID 26 does not exist) deployed in the Department of Computer Science building at the University of Otago. It is intended to be used for research purposes.}
-at two different power levels in our quest to design a secure WSN using the IDS.
-
-
-%\notedme(1){I don't think you're quite stating the contribution clearly enough yet: that for different sets of potential design parameters for the WSN (e.g. power levels, position of nodes, etc.) you would be able to simulate the IWS score range, and rank the sets based on how effectively they produce IWS values. For example, it's not clear that your shift into discussing the zones is just an indirect way of discussing the underlying IWS scores.}
-%% <Ashraf> addressed
-
-Table~\ref{tab:owheo} shows the IWS at different motes as intrusion points at 100\% and 50\% power levels. 
-In `Owheo Sensor Network', mote ID 38 was marked as the sink and.
-At 100\% power level, 19 nodes (mote ID 1, 4, 5, 7, 8, 10, 16, 17, 18, 28, 29, 30, 31, 32, 33, 34, 35, 36, and 37) were in GREEN zone, only one node (mote ID 2) was in GREY zone and the rest 16 nodes were in RED zone.
-The deployment and the zoning boundaries at 100\% power level has been shown in Figure~\ref{subfig:owheo_full}.
-When the same deployment was simulated at 50\% power level, only seven nodes (mote ID 30, 31, 32, 34, 35, 36, and 37) were in GREEN zone, two nodes (mote ID 29, and 33) were in GREY zone and rest 27 motes were in RED zone.
-The deployment and the zoning boundaries at 50\% power level has been shown in Figure~\ref{subfig:owheo_half}.
-Comparing the scenarios presented in  Figure \ref{subfig:owheo_full} and \ref{subfig:owheo_half}, it can clearly be established that Figure~\ref{subfig:owheo_half}, i.e. deployment at 50\% power level is more secure than the other because of two reasons:
-\begin{inparaenum}
-\item it has a smaller sized GREEN and GREY zone; and 
-\item there are fewer nodes in these zones. 
-\end{inparaenum}
-The deployment can be made more secure by physically relocating some of the motes from GREEN zone to RED zone, provided the relocation does not hamper the original intended purpose of the WSN.
-However, any change in topology or design parameters like power level will require recalibrating the IDS from the beginning. 
-%\notedme(1){I like this paragraph up to the last sentence. The last sentence doesn't make sense necessarily, since it seems to suggest that you can just move nodes directly between the zones. However any change in topology will require recomputing the zones, and they will change, potentially significantly...}
-%% <Addressed>
-
-
 %Identifying node failure and node compromise
-The IWS is also able to detect node failures in the WSN.
-%This additional advantage comes as a by-product contribution.
-%However, as this was not a design consideration, the contribution is not robust enough, yet it is worth mentioning.
-%\notedme(1){You've talked about this meta-point too much, now.}
-%% <Ashraf> Actually, a `not' before `robust' went missing. :)
+In addition detecting intrusion related information, the IWS is also able to detect node failures in the WSN.
 The case of a node not reporting its update time within a specified delay is handled by an error recovery procedure put in place by the IDS.
 If the recovery procedure fails, the node is considered to have failed or have been compromised.
 A unusual update time chronology and resulting unusual IWS  indicates the probability of some other types of attacks like node relocation, node repudiation, node compromise, not just a transient failure which is something worth paying attention to.

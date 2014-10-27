@@ -404,12 +404,6 @@ The time analyser module in the IDS inspects the NDB once an update activity has
 It determines the changes in the statistics of the update time and calculates IWS based on following utility function in Equation~\ref{eqn2}. IWS indicates the possibility of an intrusion. If the IWS is high enough to be considered an intrusion, the IDS sorts the timing data for that run and identifies the source of intrusion as the mote reporting from lowest update time.
 The IDS also identifies the extent of intrusion from mote ID and version information in the database.
 
-\subsubsection*{Removing Intrusion Effects}
-\label{ssc:removing} 
-DO I WANT TO PUT THIS HERE OR IN THE CONCLUSION?????
-While identifying intrusion appears a difficult task, removing does not in certain conditions.
-Unless, an intrusion lead to DoS attack, the intrusion effect can be easily removed by initiating another update of the legitimate software from the sink.
-However, in case of DoS attack, generally the network is lost and needs major effort to recover, which is beyond the scope of this paper.
 
 
 %
@@ -706,32 +700,45 @@ A unusual update time chronology and resulting unusual IWS  indicates the probab
 \section{Conclusion}
 \label{sec:concl}
 
+Collaboration between wireless sensors and robotics can offer great advantages. 
+With collaborative robotics increasing rapidly, security of environment in sensor assisted navigation or inter-robot communication over wireless media is of great importance.
+Supporting a group of robots with WSNs  can extend the capability of both. 
+Sensors can sense, they cannot react. 
+Sensors have huge limitations in their capability to be in dependently useful. 
+They not suitable for heavy computational tasks because of constraints like power, memory, storage, and severe energy. 
+On the other hand, robots have greater capabilities like mobility, performing resource intensive tasks, operating in unfavourable
+environments.
+Combining the capabilities of WSN and robots is appealing. 
+However, sensors need to address its limitations for the technology to be effectively useful for robotics. 
+
+
 In this paper, we modelled an IDS solution to intrusion in WSN software update protocols.
 We discussed the potential danger that is associated with WSN OTA software update.
 While OTA update protocols make certain WSN management tasks easy, they also remain vulnerable to intrusion attempts.
 An adversary can take advantage of the resource constrained nature of the sensor motes and employ enough resources to break in through the limited protection the sensors are armed with.
 To deal with this problem, we have suggested a passive security mechanism---an IDS.
 
-The IDS is hosted on a server that remains physically connected to the  sink. 
-% The sink has an ITC application which in coordination with the IDS performs the detection activity.
-% <dme> ITC needs to be explained if included in the conclusion. Doesn't seem high value though.
+A robot can also host the IDS in a collaborative environment.
+The IDS is generally housed in a server that remains physically connected to the  sink. 
 The system watches over the timing of software update patterns using a modified version of the Deluge protocol.
 Whenever a mote is updated, it sends an update related information to designated sink using a datagram.  
 Related information from the datagram is filtered by the ITC for further processing at IDS.
 
-The first contribution of the research is quantifying intrusion through an IWS that indicates the location and extent of intrusion.
+The first contribution of the research is quantifying intrusion through an IWS. 
 The IWS is a quantitative indicator of possible intrusion.
 The utility function that computes IWS is designed to neutralise the undesired %/unexpected
 changes in mean and standard deviation which are expected to contribute to a near zero IWS.
 
-The other important contribution is related to classifying expected IWS into zones.
-The concept of zoning using the IDS is a very useful tool in designing secure WSN deployment.
-The IDS can be used to simulate all possible combinations of parameters and  to rank the sets based on intrusion vulnerability.
-For example, a WSN with known small insecure zone is much easier to protect than a larger zone.
-The ranking mechanism is useful in such scenario.
+The other important contribution is related to identifying the location and extent of intrusion..
+Analysing timing data, the IDS can indicate the approximate location from where the intrusion was initiated.
+It can also decide on the extend of intrusion basing on reported software version information.
 Besides, the IDS also can indicate some other kinds of anomalies such as node relocation, node repudiation, node compromise and so on.
 
-The IDS has several limitations. 
+While identifying intrusion in OTA software update is a difficult task, removing the effects of is not under certain conditions.
+Unless, an intrusion lead to DoS attack, the intrusion effect can be easily removed by initiating another update of the legitimate software from the sink.
+However, in case of DoS attack, generally the network is lost and needs major effort to recover, which is beyond the scope of this paper.
+
+The IDS we described here has several limitations. 
 It assumes some special cases like a static WSN with a single sink.
 It also assumes that network-wide information will not be forged. %to have network wide transparent knowledge.
 These assumptions may not hold in a real WSN.
@@ -742,49 +749,7 @@ For example, when an intrusion takes place in close vicinity of the sink, this I
 The other limitation stems from the fact that the results are based on simulated data and needs support from real world implementation.
 In future,  the IDS can be implemented to examine real world performance including cases of multiple sinks with mobile sensors.
 
-\section{Conclusion}
-\label{sec:co}
 
-OTA software update poses certain security challenges. An
-attacker quite easily may pickup and read the motes deployed
-in the environment. Similarly, he can inject false data into
-the sensor that can infect the network using OTA protocols
-that work in an epidemic fashion. Protecting the software
-update process is certainly of great importance. In case of
-failures, reporting such incidents and identifying the extent of
-illegitimate software update are also equally important Security
-is considered an important aspect of WSN development due to
-the fact that security threats to the WSN are different in nature
-from those faced when using Internet technology.
-Combining the capabilities of WSN and robots is appeal
-ing. Sensors have huge limitation in their capability to be in
-dependently useful. They not suitable for heavy computational
-tasks and have resource constraints with respect to processing
-power, memory, storage, and severe energy. On the other
-hand, robots have greater capabilities like mobility, performing
-resource intensive tasks, and can operate in unfavourable
-environments.
-Thus, introducing wireless sensors add additional security
-challenges in robotics. With collaborative robotics increasing
-rapidly, security of inter-robot communication over wireless
-media is of great importance.
-Collaboration between wireless sensors and robotics can
-offer great advantages. Connecting WSNs with group of robots
-can extend the capability of each other. Sensors can sense, they
-cannot react. Updating the sensor is an important management
-tasks. In this paper, we have modelled a IDS solution to
-one of the weaknesses in WSN that can be capitalised by
-an adversary to invalidate a mission critical deployment of
-the technology in robotics. The proposed system watches over
-the software update pattern for over the air update protocol
-in WSN, computer an IWS that can quantitatively indicate a
-possible intrusion. In addition to this, the IDS environment
-can be used to design a secure WSN deployment. The IDS
-also can indicate some other kinds of anomalies such as node
-relocation, node repudiation, node compromise and so on.
-In future, the IDS can be implemented to examine testbed
-performance including cases of multiple sink with mobile
-sensors which would be very useful in robotics applications.
 
 
 \bibliographystyle{IEEEtran}

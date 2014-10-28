@@ -3,7 +3,6 @@
 \documentclass[conference,manuscript]{IEEEtran}
 
 \usepackage{setspace}
-%\doublespacing
 %\onehalfspacing
 
 \usepackage{ifpdf}
@@ -30,9 +29,9 @@
 %\usepackage[rgb]{xcolor}
 %\usepackage{pdfcomment}
 
-\newcommand{\dme}[2]{\pdfmarkupcomment[markup=Highlight,color=yellow]{#1}{#2}}
-\newcommand{\notedme}[1]{\raisebox{0pt}[0pt][0pt]{\pdfcomment[open=true,color=blue]{#1}}}
-\newcommand{\todo}[1]{\pdfmarkupcomment[markup=Highlight,color=red]{#1}{todo}}
+%\newcommand{\dme}[2]{\pdfmarkupcomment[markup=Highlight,color=yellow]{#1}{#2}}
+%\newcommand{\notedme}[1]{\raisebox{0pt}[0pt][0pt]{\pdfcomment[open=true,color=blue]{#1}}}
+%\newcommand{\todo}[1]{\pdfmarkupcomment[markup=Highlight,color=red]{#1}{todo}}
 
 % \newcommand{\red}[1]{\pdfmarkupcomment[markup=Highlight,color=red]{#1}}
 % \newcommand{\green}[1]{\pdfmarkupcomment[markup=Highlight,color=green]{#1}}
@@ -59,14 +58,14 @@
 
 \maketitle
 
-
+%\doublespacing
 \begin{abstract}
 Robotics and  Wireless Sensor Network (WSN) collaborations is an emerging research field in which both the technologies can benefit from integrated implementations.
+A robot operating in WSN assisted environment can dynamically push instructions using over the air (OTA) update protocols to alter sensing requirement.
 In this paper, an Intrusion Detection System (IDS) for WSN  software update protocol is designed and simulated. 
-The IDS protects WSN software updates that use over the air (OTA) update protocols, specifically the Deluge protocol.
 When the protocol modifies the running software in a mote, the mote sends related  information to the sink. 
-The IDS in association with an IDS Transport Client (ITC) in the sink analyse the update phenomena of each of the motes in the network and computes a `Intrusion Warning Score' (IWS) through an algorithmic function to indicate a possible intrusion i.e., a probable illegitimate update.
-\notedme{Mentioning robots more than just in the first word would be good}
+The IDS analyses the update phenomena of each of the motes in the network and computes a `Intrusion Warning Score' (IWS) through an algorithmic function to indicate a possible intrusion i.e., a probable illegitimate update.
+%\notedme{Mentioning robots more than just in the first word would be good}
 \end{abstract}
 
 %Theme: \textbf{Security of sensed environmental data external to the robots}\\
@@ -103,7 +102,7 @@ decision making capabilities and services where WSNs can be
 deployed in the environment. Mission critical robotics applications in military, mining, team collaboration, or companion
 for older adults employ wireless sensors as well. Conversely,
 robotics can also be utilised to solve WSN problems like
-sensor deployment/relocation in hostile environment, data aggregation, acting as data mules~\cite{Shue13}.
+sensor deployment or relocation in hostile environment, data aggregation, acting as data mules~\cite{Shue13}.
 WSN can greatly enhance
 the perception capabilities of robots and provide infrastructure
 for robust inter-robot communication. Mobile robot navigation is another emerging research area where robotics and
@@ -124,7 +123,7 @@ update primarily indicates uploading inappropriate software
 that performs undesired actions, clandestinely replacing the
 sensor operating system (OS) software, and so on. Update time
 is the time when any mote begin executing a new version
-of the software image.Data exchange in WSN takes place
+of the software image. Data exchange in WSN takes place
 locally using a neighbourhood discovery process, following
 an autonomous relay mechanism without a routing table.
 
@@ -174,12 +173,13 @@ simple communication protocols and the design of WSNs
 makes it easy to perform intrusion detection in them~\cite{quing09}.
 An Intrusion Detection System (IDS) does not prevent the
 break-in, but it can detect break-in events and raise alerts. It
-may also be able to report the location and extent of the break-in. In this paper we present an algorithm, which considers a
+may also be able to report the location and extent of the break-in. 
+In this paper we present an algorithm, which considers a
 centralised approach to detect the intrusion in case of WSN
 software update. The algorithm requires a minor modification
 of the OTA update protocol to send back a datagram packet
 containing the update time~\cite{tep116}.
-\notedme{broken approach? (i.e. Skipping from simulation to IDS implementation when that's not possible.)}
+%\notedme{broken approach? (i.e. Skipping from simulation to IDS implementation when that's not possible.)}
 
 The information carried by the
 datagram is processed and analysed to work out a `Surprise
@@ -223,20 +223,22 @@ beyond the updates itself. Secondly, cryptographic protection in
 sensors is inadequate. Constrained computational capacity and
 resources make it possible to compromise the cryptographic
 measures incorporated in the implemented WSN OSs~\cite{aes2011}.
-There is no mechanism to check the integrity of the entire
-image object, because when the size of the object exceeds
-the size of available sensor memory, it becomes infeasible.
-\notedme{Interesting argument! I like it. Although it could be that _most_ of the pages get integrity-checked, and Deluge does use pages...}
-Additionally, a malicious intruder can replicate as an authentic
+A  malicious intruder can replicate as an authentic
 image source and advertise new program version which the
-other motes cannot repudiate. Thirdly, even if an OTA update protocol incorporates on-chip hardware based encryption,
+other motes cannot repudiate.
+Thirdly, there is no mechanism to check the integrity of the entire
+image object, because it is infeasible when the size of the object exceeds
+the size of available sensor memory.
+%\notedme{Interesting argument! I like it. Although it could be that _most_ of the pages get integrity-checked, and Deluge does use pages...}
+Fourthly, even if an OTA update protocol incorporates on-chip hardware based encryption,
 cryptography alone cannot prevent all attacks. 
-\notedme{Weak point. No evidence is provided, and no examples given.}
+%\notedme{Weak point. No evidence is provided, and no examples given.}
 Techniques of
 different types of attacks on WSN have been described by~\cite{DBLP:journals/corr/abs-1301-3022}. Countermeasure against these attacks are computationally
 expansive, energy intensive. It implies employing them exposes
-WSN to some other new kinds of attacks, such as DoS through
-resource exhaustion. Fourthly, an attacker can extract valuable
+WSN to some other kinds of attacks, such as DoS through
+resource exhaustion. 
+Fifthly, an attacker can extract valuable
 information about the network from a physically compromised
 node. He can utilise the knowledge to initiate Sybil attack, even
 can replace the nodes with the illegitimate and malicious ones,
@@ -257,51 +259,52 @@ the whole WSN. An attacker may pretend to be an authentic
 source and disappear after successful introduction of the illegitimate image to one mote in the network. OTA protocol security
 mechanisms, which are cryptographic, would be unable to
 detect the breach and would allow the network to be flooded
-by a malicious application~\cite{Karlof:2004:TLL:1031495.1031515}.
+by the malicious application~\cite{Karlof:2004:TLL:1031495.1031515}.
 In recent years, researchers
 have suggested several intrusion or anomaly detection means
 to secure WSN, alongside the other cryptographic approaches.
 Thus it is useful to employ some other security measures, for
 example: an IDS. Purpose of an IDS is to detect suspicious
 behaviour in the network, to provides useful information about
-information.
+intrusion.
 %\marginnote{Ease of attacking OTA protocol}[2cm]
 
 %%%%I WANT TO CHANGE THIS PORTION
-The proposed techniques varies greatly in their idea and approach.
-Misuse based  detection  techniques identifies undesired activities basing on signature.
+The proposed techniques varies greatly in their ideas and approaches.
+Misuse based  detection  techniques identify undesired activities basing on signature.
 They aim to detect known attacks.
-However, they are ineffective against novel attack.
+However, they are ineffective against novel attacks.
 Additionally, they may wrongly identify legitimate activities as intrusion because of similarity with the signature~\cite{372146, 1515559, ISI:000298891500099, Chen:2009:NMI:1516241.1516282, 1424814, Strikos_afull}.
 In response to this difficulty, anomaly based IDS builds the signature based on defined normal activity.
 They use statistical probability and significance to identify anomalies. Unfortunately, a system may display previously unknown behaviour.
 For example: rare critical activities like earthquake or tsunami may raise false positive intrusion alert in sensors employed for other environmental monitoring.
-On the other hand, an intrusion that masks its pattern under hood of normal behaviour, for example: increased packet traffic during OTA update, would go undetected~\cite{ISI:000257882502160, 1593102, 1593102, 1290173, 4024996}.
-The techniques described above use different kinds of machine learning algorithm including support vector machine.
-In contrast, specification-based and reputation-based techniques rely on manual input for defining normal and anomalous behaviour with less reliance on automation.
+On the other hand, an intrusion that masks its pattern under the hood of normal behaviour, for example: increased packet traffic during OTA update, would go undetected~\cite{ISI:000257882502160, 1593102, 1290173, 4024996}.
+The techniques described above use different kinds of machine learning tools including support vector machine.
+In contrast, specification-based and reputation-based techniques rely on manual input for defining normal and anomalous behaviour with lesser reliance on automation.
 However, these techniques also have not been proved to be very effective because human interaction are more prone to errors and require more learning time~\cite{Chen:2009:NMI:1516241.1516282, 4085803, Ko2001}. 
 
 
-IDS mechanisms are either centrally controlled or distributed in nature.
-They employ techniques like key management, encryption and authentication to protect services like localisation, data aggregation, cluster formation, time synchronisation.
+Approaches to design IDS mechanisms %are either distributed or centrally controlled. They 
+employ techniques like key management, encryption and authentication to protect services like localisation, data aggregation, cluster formation, time synchronisation.
 It is considered that specific services are protected against specific attacks e.g, forwarding, sinkhole, wormhole under certain conditions~\cite{1639675, 6096939, sink08, 5172466}.
-Although approaches described above are innovative, only few of them are able to specifically address the security issues related to software update in WSN.
+%Although approaches described above
+Despite innovative ideas, only few IDSs are able to address the security issues related to software update in WSN.
 Hence, we propose an analytical tool that is passive in nature and can provide valuable insight into the propagation characteristics of OTA reprogramming protocol. 
 The technique has been tested on Deluge.
-We have exploited services from other existing standard protocols to gather timing information from motes in  the WSN and then process the timing information for intrusion detection.
+We have exploited services from standard protocols to gather timing information from motes in  the WSN and then process the timing information for intrusion detection.
 Use of timing analysis approach is a novel technique in IDS for WSN.
-The IDS  gathers processed information from the sensors, is centrally controlled and resides outside the WSN and .
+The IDS  gathers processed information from the sensors, is centrally controlled and resides outside the WSN.
 It  identifies anomaly in software update pattern in terms of quantitative score. 
-The higher score indicates a higher probability of intrusion at some point in the WSN. 
+A higher score indicates a higher probability of intrusion at some point in the WSN~\cite{aalam14}. 
 
 % While timing analysis mechanism is non-existent in the WSN, some of the IDSs use traffic analysis or packet inspection  techniques.
 % It can be argued that traffic analysis approach is potentially comparable to proposed timing analysis.
 % The argument can be quite intense because traffic analysis considers both throughput and latency, and latency is essentially about timing.
 % <dme> the above makes little sense to me.
-Onat and Miri present an IDS approach which considers statistical treatment similar to the one we proposed, yet the techniques have subtle differences.
-The IDS deals with node impersonation and resource depletion attacks only.
+Onat and Miri present an IDS design which considers statistical treatment similar to the one we proposed, yet the techniques have subtle differences.
+The IDS proposed by them deals with node impersonation and resource depletion attacks only.
 In this approach, each node build an expectation statistics of received packets based on the last N packets received from each neighbour.
-If packets received from any neighbour displays anomalous patterns after a predefined number of consecutive packets, intrusion alarms may be raised \cite{1512911}.
+If packets received from any neighbour display anomalous patterns after a predefined number of consecutive packets, intrusion alarms may be raised \cite{1512911}.
 Unfortunately, the  packet count statistics is not suitable in OTA software update scenario.
 There is a significant increase in packet traffic owing to software update process. 
 This puts the mechanism off balance.
@@ -355,14 +358,16 @@ All motes are assumed to have time synchronisation accurate to 1~$\mu$s, e.g., a
 % <dme> !
 The timing information carried by the datagram is therefore synchronised with other nodes in the WSN and can be used readily for processing by the IDS.
 
-\subsubsection*{IDS Framework}
-\label{ssc:ids_fw}
 \begin{figure}[btp]
     \centering
     \includegraphics[width=\linewidth]{IDS_fw}	
     \caption{IDS Framework}
     \label{fig:ids_fw}
 \end{figure}
+
+\subsubsection*{IDS Framework}
+\label{ssc:ids_fw}
+
 The IDS framework components and chronology of the activities associated with the IDS has been shown in Figure~\ref{fig:ids_fw}.
 The IDS has three types of components:
 \begin{inparaenum}
@@ -399,7 +404,7 @@ The motes perform their part by endorsing update time, software version, mote ID
 %[PATH TAGGING CAN BE USED AS HEART-BEAT MESSAGE]
 The packet travels to the sink using a synchronous acknowledgement mechanism in transport layer protocols~\cite{tep116}.
 %When it arrives at the sink, the checksum value is examined by the ITC to ensure that the packet content has not been altered enroute.
-After checking for correctness, the ITC then inserts the update time, mote ID and related information to the NDB in the IDS.
+After checking for correctness of the datagram contents, the ITC then inserts the update time, mote ID and related information to the NDB in the IDS.
 The IDS maintains an identifier to differentiate among different update times from different runs for the same mote.
 %
 %The first software update run in the WSN is considered to be legitimate and the IDS takes this timing information as baseline.
@@ -411,10 +416,10 @@ The IDS maintains an identifier to differentiate among different update times fr
 
 \subsubsection*{Identifying Intrusion}
 \label{ssc:cal_iws} 
-The IDS builds anomaly signature or baseline data from authenticated initial software update runs.  are considered to be 
+The IDS builds anomaly signature or baseline data from authenticated initial software update runs. % are considered to be 
 The subsequent updates are subject to verification against signature.
 The time analyser module in the IDS inspects the NDB once an update activity has been detected.
-It determines the changes in the statistics of the update time and calculates IWS based on following utility function in Equation~\ref{eqn2}. IWS indicates the possibility of an intrusion. If the IWS is high enough to be considered an intrusion, the IDS sorts the timing data for that run and identifies the source of intrusion as the mote reporting from lowest update time.
+It determines the changes in the statistics of the update time and calculates IWS based on utility function in Equation~\ref{eqn2}. IWS indicates the possibility of an intrusion. If the IWS is high enough to be considered an intrusion, the IDS sorts the timing data for that run and identifies the source of intrusion as the mote reporting from lowest update time.
 The IDS also identifies the extent of intrusion from mote ID and version information in the database.
 
 
@@ -452,13 +457,10 @@ In addition to this, the IDS also considers a threat model where a new node pops
 
 We assume that an  attacker  can take over one or more nodes deployed in hostile environment, and can access the code in a compromised node. 
 %He is able to access the code in a compromised node by employing superior computing power. 
-In addition, he can also use cryptanalysis to represent a false identity without physically compromising a node.
+Moreover, he can also use cryptanalysis to represent a false identity without physically compromising a node.
 %However, he has  no special  access to  the  network and 
 % <dme> they have plenty of special access to the network??
 However, he is unable to modify the underlying protocols running in the uncompromised nodes.
-
-
-
 The paper assumes several WSN settings and capabilities.
 One of the most important assumptions is that there is a single  sink. 
 It further assumes that the sink is protected from all kinds of attacks and cannot be compromised. 
@@ -468,8 +470,8 @@ The system do not consider mote mobility scenario and assumes a static WSN.
 \subsection*{Experiment Settings}
 \label{subsec:sim_env}
 
-The IDS requires Deluge to report the time of executing  a new version of its software.
-The protocol was originally implemented in TinyOS and later has been ported to other embedded operating systems including Contiki\footnote{\url{http://www.contiki-os.org}}. 
+The IDS requires Deluge to report the time when it begins  executing  a new version of some software.
+The Deluge protocol was originally implemented in TinyOS and later has been ported to other embedded operating systems including Contiki\footnote{\url{http://www.contiki-os.org}}. 
 We used Deluge protocol implemented in Contiki v2.7 on a system running on Ubuntu 12.04.
 %[So this will eventually need citation and a self-contained description.]
 `Cooja'\footnote{\url{https://github.com/contiki-os/contiki/wiki/An-Introduction-to-Cooja}}, a network simulator for Contiki, was used to simulate the software update pattern associated with Deluge protocol.
@@ -487,7 +489,7 @@ The simulations evaluated the proposed IDS in different WSN topologies and explo
 Evaluating the IDS on each of the topologies consisted of several test runs.
 The test runs were of two kinds: 
 \begin{inparaenum}
-\item test runs aimed at establishing baseline data consisted of 20 individual simulations that were initiated from the sink; and
+\item test runs aimed at establishing baseline data consisted of 20 individual simulations initiated from the sink; and
 \item simulations that replicated intrusion initiated at different nodes except the sink.
 \end{inparaenum}
 The results from these simulations were used to model the expected pattern for a particular topology.
@@ -525,9 +527,9 @@ The diagnostic application would necessarily report its time, version number and
 
 %Step 2: Stopping the simulation
 \subsubsection*{Step 2} 
-The base station dynamically began the update process and propagated another version of the software image using Deluge protocol. %, which is also called 
-Whenever the transfer to a mote was complete, the new image would replace its the one and reboot to begin executing itself.
-The  new application causes the motes to report their time, version number and mote ID on the serial terminal. 
+The sink dynamically began the update process and propagated another version of the software image using Deluge protocol. %, which is also called 
+Whenever the transfer to a mote was complete, the new image would replace the old one and reboot to begin executing itself.
+The  new application also causes the motes to report their time, version number and mote ID on the serial terminal. 
 In real system, the suggested modified Deluge protocol that runs with the OS would report the information to the sink using datagram.
 The simulator continued until all the motes in the WSN were updated and the reported events were logged. 
 %Step 3: Filtering out mote update time and distance
@@ -548,9 +550,9 @@ The update time of each mote were filtered out  and were sorted In ascending ord
 %\subsubsection*{Building the Baseline Data}
 %\label{ssc:build_baseline}
 \subsubsection*{Step 3} 
-To build the baseline for each topology, processed data from 20 simulations initiated from the sink were considered for building the baseline.
+To build the baseline for each topology, processed data from 20 simulations initiated from the sink were considered.% for building the baseline.
 Any change in variable parameters or in the topology setup would necessitate recalibrating the baseline.
-Mean and standard deviation of mote update times, generally in seconds, were statistically calculated to build the baseline.
+Mean and standard deviation of mote update times, generally in seconds, were statistically calculated from reported information. %to build the baseline.
 These were the inputs to the IDS to calculate the IWS according to the utility function shown in Equation~\ref{eqn2}. 
 
 %Step 6: Calculating IWS
@@ -629,7 +631,7 @@ The first row in Table~\ref{tab:stat_ellip} contains the Node IDs that are heade
 The next two rows show the baseline data i.e., mean and standard deviation computed from the 20 legitimate updates initiated from the sink.
 It is observed that the motes further away from the sink have higher mean and standard deviation.  
 However, standard deviation increases gently.
-The the stability results from efficient and reliable image transfer effected by OTA protocol.
+The stability observed in standard deviation results from efficient and reliable image transfer effected by OTA protocol.
 In contrast to this, mean increases sharply as the motes are placed further from the sink.
 The result in baseline data shows that motes closer to the sink have lower mean which follows a steep rise with the increase in distance.
 
@@ -657,7 +659,7 @@ However, an estimation of distance along the most probable link path based on th
 
 The IWS is considerably higher for intrusion at distant motes than ones which are close to the sink.
 This phenomena is topology dependent, which also implies  that it is connectivity dependent.
-It is possible that if IWS in a network are organised in a specific order, it would represent/resemble the original topology in some fashion.
+It is possible that if IWS in a network are organised in a specific order, it would represent the original topology in some fashion.
 For example, in the tree topology, the major branches are represented by linear rising slope in Figure~\ref{fig:ellipgraph}.
 The branch along node ID 1 to 7 can be imagined as a line from point `A' to `B'. Similarly, distant point of other branches can also be imagined at points `C',`D',`E'.
 
@@ -665,7 +667,7 @@ The branch along node ID 1 to 7 can be imagined as a line from point `A' to `B'.
 %The observation is also evident from Figure~\ref{fig:ellipgraph}.
 % <dme> covered indirectly in the paragraphs below, I think.
 
-The main contribution of this research project comes from the fact that the IDS is able to report an anomaly from a software update in quantitative term like the IWS.
+The main contribution of this research project comes from the ability to report anomaly in quantitative term like the IWS.
 For example:  a regular legitimate update, initiated from node ID 1, resulted into a IWS of 13.
 The result matched the theoretical expectation of very low IWS.
 In addition to this, when intrusion scenario were simulated from the nodes near the sink, the IWS reported was fairly low, e.g. 30 for mote ID 3, 8, 9, and 15
@@ -683,8 +685,8 @@ The timing data shows that lowest timing was recorded at node 17 and 19 which wa
 Node 18 did not report any time because of three reasons: 
 \begin{inparaenum}
 \item node 18 initiated the update, so it was updated at $0$ second;
-\item it acted as a sink, according to the protocol it did not require notifying its update time any other mote; and 
-\item it is the compromised node whose protocol expected to be altered.
+\item it acted as a sink, according to the protocol it did not require notifying its update time to any other mote; and 
+\item it is the compromised node whose protocol is expected to be altered.
 \end{inparaenum}
 From this information, the IDS can conclude that node 18 was the intrusion point.
 The extent of intrusion, as specified earlier, is found out from reported version information.
@@ -741,7 +743,6 @@ We discussed the potential danger that is associated with WSN OTA software updat
 While OTA update protocols make certain WSN management tasks easy, they also remain vulnerable to intrusion attempts.
 An adversary can take advantage of the resource constrained nature of the sensor motes and employ enough resources to break in through the limited protection the sensors are armed with.
 To help manage this problem, we have suggested a passive security mechanism---an IDS.
-
 A robot can also host the IDS in a collaborative environment.
 The IDS is generally housed in a server that remains physically connected to the  sink. 
 The system watches over the timing of software update patterns using a modified version of the Deluge protocol.
@@ -751,15 +752,15 @@ Related information from the datagram is filtered by the ITC for further process
 The first contribution of the research is quantifying intrusion probability through a quantitative IWS metric. 
 %The IWS is a quantitative indicator of possible intrusion.
 The utility function that computes the IWS is designed to neutralise the undesired %/unexpected
-changes in mean and standard deviation which are expected to contribute to a near zero IWS.\notedme{unclear}
+changes in mean and standard deviation which are expected to contribute to a near zero IWS.%\notedme{unclear}
 
 The other important contribution is related to identifying the location and extent of intrusion..
-Analysing timing data, the IDS can indicate the approximate location from where the intrusion was initiated.
+The IDS can indicate the approximate location from where the intrusion was initiated by analysing timing data.
 It can also decide on the extend of intrusion based on reported software version information.
 %Besides, the IDS also can indicate some other kinds of anomalies such as node relocation, node repudiation, node compromise and so on.
 
 While identifying intrusion in OTA software update is a difficult task, removing the effects of is not under certain conditions.
-Unless, an intrusion lead to DoS attack, the intrusion effect can be easily removed by initiating another update of the legitimate software from the sink.
+Unless, an intrusion leads to DoS attack, the intrusion effect can be easily removed by initiating another update of the legitimate software from the sink.
 However, in case of DoS attack, generally the network is lost and needs major effort to recover, which is beyond the scope of this paper.
 
 The IDS we described here has several limitations. 

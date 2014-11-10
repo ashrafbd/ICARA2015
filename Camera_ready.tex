@@ -2,22 +2,22 @@
 %\documentclass[conference,final]{IEEEtran}
 \documentclass[conference,manuscript]{IEEEtran}
 
-\usepackage{setspace}
+%\usepackage{setspace}
 %\onehalfspacing
 
-\usepackage{ifpdf}
+%\usepackage{ifpdf}
 \usepackage[utf8]{inputenc}
 \usepackage{cite}
 \usepackage{paralist}
 \usepackage[pdftex]{graphicx}
 \usepackage{caption}
 \usepackage{subcaption}
-\graphicspath{{.}{images/}} 
-\DeclareGraphicsExtensions{.pdf,.jpeg,.png,.jpg}
+%\graphicspath{{.}{images/}} 
+\DeclareGraphicsExtensions{.eps}
 \usepackage[cmex10]{amsmath}
-\usepackage{url}
-\usepackage[rgb]{xcolor}
-\usepackage{pdfcomment}
+%\usepackage{url}
+%\usepackage[rgb]{xcolor}
+%\usepackage{pdfcomment}
 
 %\usepackage[tight,footnotesize]{subfigure}
 %\usepackage[caption=false]{caption}
@@ -58,8 +58,7 @@
 
 \maketitle
 
-\doublespacing
-\newpage
+%\doublespacing
 \begin{abstract}
 Robotics and  Wireless Sensor Network (WSN) collaborations is an emerging research field in which both the technologies can benefit from integrated implementations.
 A robot operating in WSN assisted environment can dynamically push instructions using over the air (OTA) update protocols to alter sensing requirement.
@@ -468,10 +467,10 @@ The system do not consider mote mobility scenario and assumes a static WSN.
 \label{subsec:sim_env}
 
 The IDS requires Deluge to report the time when it begins  executing  a new version of some software.
-The Deluge protocol was originally implemented in TinyOS and later has been ported to other embedded operating systems including Contiki\footnote{\url{http://www.contiki-os.org}}. 
+The Deluge protocol was originally implemented in TinyOS and later has been ported to other embedded operating systems including Contiki\footnote{http://www.contiki-os.org}. 
 We used Deluge protocol implemented in Contiki v2.7 on a system running on Ubuntu 12.04.
 %[So this will eventually need citation and a self-contained description.]
-`Cooja'\footnote{\url{https://github.com/contiki-os/contiki/wiki/An-Introduction-to-Cooja}}, a network simulator for Contiki, was used to simulate the software update pattern associated with Deluge protocol.
+`Cooja'\footnote{https://github.com/contiki-os/contiki/wiki/An-Introduction-to-Cooja}, a network simulator for Contiki, was used to simulate the software update pattern associated with Deluge protocol.
 %\notedme{Best to give academic citations, or footnote URLs for these technologies.}
 %We also used a plugin for Contiki called Mobility to aid our experiential setup.
 %Although the plugin was designed to deal with positions over time for the nodes in the simulation, we used it to load the exact location of the sensor motes into the `Cooja' simulator. 
@@ -772,10 +771,196 @@ The other limitation stems from the fact that the results are based on simulated
 In future,  the IDS can be implemented to examine real world performance including cases of multiple sinks with mobile sensors.
 
 
+\begin{thebibliography}{10}
+\providecommand{\url}[1]{#1}
+\csname url@samestyle\endcsname
+\providecommand{\newblock}{\relax}
+\providecommand{\bibinfo}[2]{#2}
+\providecommand{\BIBentrySTDinterwordspacing}{\spaceskip=0pt\relax}
+\providecommand{\BIBentryALTinterwordstretchfactor}{4}
+\providecommand{\BIBentryALTinterwordspacing}{\spaceskip=\fontdimen2\font plus
+\BIBentryALTinterwordstretchfactor\fontdimen3\font minus
+  \fontdimen4\font\relax}
+\providecommand{\BIBforeignlanguage}[2]{{%
+\expandafter\ifx\csname l@#1\endcsname\relax
+\typeout{** WARNING: IEEEtran.bst: No hyphenation pattern has been}%
+\typeout{** loaded for the language `#1'. Using the pattern for}%
+\typeout{** the default language instead.}%
+\else
+\language=\csname l@#1\endcsname
+\fi
+#2}}
+\providecommand{\BIBdecl}{\relax}
+\BIBdecl
+
+\bibitem{Shue13}
+S.~Shue and J.~Conrad, ``A survey of robotic applications in wireless sensor
+  networks,'' in \emph{Southeastcon, 2013 Proceedings of IEEE}, April 2013, pp.
+  1--5.
+
+\bibitem{ISI:000253439700120}
+A.~Bari, A.~Jaekel, and S.~Bandyopadhyay, ``{Optimal placement of relay nodes
+  in two-tiered, fault tolerant sensor networks},'' in \emph{{2007 IEEE
+  SYMPOSIUM ON COMPUTERS AND COMMUNICATIONS, VOLS 1-3}}, ser. {IEEE Symposium
+  on Computers and Communications ISCC}.\hskip 1em plus 0.5em minus 0.4em\relax
+  {IEEE; IEEE Commun Soc; IEEE Comp Soc; Inst Telecommun; Univ Aveiro;
+  Inovacao; AT\&T}, {2007}, pp. {809--814}, {12th IEEE Symposium on Computers
+  and Communications, Aveiro, PORTUGAL, JUL 01-04, 2007}.
+
+\bibitem{1031506}
+J.~W. Hui and D.~Culler, ``The dynamic behavior of a data dissemination
+  protocol for network programming at scale,'' in \emph{SenSys '04: Proceedings
+  of the 2nd international conference on Embedded networked sensor
+  systems}.\hskip 1em plus 0.5em minus 0.4em\relax New York, NY, USA: ACM,
+  2004, pp. 81--94.
+
+\bibitem{quing09}
+Q.~Wang and T.~Zhang, \emph{Security in RFID and Sensor Networks}.\hskip 1em
+  plus 0.5em minus 0.4em\relax Auerbach Publications, April 2009, ch. A Survey
+  on Security of Wireless Network, pp. 293--320.
+
+\bibitem{tep116}
+P.~Levis, ``{TEP} 116: Packet protocols,'' TinyOS Core Working Group, Tech.
+  Rep., 2012, tinyOS-Version: > 2.1.
+
+\bibitem{aes2011}
+A.~Bogdanov, D.~Khovratovich, and C.~Rechberger,
+  ``\BIBforeignlanguage{English}{Biclique cryptanalysis of the full aes},'' in
+  \emph{\BIBforeignlanguage{English}{Advances in Cryptology ASIACRYPT
+  2011}}, ser. Lecture Notes in Computer Science, D.~Lee and X.~Wang,
+  Eds.\hskip 1em plus 0.5em minus 0.4em\relax Springer Berlin Heidelberg, 2011,
+  vol. 7073, pp. 344--371.
+
+\bibitem{DBLP:journals/corr/abs-1301-3022}
+M.~Y. Malik, ``{An Outline of Security in Wireless Sensor Networks: Threats,
+  Countermeasures and Implementations},'' \emph{CoRR}, vol. abs/1301.3022,
+  2013.
+
+\bibitem{Karlof:2004:TLL:1031495.1031515}
+C.~Karlof, N.~Sastry, and D.~Wagner, ``Tinysec: A link layer security
+  architecture for wireless sensor networks,'' in \emph{Proceedings of the 2Nd
+  International Conference on Embedded Networked Sensor Systems}, 2004, pp.
+  162--175.
+
+\bibitem{372146}
+K.~Ilgun, R.~Kemmerer, and P.~Porras, ``{State Transition Analysis: a
+  Rule-based Intrusion Detection Approach},'' \emph{Software Engineering, IEEE
+  Transactions on}, vol.~21, no.~3, pp. 181--199, Mar 1995.
+
+\bibitem{1515559}
+I.~Onat and A.~Miri, ``A real-time node-based traffic anomaly detection
+  algorithm for wireless sensor networks,'' in \emph{Systems Communications,
+  2005. Proceedings}, Aug 2005, pp. 422--427.
+
+\bibitem{ISI:000298891500099}
+F.~Santoso, ``{A Decentralised Self-dispatch Algorithm for Square-grid Blanket
+  Coverage Intrusion Detection Systems in Wireless Sensor Networks},'' in
+  \emph{{2011 IEEE VEHICULAR TECHNOLOGY CONFERENCE (VTC FALL)}}, ser. {IEEE VTS
+  Vehicular Technology Conference Proceedings}.\hskip 1em plus 0.5em minus
+  0.4em\relax {IEEE; IEEE Vehicular Technol Soc}, {2011}, {IEEE 74th Vehicular
+  Technology Conference (VTC), San Francisco, CA, SEP 05-08, 2011}.
+
+\bibitem{Chen:2009:NMI:1516241.1516282}
+R.-C. Chen, C.-F. Hsieh, and Y.-F. Huang, ``A new method for intrusion
+  detection on hierarchical wireless sensor networks,'' in \emph{Proceedings of
+  the 3rd International Conference on Ubiquitous Information Management and
+  Communication}, ser. ICUIMC '09.\hskip 1em plus 0.5em minus 0.4em\relax New
+  York, NY, USA: ACM, 2009, pp. 238--245.
+
+\bibitem{1424814}
+C.-C. Su, K.-M. Chang, Y.-H. Kuo, and M.-F. Horng, ``The new intrusion
+  prevention and detection approaches for clustering-based sensor networks
+  [wireless sensor networks],'' in \emph{Wireless Communications and Networking
+  Conference, 2005 IEEE}, vol.~4, March 2005, pp. 1927--1932 Vol. 4.
+
+\bibitem{Strikos_afull}
+A.~A. Strikos, ``A full approach for intrusion detection in wireless sensor
+  networks,'' 2007.
+
+\bibitem{ISI:000257882502160}
+S.~Rajasegarar, C.~Leckie, M.~Palaniswami, and J.~C. Bezdek, ``{Quarter sphere
+  based distributed anomaly detection in wireless sensor networks},'' in
+  \emph{{2007 IEEE INTERNATIONAL CONFERENCE ON COMMUNICATIONS, VOLS 1-14}},
+  ser. {IEEE International Conference on Communications}, {2007}, pp.
+  {3864--3869}.
+
+\bibitem{1593102}
+R.~Roman, J.~Zhou, and J.~Lopez, ``Applying intrusion detection systems to
+  wireless sensor networks,'' in \emph{Consumer Communications and Networking
+  Conference, 2006. CCNC 2006. 3rd IEEE}, vol.~1, Jan 2006, pp. 640--644.
+
+\bibitem{1290173}
+S.~Doumit and D.~Agrawal, ``Self-organized criticality and stochastic learning
+  based intrusion detection system for wireless sensor networks,'' in
+  \emph{Military Communications Conference, 2003. MILCOM '03. 2003 IEEE},
+  vol.~1, Oct 2003, pp. 609--614 Vol.1.
+
+\bibitem{4024996}
+E.-H. Ngai, J.~Liu, and M.~Lyu, ``On the intruder detection for sinkhole attack
+  in wireless sensor networks,'' in \emph{Communications, 2006. ICC '06. IEEE
+  International Conference on}, vol.~8, June 2006, pp. 3383--3389.
+
+\bibitem{4085803}
+S.~Rajasegarar, C.~Leckie, M.~Palaniswami, and J.~Bezdek, ``Distributed anomaly
+  detection in wireless sensor networks,'' in \emph{Communication systems,
+  2006. ICCS 2006. 10th IEEE Singapore International Conference on}, Oct 2006,
+  pp. 1--5.
+
+\bibitem{Ko2001}
+C.~Ko, P.~Brutch, J.~Rowe, G.~Tsafnat, and K.~N. Levitt, ``{System Health and
+  Intrusion Monitoring Using a Hierarchy of Constraints},'' in
+  \emph{{Proceedings of the 4th International Symposium on Recent Advances in
+  Intrusion Detection}}, ser. RAID '00.\hskip 1em plus 0.5em minus 0.4em\relax
+  London, UK: Springer-Verlag, 2001, pp. 190--204.
+
+\bibitem{1639675}
+B.~Yu and B.~Xiao, ``Detecting selective forwarding attacks in wireless sensor
+  networks,'' in \emph{Parallel and Distributed Processing Symposium, 2006.
+  IPDPS 2006. 20th International}, April 2006.
+
+\bibitem{6096939}
+D.~yin Zhang, C.~Xu, and L.~Siyuan, ``Detecting selective forwarding attacks in
+  wsns using watermark,'' in \emph{Wireless Communications and Signal
+  Processing (WCSP), 2011 International Conference on}, Nov 2011, pp. 1--4.
+
+\bibitem{sink08}
+I.~Krontiris, T.~Dimitriou, T.~Giannetsos, and M.~Mpasoukos, ``Intrusion
+  detection of sinkhole attacks in wireless sensor networks,'' in
+  \emph{Algorithmic Aspects of Wireless Sensor Networks}, ser. Lecture Notes in
+  Computer Science, M.~Kutylowski, J.~Cichon, and P.~Kubiak, Eds.\hskip 1em
+  plus 0.5em minus 0.4em\relax Springer Berlin Heidelberg, 2008, vol. 4837, pp.
+  150--161.
+
+\bibitem{5172466}
+T.~Giannetsos, T.~Dimitriou, and N.~Prasad, ``State of the art on defenses
+  against wormhole attacks in wireless sensor networks,'' in \emph{Wireless
+  Communication, Vehicular Technology, Information Theory and Aerospace
+  Electronic Systems Technology, 2009. Wireless VITAE 2009. 1st International
+  Conference on}, May 2009, pp. 313--318.
+
+\bibitem{aalam14}
+A.~S. M.~A. Alam, D.~Eyers, and Z.~Huang, ``Intrusion detection within a
+  wireless sensor network over the air update protocol,'' in \emph{IEEE
+  International Conference on Advanced Information Networking and Applications
+  (AINA-2015)}.\hskip 1em plus 0.5em minus 0.4em\relax IEEE, May 2015, under
+  review.
+
+\bibitem{1512911}
+I.~Onat and A.~Miri, ``An intrusion detection system for wireless sensor
+  networks,'' in \emph{Wireless And Mobile Computing, Networking And
+  Communications, 2005. (WiMob'2005), IEEE International Conference on},
+  vol.~3, Aug 2005, pp. 253--259 Vol. 3.
+
+\bibitem{Pister08tsmp:time}
+K.~S.~J. Pister and L.~Doherty, ``{TSMP}: Time synchronized mesh protocol,'' in
+  \emph{In Proceedings of the IASTED International Symposium on Distributed
+  Sensor Networks (DSN08)}, 2008.
+
+\end{thebibliography}
 
 
-\bibliographystyle{IEEEtran}
-\bibliography{icara}
+% \bibliographystyle{IEEEtran}
+% \bibliography{icara}
 
 
 % that's all folks

@@ -1,6 +1,6 @@
 %\documentclass[conference,draftcls]{IEEEtran}
-%\documentclass[conference,final]{IEEEtran}
-\documentclass[conference,manuscript]{IEEEtran}
+\documentclass[conference,final]{IEEEtran}
+%\documentclass[conference,manuscript]{IEEEtran}
 
 %\usepackage{setspace}
 %\onehalfspacing
@@ -10,10 +10,12 @@
 \usepackage{cite}
 \usepackage{paralist}
 \usepackage[pdftex]{graphicx}
+%\usepackage[dvips]{graphicx} 
+%\usepackage{pslatex}
 \usepackage{caption}
 \usepackage{subcaption}
 %\graphicspath{{.}{images/}} 
-\DeclareGraphicsExtensions{.eps}
+%\DeclareGraphicsExtensions{.eps}
 \usepackage[cmex10]{amsmath}
 %\usepackage{url}
 %\usepackage[rgb]{xcolor}
@@ -118,7 +120,7 @@ identification number called `Node ID'. Intrusion in software
 update primarily indicates uploading inappropriate software
 that performs undesired actions, clandestinely replacing the
 sensor operating system (OS) software, and so on. Update time
-is the time when any mote begin executing a new version
+is the time when any mote begins executing a new version
 of the software image. Data exchange in WSN takes place
 locally using a neighbourhood discovery process, following
 an autonomous relay mechanism without a routing table.
@@ -236,7 +238,7 @@ WSN to some other kinds of attacks, such as DoS through
 resource exhaustion. 
 Fifthly, an attacker can extract valuable
 information about the network from a physically compromised
-node. He can utilise the knowledge to initiate Sybil attack, even
+node. He can utilise the knowledge to initiate Sybil attack~\cite{syb02}, even
 can replace the nodes with the illegitimate and malicious ones,
 which can imitate a legal update process. Considering the above, some researchers suggest a complete redesign
 of security mechanisms in WSNs~\cite{quing09}.
@@ -267,7 +269,7 @@ intrusion.
 
 %%%%I WANT TO CHANGE THIS PORTION
 The proposed techniques varies greatly in their ideas and approaches.
-Misuse based  detection  techniques identify undesired activities basing on signature.
+Misuse based  detection  techniques identify undesired activities based  on signature.
 They aim to detect known attacks.
 However, they are ineffective against novel attacks.
 Additionally, they may wrongly identify legitimate activities as intrusion because of similarity with the signature~\cite{372146, 1515559, ISI:000298891500099, Chen:2009:NMI:1516241.1516282, 1424814, Strikos_afull}.
@@ -280,7 +282,7 @@ In contrast, specification-based and reputation-based techniques rely on manual 
 However, these techniques also have not been proved to be very effective because human interaction are more prone to errors and require more learning time~\cite{Chen:2009:NMI:1516241.1516282, 4085803, Ko2001}. 
 
 
-Approaches to design IDS mechanisms %are either distributed or centrally controlled. They 
+Approaches to design of IDS mechanisms %are either distributed or centrally controlled. They 
 employ techniques like key management, encryption and authentication to protect services like localisation, data aggregation, cluster formation, time synchronisation.
 It is considered that specific services are protected against specific attacks e.g, forwarding, sinkhole, wormhole under certain conditions~\cite{1639675, 6096939, sink08, 5172466}.
 %Although approaches described above
@@ -356,7 +358,9 @@ The timing information carried by the datagram is therefore synchronised with ot
 
 \begin{figure}[btp]
     \centering
-    \includegraphics[width=\linewidth]{IDS_fw}	
+	\resizebox{\linewidth}{!}{
+	    \includegraphics[width=\linewidth]{IDS_fw.eps}	
+	}
     \caption{IDS Framework}
     \label{fig:ids_fw}
 \end{figure}
@@ -364,7 +368,7 @@ The timing information carried by the datagram is therefore synchronised with ot
 \subsubsection*{IDS Framework}
 \label{ssc:ids_fw}
 
-The IDS framework components and chronology of the activities associated with the IDS has been shown in Figure~\ref{fig:ids_fw}.
+The IDS framework components and chronology of the activities associated with the IDS have been shown in Figure~\ref{fig:ids_fw}.
 The IDS has three types of components:
 \begin{inparaenum}
 \item the motes in the WSN radio network that are subject to legitimate or illegitimate update e.g., intrusion attempt; 
@@ -384,7 +388,9 @@ The IDS has three types of components:
 %The IDS analyses the acquired timing information to arrive at decision.
 \begin{figure}[btp]
     \centering
-    \includegraphics[width=\linewidth]{IDS}
+	\resizebox{\linewidth}{!}{
+	    \includegraphics[width=\linewidth]{IDS.eps}
+	}    
     \caption{IDS Modelling}
     \label{fig:ids_model}
 \end{figure}
@@ -451,12 +457,19 @@ In addition to this, the IDS also considers a threat model where a new node pops
 %However, once the new image transfer has been injected, the node may remain alive or disappear.
 %In case the compromised mote disappears, WSN would consider it as a node failure instead of node compromise.
 
-We assume that an  attacker  can take over one or more nodes deployed in hostile environment, and can access the code in a compromised node. 
+%We assume that an  attacker  can take over one or more nodes deployed in hostile environment, and can access the code in a compromised node. 
+We assume that the nodes are physically protected and not accessible by the attacker.
+The only way an intruder can launch an attack is through the wireless network.
+An attacker can also use cryptanalysis to represent a false identity without physically compromising a node.
+We also assume that the sensors are equipped with a protected memory area that cannot be overwritten by the OTA update process.
+The protected area can only be programmed physically through a sensor programming board and needs to follow specific security routines which are beyond the scope of this paper.
+The update protocol and other security codes are housed in this protected memory area.
+This implies that the update protocol cannot be compromised by the intruder. 
 %He is able to access the code in a compromised node by employing superior computing power. 
-Moreover, he can also use cryptanalysis to represent a false identity without physically compromising a node.
 %However, he has  no special  access to  the  network and 
 % <dme> they have plenty of special access to the network??
-However, he is unable to modify the underlying protocols running in the uncompromised nodes.
+%However, he is unable to modify the underlying protocols running in the uncompromised nodes.
+
 The paper assumes several WSN settings and capabilities.
 One of the most important assumptions is that there is a single  sink. 
 It further assumes that the sink is protected from all kinds of attacks and cannot be compromised. 
@@ -517,7 +530,7 @@ We used topologies in experiments that had many shapes such as: linear, circular
 %\label{ssc:test_runs}
 %Step 1: Running simulation
 \subsubsection*{Step 1} 
-In the environmental set up described above, all motes in the WSN were booted up at same time running one version of a diagnostic application. 
+In the environmental arrangement described above, all motes in the WSN were booted up at same time running one version of a diagnostic application. 
 The diagnostic application would necessarily report its time, version number and mote ID on the serial terminal every second at its serial port. 
 
 
@@ -546,8 +559,8 @@ The update time of each mote were filtered out  and were sorted In ascending ord
 %\subsubsection*{Building the Baseline Data}
 %\label{ssc:build_baseline}
 \subsubsection*{Step 3} 
-To build the baseline for each topology, processed data from 20 simulations initiated from the sink were considered.% for building the baseline.
-Any change in variable parameters or in the topology setup would necessitate recalibrating the baseline.
+To build the baseline for each topology, processed data from 20 simulations initiated from the sink were considered. % for building the baseline.
+Any change in variable parameters or in the topology configuration would necessitate recalibrating the baseline.
 Mean and standard deviation of mote update times, generally in seconds, were statistically calculated from reported information. %to build the baseline.
 These were the inputs to the IDS to calculate the IWS according to the utility function shown in Equation~\ref{eqn2}. 
 
@@ -557,7 +570,7 @@ These were the inputs to the IDS to calculate the IWS according to the utility f
 
 \subsubsection*{Step 4} 
 Intrusion attacks at different nodes were replicated in simulations.
-The individual simulations runs were treated in a fashion  similar to~Step 1 and Step 2.
+The individual simulation runs were treated in a fashion  similar to~Step 1 and Step 2.
 The update time recorded at each of the motes is then analysed using Equation~\ref{eqn2}.
 % , which performed the following computations:
 % \begin{itemize}
@@ -598,16 +611,15 @@ $\sigma$		 & 0 & 28 & 31 & 80 & 84 & 146 & 38 & 32 & 29 & 77 & 87 & 192 & 18 & 2
 \end{table*}
 
 In this section, we presents the data found in the course of this investigation, their interpretation and evaluate the contribution.
-While discussing the performance and effects of the proposed IDS in different topologies are useful, discussing any of the topologies presents fair idea about the outcomes from the others and mentioning the cases when the outcome was considered  contrary to the expectations.
+Discussing the performance and effects of the proposed IDS in different topologies are useful.
+However, any of the experimented topologies also presents fair idea about the outcomes from the others. 
+Hence, we shall concentrate our discussion on results and findings of a single, tree topology only.
+We shall mention the cases in other topologies when the outcome was considered contrary to our expectations.
 
-  
-
-We shall concentrate our discussion on results and findings of a single, tree topology only.
-The tree shaped deployment of 25 nodes with several branches as shown in Figure~\ref{fig:elliptopo}, which intends to
+The tree shaped deployment has 25 nodes with four major branches as shown in Figure~\ref{fig:elliptopo}. 
 % has been designed considering several requirements.
 %The motes are placed in a way that can 
-place nodes to
-be useful in robot navigation and localisation along the branches.
+The nodes were placed with an aim of making them useful for WSN-assisted robot navigation and localisation along the branches.
 %Total 20 nodes were deployed with the minor axis being 30 meter and the major axis being way larger than that.
 %The transmission power level was set at 100\%. 
 % which allowed a  transmission range of 50 meter and nodes were  able to interfere other nodes at  up to 100 meter apart.
@@ -628,12 +640,14 @@ The next two rows show the baseline data i.e., mean and standard deviation compu
 It is observed that the motes further away from the sink have higher mean and standard deviation.  
 However, standard deviation increases gently.
 The stability observed in standard deviation results from efficient and reliable image transfer effected by OTA protocol.
-In contrast to this, mean increases sharply as the motes are placed further from the sink.
-The result in baseline data shows that motes closer to the sink have lower mean which follows a steep rise with the increase in distance.
+In contrast to this, the mean increases sharply as the motes are placed further from the sink.
+The result in baseline data shows that motes closer to the sink have lower mean values, which follow a steep rise with the increase in distance.
 
 \begin{figure}[t]
     \centering
-        \includegraphics[width=\linewidth]{Tree}
+	\resizebox{\linewidth}{!}{
+        \includegraphics[width=\linewidth]{Tree.eps}
+    }    
         \caption{IWS and Relative position of nodes}
     \label{fig:elliptopo} 
 \end{figure} 
@@ -643,17 +657,21 @@ Each of the motes were considered as intrusion point in the process of measuring
 The IWS increases linearly with the increase in distance from the sink.
 The `distance' term can be misleading without further clarification.
 Euclidean distance between a mote and the sink does not make useful sense as the packets in the network must travel using a relay mechanism through other motes in the network.
-Because of the availability of the multiple paths, it is not possible to quantify the exact distance that a packet would travel while transporting form a mote to the sink.
+Because of the availability of the multiple paths, it is not possible to quantify the exact distance that a packet would travel while transporting from a mote to the sink.
 However, an estimation of distance along the most probable link path based on the connectivity may be considered.
+
+
 
 \begin{figure}[tbph!]
 	\centering
-        \includegraphics[width=\linewidth]{Tree_column}
-        \caption{Comparison of IWS at different motes}
-        \label{fig:ellipgraph}
+	\resizebox{\linewidth}{!}{
+        \includegraphics[width=\linewidth]{Tree_column.eps}
+    }
+     \caption{Comparison of IWS at different motes}
+     \label{fig:ellipgraph}
 \end{figure}
 
-The IWS is considerably higher for intrusion at distant motes than ones which are close to the sink.
+The IWS is considerably higher for intrusion at distant motes than those which are close to the sink.
 This phenomena is topology dependent, which also implies  that it is connectivity dependent.
 It is possible that if IWS in a network are organised in a specific order, it would represent the original topology in some fashion.
 For example, in the tree topology, the major branches are represented by linear rising slope in Figure~\ref{fig:ellipgraph}.
@@ -668,7 +686,7 @@ For example:  a regular legitimate update, initiated from node ID 1, resulted in
 The result matched the theoretical expectation of very low IWS.
 In addition to this, when intrusion scenario were simulated from the nodes near the sink, the IWS reported was fairly low, e.g. 30 for mote ID 3, 8, 9, and 15
  and 45 for node 2. 
-Because of the fact that IWS of the motes close to the sink are likely to be very low, which is in line with the theoretical expectation, it is quite difficult to conclude if such a IWS indicate an intrusion. 
+Because of the fact that IWS of the motes close to the sink are likely to be very low, which is in line with the theoretical expectation, it is quite difficult to conclude if such an IWS indicate an intrusion. 
 However, for the distant motes, the IWS is quite high and the IDS can conclude such cases as intrusion, e.g. IWS of 408 for mote ID 7, 390 for mote ID 14, 322 for mote ID 18, 
 %277 for mote ID 23
 and likewise indicate intrusion.
@@ -678,7 +696,8 @@ While reporting severity or likelihood of an intrusion in quantitative term like
 The IDS analyses update timing of all motes to identify the source of intrusion. 
 For example, Table~\ref{tab:tree_time_18} presents the update time recorded at different motes when intrusion was initiated from note 18.
 The timing data shows that lowest timing was recorded at node 17 and 19 which was equal to 15 seconds.
-Node 18 did not report any time because of three reasons: 
+Node 18 is not expected to report any time because of three practical reasons: 
+%<Ash> I am not comfortable with this arguments anow because of the way we've changed the assumptions now. Well, I'll revisit the assumptions again and then come back here later.
 \begin{inparaenum}
 \item node 18 initiated the update, so it was updated at $0$ second;
 \item it acted as a sink, according to the protocol it did not require notifying its update time to any other mote; and 
@@ -750,12 +769,12 @@ The first contribution of the research is quantifying intrusion probability thro
 The utility function that computes the IWS is designed to neutralise the undesired %/unexpected
 changes in mean and standard deviation which are expected to contribute to a near zero IWS.%\notedme{unclear}
 
-The other important contribution is related to identifying the location and extent of intrusion..
+The other important contribution is related to identifying the location and extent of intrusion.
 The IDS can indicate the approximate location from where the intrusion was initiated by analysing timing data.
-It can also decide on the extend of intrusion based on reported software version information.
+It can also decide on the extent of intrusion based on reported software version information.
 %Besides, the IDS also can indicate some other kinds of anomalies such as node relocation, node repudiation, node compromise and so on.
 
-While identifying intrusion in OTA software update is a difficult task, removing the effects of is not under certain conditions.
+While identifying intrusion in OTA software update is a difficult task, under certain conditions removing the effects is quite easy.
 Unless, an intrusion leads to DoS attack, the intrusion effect can be easily removed by initiating another update of the legitimate software from the sink.
 However, in case of DoS attack, generally the network is lost and needs major effort to recover, which is beyond the scope of this paper.
 
@@ -767,200 +786,12 @@ In addition to this, assumptions about the attacker are: the attacker can employ
 The IDS has an obvious functional limitation.
 It cannot identify an intrusion in certain scenarios.
 For example, when an intrusion takes place in close vicinity of the sink, this IWS may not always be sufficiently large to be identified as an intrusion.
-The other limitation stems from the fact that the results are based on simulated data and needs support from real world implementation.
+Another limitation stems from the fact that the results are based on simulated data and needs support from real world implementation.
 In future,  the IDS can be implemented to examine real world performance including cases of multiple sinks with mobile sensors.
 
 
-\begin{thebibliography}{10}
-\providecommand{\url}[1]{#1}
-\csname url@samestyle\endcsname
-\providecommand{\newblock}{\relax}
-\providecommand{\bibinfo}[2]{#2}
-\providecommand{\BIBentrySTDinterwordspacing}{\spaceskip=0pt\relax}
-\providecommand{\BIBentryALTinterwordstretchfactor}{4}
-\providecommand{\BIBentryALTinterwordspacing}{\spaceskip=\fontdimen2\font plus
-\BIBentryALTinterwordstretchfactor\fontdimen3\font minus
-  \fontdimen4\font\relax}
-\providecommand{\BIBforeignlanguage}[2]{{%
-\expandafter\ifx\csname l@#1\endcsname\relax
-\typeout{** WARNING: IEEEtran.bst: No hyphenation pattern has been}%
-\typeout{** loaded for the language `#1'. Using the pattern for}%
-\typeout{** the default language instead.}%
-\else
-\language=\csname l@#1\endcsname
-\fi
-#2}}
-\providecommand{\BIBdecl}{\relax}
-\BIBdecl
-
-\bibitem{Shue13}
-S.~Shue and J.~Conrad, ``A survey of robotic applications in wireless sensor
-  networks,'' in \emph{Southeastcon, 2013 Proceedings of IEEE}, April 2013, pp.
-  1--5.
-
-\bibitem{ISI:000253439700120}
-A.~Bari, A.~Jaekel, and S.~Bandyopadhyay, ``{Optimal placement of relay nodes
-  in two-tiered, fault tolerant sensor networks},'' in \emph{{2007 IEEE
-  SYMPOSIUM ON COMPUTERS AND COMMUNICATIONS, VOLS 1-3}}, ser. {IEEE Symposium
-  on Computers and Communications ISCC}.\hskip 1em plus 0.5em minus 0.4em\relax
-  {IEEE; IEEE Commun Soc; IEEE Comp Soc; Inst Telecommun; Univ Aveiro;
-  Inovacao; AT\&T}, {2007}, pp. {809--814}, {12th IEEE Symposium on Computers
-  and Communications, Aveiro, PORTUGAL, JUL 01-04, 2007}.
-
-\bibitem{1031506}
-J.~W. Hui and D.~Culler, ``The dynamic behavior of a data dissemination
-  protocol for network programming at scale,'' in \emph{SenSys '04: Proceedings
-  of the 2nd international conference on Embedded networked sensor
-  systems}.\hskip 1em plus 0.5em minus 0.4em\relax New York, NY, USA: ACM,
-  2004, pp. 81--94.
-
-\bibitem{quing09}
-Q.~Wang and T.~Zhang, \emph{Security in RFID and Sensor Networks}.\hskip 1em
-  plus 0.5em minus 0.4em\relax Auerbach Publications, April 2009, ch. A Survey
-  on Security of Wireless Network, pp. 293--320.
-
-\bibitem{tep116}
-P.~Levis, ``{TEP} 116: Packet protocols,'' TinyOS Core Working Group, Tech.
-  Rep., 2012, tinyOS-Version: > 2.1.
-
-\bibitem{aes2011}
-A.~Bogdanov, D.~Khovratovich, and C.~Rechberger,
-  ``\BIBforeignlanguage{English}{Biclique cryptanalysis of the full aes},'' in
-  \emph{\BIBforeignlanguage{English}{Advances in Cryptology ASIACRYPT
-  2011}}, ser. Lecture Notes in Computer Science, D.~Lee and X.~Wang,
-  Eds.\hskip 1em plus 0.5em minus 0.4em\relax Springer Berlin Heidelberg, 2011,
-  vol. 7073, pp. 344--371.
-
-\bibitem{DBLP:journals/corr/abs-1301-3022}
-M.~Y. Malik, ``{An Outline of Security in Wireless Sensor Networks: Threats,
-  Countermeasures and Implementations},'' \emph{CoRR}, vol. abs/1301.3022,
-  2013.
-
-\bibitem{Karlof:2004:TLL:1031495.1031515}
-C.~Karlof, N.~Sastry, and D.~Wagner, ``Tinysec: A link layer security
-  architecture for wireless sensor networks,'' in \emph{Proceedings of the 2Nd
-  International Conference on Embedded Networked Sensor Systems}, 2004, pp.
-  162--175.
-
-\bibitem{372146}
-K.~Ilgun, R.~Kemmerer, and P.~Porras, ``{State Transition Analysis: a
-  Rule-based Intrusion Detection Approach},'' \emph{Software Engineering, IEEE
-  Transactions on}, vol.~21, no.~3, pp. 181--199, Mar 1995.
-
-\bibitem{1515559}
-I.~Onat and A.~Miri, ``A real-time node-based traffic anomaly detection
-  algorithm for wireless sensor networks,'' in \emph{Systems Communications,
-  2005. Proceedings}, Aug 2005, pp. 422--427.
-
-\bibitem{ISI:000298891500099}
-F.~Santoso, ``{A Decentralised Self-dispatch Algorithm for Square-grid Blanket
-  Coverage Intrusion Detection Systems in Wireless Sensor Networks},'' in
-  \emph{{2011 IEEE VEHICULAR TECHNOLOGY CONFERENCE (VTC FALL)}}, ser. {IEEE VTS
-  Vehicular Technology Conference Proceedings}.\hskip 1em plus 0.5em minus
-  0.4em\relax {IEEE; IEEE Vehicular Technol Soc}, {2011}, {IEEE 74th Vehicular
-  Technology Conference (VTC), San Francisco, CA, SEP 05-08, 2011}.
-
-\bibitem{Chen:2009:NMI:1516241.1516282}
-R.-C. Chen, C.-F. Hsieh, and Y.-F. Huang, ``A new method for intrusion
-  detection on hierarchical wireless sensor networks,'' in \emph{Proceedings of
-  the 3rd International Conference on Ubiquitous Information Management and
-  Communication}, ser. ICUIMC '09.\hskip 1em plus 0.5em minus 0.4em\relax New
-  York, NY, USA: ACM, 2009, pp. 238--245.
-
-\bibitem{1424814}
-C.-C. Su, K.-M. Chang, Y.-H. Kuo, and M.-F. Horng, ``The new intrusion
-  prevention and detection approaches for clustering-based sensor networks
-  [wireless sensor networks],'' in \emph{Wireless Communications and Networking
-  Conference, 2005 IEEE}, vol.~4, March 2005, pp. 1927--1932 Vol. 4.
-
-\bibitem{Strikos_afull}
-A.~A. Strikos, ``A full approach for intrusion detection in wireless sensor
-  networks,'' 2007.
-
-\bibitem{ISI:000257882502160}
-S.~Rajasegarar, C.~Leckie, M.~Palaniswami, and J.~C. Bezdek, ``{Quarter sphere
-  based distributed anomaly detection in wireless sensor networks},'' in
-  \emph{{2007 IEEE INTERNATIONAL CONFERENCE ON COMMUNICATIONS, VOLS 1-14}},
-  ser. {IEEE International Conference on Communications}, {2007}, pp.
-  {3864--3869}.
-
-\bibitem{1593102}
-R.~Roman, J.~Zhou, and J.~Lopez, ``Applying intrusion detection systems to
-  wireless sensor networks,'' in \emph{Consumer Communications and Networking
-  Conference, 2006. CCNC 2006. 3rd IEEE}, vol.~1, Jan 2006, pp. 640--644.
-
-\bibitem{1290173}
-S.~Doumit and D.~Agrawal, ``Self-organized criticality and stochastic learning
-  based intrusion detection system for wireless sensor networks,'' in
-  \emph{Military Communications Conference, 2003. MILCOM '03. 2003 IEEE},
-  vol.~1, Oct 2003, pp. 609--614 Vol.1.
-
-\bibitem{4024996}
-E.-H. Ngai, J.~Liu, and M.~Lyu, ``On the intruder detection for sinkhole attack
-  in wireless sensor networks,'' in \emph{Communications, 2006. ICC '06. IEEE
-  International Conference on}, vol.~8, June 2006, pp. 3383--3389.
-
-\bibitem{4085803}
-S.~Rajasegarar, C.~Leckie, M.~Palaniswami, and J.~Bezdek, ``Distributed anomaly
-  detection in wireless sensor networks,'' in \emph{Communication systems,
-  2006. ICCS 2006. 10th IEEE Singapore International Conference on}, Oct 2006,
-  pp. 1--5.
-
-\bibitem{Ko2001}
-C.~Ko, P.~Brutch, J.~Rowe, G.~Tsafnat, and K.~N. Levitt, ``{System Health and
-  Intrusion Monitoring Using a Hierarchy of Constraints},'' in
-  \emph{{Proceedings of the 4th International Symposium on Recent Advances in
-  Intrusion Detection}}, ser. RAID '00.\hskip 1em plus 0.5em minus 0.4em\relax
-  London, UK: Springer-Verlag, 2001, pp. 190--204.
-
-\bibitem{1639675}
-B.~Yu and B.~Xiao, ``Detecting selective forwarding attacks in wireless sensor
-  networks,'' in \emph{Parallel and Distributed Processing Symposium, 2006.
-  IPDPS 2006. 20th International}, April 2006.
-
-\bibitem{6096939}
-D.~yin Zhang, C.~Xu, and L.~Siyuan, ``Detecting selective forwarding attacks in
-  wsns using watermark,'' in \emph{Wireless Communications and Signal
-  Processing (WCSP), 2011 International Conference on}, Nov 2011, pp. 1--4.
-
-\bibitem{sink08}
-I.~Krontiris, T.~Dimitriou, T.~Giannetsos, and M.~Mpasoukos, ``Intrusion
-  detection of sinkhole attacks in wireless sensor networks,'' in
-  \emph{Algorithmic Aspects of Wireless Sensor Networks}, ser. Lecture Notes in
-  Computer Science, M.~Kutylowski, J.~Cichon, and P.~Kubiak, Eds.\hskip 1em
-  plus 0.5em minus 0.4em\relax Springer Berlin Heidelberg, 2008, vol. 4837, pp.
-  150--161.
-
-\bibitem{5172466}
-T.~Giannetsos, T.~Dimitriou, and N.~Prasad, ``State of the art on defenses
-  against wormhole attacks in wireless sensor networks,'' in \emph{Wireless
-  Communication, Vehicular Technology, Information Theory and Aerospace
-  Electronic Systems Technology, 2009. Wireless VITAE 2009. 1st International
-  Conference on}, May 2009, pp. 313--318.
-
-\bibitem{aalam14}
-A.~S. M.~A. Alam, D.~Eyers, and Z.~Huang, ``Intrusion detection within a
-  wireless sensor network over the air update protocol,'' in \emph{IEEE
-  International Conference on Advanced Information Networking and Applications
-  (AINA-2015)}.\hskip 1em plus 0.5em minus 0.4em\relax IEEE, May 2015, under
-  review.
-
-\bibitem{1512911}
-I.~Onat and A.~Miri, ``An intrusion detection system for wireless sensor
-  networks,'' in \emph{Wireless And Mobile Computing, Networking And
-  Communications, 2005. (WiMob'2005), IEEE International Conference on},
-  vol.~3, Aug 2005, pp. 253--259 Vol. 3.
-
-\bibitem{Pister08tsmp:time}
-K.~S.~J. Pister and L.~Doherty, ``{TSMP}: Time synchronized mesh protocol,'' in
-  \emph{In Proceedings of the IASTED International Symposium on Distributed
-  Sensor Networks (DSN08)}, 2008.
-
-\end{thebibliography}
-
-
-% \bibliographystyle{IEEEtran}
-% \bibliography{icara}
+\bibliographystyle{IEEEtran}
+\bibliography{icara}
 
 
 % that's all folks

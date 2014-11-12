@@ -63,10 +63,10 @@
 %\doublespacing
 \begin{abstract}
 Robotics and  Wireless Sensor Network (WSN) collaborations is an emerging research field in which both the technologies can benefit from integrated implementations.
-A robot operating in WSN assisted environment can dynamically push instructions using over the air (OTA) update protocols to alter sensing requirement.
+A robot operating in WSN assisted environment can dynamically push instructions using over the air (OTA) update protocols to suit to its sensing requirement.
 In this paper, an Intrusion Detection System (IDS) for WSN  software update protocol is designed and simulated. 
-When the protocol modifies the running software in a mote, the mote sends related  information to the sink. 
-The IDS analyses the update phenomena of each of the motes in the network and computes a `Intrusion Warning Score' (IWS) through an algorithmic function to indicate a possible intrusion i.e., a probable illegitimate update.
+%When the protocol modifies the running software in a mote, the mote sends related  information to the sink. 
+The IDS analyses the update phenomena and computes an `Intrusion Warning Score' (IWS) to indicate a possible intrusion i.e., a probable illegitimate update.
 %\notedme{Mentioning robots more than just in the first word would be good}
 \end{abstract}
 
@@ -269,10 +269,15 @@ intrusion.
 
 %%%%I WANT TO CHANGE THIS PORTION
 The proposed techniques varies greatly in their ideas and approaches.
-Misuse based  detection  techniques identify undesired activities based  on signature.
+Rule-based misuse detection  techniques identify undesired activities based  on signature.
 They aim to detect known attacks.
-However, they are ineffective against novel attacks.
+However, they are ineffective against previously unknown attacks.
 Additionally, they may wrongly identify legitimate activities as intrusion because of similarity with the signature~\cite{372146, 1515559, ISI:000298891500099, Chen:2009:NMI:1516241.1516282, 1424814, Strikos_afull}.
+A decentralized, hierarchical, rule-based IDS follows a network-based approach  and monitors exchanged  messages to detect intrusion. 
+The technique relies on hierarchical routing  and monitors the cluster heads to trace messages~\cite{ioa07}.
+However, rule-based hierarchical routing method does not guarantee using the best energy path.
+%}ISI:000298891500099, Chen:2009:NMI:1516241.1516282, 1424814, Strikos_afull}. %Rule-based, node-based traffic
+They also are often ineffective against novel attacks and may wrongly identify legitimate activities as intrusion because of similarities with a malicious signature. 
 In response to this difficulty, anomaly based IDS builds the signature based on defined normal activity.
 They use statistical probability and significance to identify anomalies. Unfortunately, a system may display previously unknown behaviour.
 For example: rare critical activities like earthquake or tsunami may raise false positive intrusion alert in sensors employed for other environmental monitoring.
@@ -380,9 +385,9 @@ The IDS has three types of components:
 %%% <ashraf> strike out
 %\begin{inparaenum}
 %\item Updates are initiated using Deluge protocol;
-%\item Deluge disseminates the new software image using the motes enroute to reach all the motes using a relay mechanism; 
+%\item Deluge disseminates the new software image using the motes en route to reach all the motes using a relay mechanism; 
 %\item The nodes deliver their timing information to the sink using an AM packet;
-%\item AM packets from the distant nodes rely on the other nodes enroute to reach the sink using a relay mechanism; and
+%\item AM packets from the distant nodes rely on the other nodes en route to reach the sink using a relay mechanism; and
 %\item The ITC application in the sink delivers revelent information to the IDS for processing. 
 %\end{inparaenum}
 %The IDS analyses the acquired timing information to arrive at decision.
@@ -402,10 +407,10 @@ The intrusion detection activity begins when a software update takes place.
 The motes perform their part by endorsing update time, software version, mote ID  and initiating a datagram to the sink. 
 %An AM packet initiated for the IDS has several fields: destination address, type identifier that indicates the update time information and the protocol for IDS, timing information and a checksum value.
 %[DO WE WANT TO INCLUDE THE PATH TAGGING; MAY BE LATER - IT INCREASES RELIABILITY, NOT DIRECTLY $IDS$ ACTIVITY?]
-%[path tagging is good, but in all cases, whatb s the risk from intruders messing with the reported data?]
+%[path tagging is good, but in all cases, what's the risk from intruders messing with the reported data?]
 %[PATH TAGGING CAN BE USED AS HEART-BEAT MESSAGE]
 The packet travels to the sink using a synchronous acknowledgement mechanism in transport layer protocols~\cite{tep116}.
-%When it arrives at the sink, the checksum value is examined by the ITC to ensure that the packet content has not been altered enroute.
+%When it arrives at the sink, the checksum value is examined by the ITC to ensure that the packet content has not been altered en route.
 After checking for correctness of the datagram contents, the ITC then inserts the update time, mote ID and related information to the NDB in the IDS.
 The IDS maintains an identifier to differentiate among different update times from different runs for the same mote.
 %

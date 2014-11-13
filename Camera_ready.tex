@@ -63,30 +63,19 @@
 %\doublespacing
 \begin{abstract}
 Robotics and  Wireless Sensor Network (WSN) collaborations is an emerging research field in which both the technologies can benefit from integrated implementations.
-A robot operating in WSN assisted environment can dynamically push instructions using over the air (OTA) update protocols to suit to its sensing requirement.
+A robot operating in WSN assisted environment can dynamically push instructions using over the air (OTA) update protocols to suit to its sensing requirements.
 In this paper, an Intrusion Detection System (IDS) for WSN  software update protocol is designed and simulated. 
 %When the protocol modifies the running software in a mote, the mote sends related  information to the sink. 
 The IDS analyses the update phenomena and computes an `Intrusion Warning Score' (IWS) to indicate a possible intrusion i.e., a probable illegitimate update.
 %\notedme{Mentioning robots more than just in the first word would be good}
 \end{abstract}
 
-%Theme: \textbf{Security of sensed environmental data external to the robots}\\
-%NEED to include Key words here\\
 
 %\begin{keyword}
 %Wireless Sensors, WSN, Intrusion Detection System, IDS, Security
 %\end{keyword}
 
-% no keywords
-% For peer review papers, you can put extra information on the cover
-% page as needed:
-% \ifCLASSOPTIONpeerreview
-% \begin{center} \bfseries EDICS Category: 3-BBND \end{center}
-% \fi
-%
-% For peerreview papers, this IEEEtran command inserts a page break and
-% creates the second title. It will be ignored for other modes.
-\IEEEpeerreviewmaketitle %not meant to be here for submission
+
 %ICARA does accept papers on sensors. With collaborative robotics increasing rapidly, security of inter-robot communication over wireless media is of great importance. Your proposed paper would be of interest to ICARA attendees and we look forward to receiving your paper by 27th October.
 
 \section{Introduction}
@@ -108,14 +97,14 @@ wireless sensors collaborate. Multiple robots can benefit from
 navigating in WSN-assisted environments without depending
 on GPS signals. Robots can also dynamically change the
 sensor applications over the air (OTA) to suit changes
-in environmental sensing requirements. However, security of
+in its environmental sensing requirements. However, security of
 technologies is one of the major concerns in such collaborative
 approach.
 
 Wireless sensor devices in WSN are known as nodes or
 motes. The manager node, which is generally connected to
-a workstation and long lasting power source is called a sink
-or base station. All sensor nodes in a WSN have a unique
+a workstation and has long lasting power source is called a sink
+or base station. Every sensor node in a WSN has a unique
 identification number called `Node ID'. Intrusion in software
 update primarily indicates uploading inappropriate software
 that performs undesired actions, clandestinely replacing the
@@ -123,7 +112,7 @@ sensor operating system (OS) software, and so on. Update time
 is the time when any mote begins executing a new version
 of the software image. Data exchange in WSN takes place
 locally using a neighbourhood discovery process, following
-an autonomous relay mechanism without a routing table.
+an autonomous relay mechanism that does not require a routing table.
 
 WSNs usually require updating after deployment to accommodate bug-fixes, changes in requirement, alteration in
 the environment, sensing applications, or scientific requirements~\cite{ISI:000253439700120}.
@@ -143,17 +132,18 @@ this, security measures on the sensor motes are deactivated or
 unavailable for a short period of time. Additionally, the update
 process across the whole WSN contributes to a significant
 increase in traffic that an adversary may exploit to mask his
-actions. An attacker can target this time to clandestinely initiate
+actions. 
+This window in time can be a potential attack target to an adversary.
+An attacker may choose this windows of opportunity to clandestinely initiate
 an illegitimate update and inject his own program image
-to serve his intended purpose. This enables an adversary to
-steal sensitive information, log network events, even complete
-denial of service.
+to serve his intended purpose. This enables an adversary to perform a range of undesired activities 
+such as logging network events, denying services or stealing sensitive information.
 
 Implementation of security techniques in WSN are critical
 and challenging because of constrained resources in the sensor.
 Moreover, capability of devices that can compromise security
-computationally grows at enormous speed in comparison to
-sensors. 
+computationally grows at an enormous speed in comparison to
+that of sensors. 
 %
 %In addition to that,
 WSNs have special vulnerabilities
@@ -168,7 +158,7 @@ robotics.
 
 In contrast to the problems described above, relatively
 simple communication protocols and the design of WSNs
-makes it easy to perform intrusion detection in them~\cite{quing09}.
+make it easy to perform intrusion detection in them~\cite{quing09}.
 An Intrusion Detection System (IDS) does not prevent the
 break-in, but it can detect break-in events and raise alerts. It
 may also be able to report the location and extent of the break-in. 
@@ -254,8 +244,9 @@ follows a few local rules to achieve global
 behaviour~\cite{1031506}.
 It follows that breach at any one point weakens
 the whole WSN. An attacker may pretend to be an authentic
-source and disappear after successful introduction of the illegitimate image to one mote in the network. OTA protocol security
-mechanisms, which are cryptographic, would be unable to
+source and disappear after successful introduction of the illegitimate image to one mote in the network. 
+Because of the epidemic propagation property in Deluge, this illegitimate image will spread over the entire network.
+OTA protocol security mechanisms, which are cryptographic, would be unable to
 detect the breach and would allow the network to be flooded
 by the malicious application~\cite{Karlof:2004:TLL:1031495.1031515}.
 In recent years, researchers
@@ -263,12 +254,12 @@ have suggested several intrusion or anomaly detection means
 to secure WSN, alongside the other cryptographic approaches.
 Thus it is useful to employ some other security measures, for
 example: an IDS. Purpose of an IDS is to detect suspicious
-behaviour in the network, to provides useful information about
+behaviour in the network, and to provides useful information about
 intrusion.
 %\marginnote{Ease of attacking OTA protocol}[2cm]
 
 %%%%I WANT TO CHANGE THIS PORTION
-The proposed techniques varies greatly in their ideas and approaches.
+The proposed IDS techniques vary greatly in their ideas and approaches.
 Rule-based misuse detection  techniques identify undesired activities based  on signature.
 They aim to detect known attacks.
 However, they are ineffective against previously unknown attacks.
@@ -278,12 +269,14 @@ The technique relies on hierarchical routing  and monitors the cluster heads to 
 However, rule-based hierarchical routing method does not guarantee using the best energy path.
 %}ISI:000298891500099, Chen:2009:NMI:1516241.1516282, 1424814, Strikos_afull}. %Rule-based, node-based traffic
 They also are often ineffective against novel attacks and may wrongly identify legitimate activities as intrusion because of similarities with a malicious signature. 
+The other rule-based IDSs also are often ineffective against new attacks and may wrongly identify legitimate activities as intrusion because of similarities with a malicious signature. 
 In response to this difficulty, anomaly based IDS builds the signature based on defined normal activity.
 They use statistical probability and significance to identify anomalies. Unfortunately, a system may display previously unknown behaviour.
 For example: rare critical activities like earthquake or tsunami may raise false positive intrusion alert in sensors employed for other environmental monitoring.
 On the other hand, an intrusion that masks its pattern under the hood of normal behaviour, for example: increased packet traffic during OTA update, would go undetected~\cite{ISI:000257882502160, 1593102, 1290173, 4024996}.
 The techniques described above use different kinds of machine learning tools including support vector machine.
 In contrast, specification-based and reputation-based techniques rely on manual input for defining normal and anomalous behaviour with lesser reliance on automation.
+The techniques are inherently slow and not effective against previously unknown attack techniques.
 However, these techniques also have not been proved to be very effective because human interaction are more prone to errors and require more learning time~\cite{Chen:2009:NMI:1516241.1516282, 4085803, Ko2001}. 
 
 
@@ -356,7 +349,8 @@ where,
 \end{inparaenum}
 
 The intrusion detection algorithm requires some modification of the update protocol to enable an automatic reporting service in the mote by using a datagram packets to carry latest update information to the sink.
-All motes are assumed to have time synchronisation accurate to 1~$\mu$s, e.g., achieved using the TSMP~\cite{Pister08tsmp:time}.
+The collection of update information can follow realistic meacanisms such as using Active Message technique\cite{tep116} or using CTP~\cite{tep123, ctptosn2014}.
+All motes in the WSN are assumed to have time synchronisation accurate to 1~$\mu$s, e.g., achieved using the TSMP~\cite{Pister08tsmp:time}.
 % devices e.g., motes stay synchronised to each other} protocol 
 % <dme> !
 The timing information carried by the datagram is therefore synchronised with other nodes in the WSN and can be used readily for processing by the IDS.
@@ -547,7 +541,7 @@ The  new application also causes the motes to report their time, version number 
 In real system, the suggested modified Deluge protocol that runs with the OS would report the information to the sink using datagram.
 The simulator continued until all the motes in the WSN were updated and the reported events were logged. 
 %Step 3: Filtering out mote update time and distance
-The update time of each mote were filtered out  and were sorted In ascending order of update time.
+The update time of each mote were filtered out  and were sorted in ascending order of update time.
 
 %Step 4: Calculating the euclidean distance and sorting
 %A cpp application was used to take input from this semi-processed information and another file that preserved the position information of the motes in the deployment.

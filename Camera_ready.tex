@@ -300,11 +300,20 @@ A higher score indicates a higher probability of intrusion at some point in the 
 
 Use of quantitative measure like the IWS to identify intruders is not new in WSN security research.
 A cooperative distributed IDS for mobile Ad-hoc networks (MANET) detects intrusion based on a quantitative measure of packet forwarding percentage~\cite{hua03}.
-The experiment results is based on simulations in NS-2~\footnote{A network simulator}.
+The experiment results are based on simulations in NS-2~\footnote{NS-2 is a open-source real-time network simulation tool that can be used to define different scenario}.
 The technique can be applied to resource constraint MANET.
 However, it may not be suitable for WSN because of the magnitude of data processing is very high. 
 An algorithm for detecting the intruder in sinkhole attack identifies the intruder through analysing the network flow information and uses a mathematical function for this purpose.  According to this technique, the suspected node has a greater than threshold function value.
 For the data from this node, it is also noticeably inconsistent with other nodes in the area~\cite{ngai07}. 
+The authors claim to evaluate the performance of the proposed algorithm through simulations, but they have not presented any details of the simulation environment or framework.
+Moreover, in the simulation the sensors adopted IEEE 802.11 standard compliant MAC protocol which is used for WiFi networks and not WSN.
+It is worth mentioning that WSN is compliant with IEEE 802.15.4 standard, which was defined four years before the publication~\cite{893287}.
+However, the systems referred above use the quantitative measure to compare against some threshold value to decide on  the possibility of an intrusion.
+The techniques are quite different in its usage from the approach we have presented where the measure of quantitative score or the IWS indicates severity or possibility of an intrusion.
+The the quantitative calculation that we have presented is very simple. 
+In our perception, any computation task employed in WSN needs to be simple and computationally light-weight.
+Otherwise, it is expected to cut down upon  so much of energy resources that it will render the detection system to be practically unemployable.
+
 
 Onat and Miri present an IDS design which considers statistical treatment similar to the one we proposed, yet the techniques have subtle differences.
 The IDS proposed by them deals with node impersonation and resource depletion attacks only.
@@ -314,7 +323,6 @@ Unfortunately, the  packet count statistics is not suitable in OTA software upda
 There is a significant increase in packet traffic owing to software update process. 
 This puts the mechanism off balance.
 However, the mechanism of statistical treatment on information over a time period motivates us to employ timing analysis approach on the context of OTA update protocol.
-
 
 
 \section{Methodology}
@@ -341,7 +349,7 @@ The IDS resides on a computing system that is physically connected to the sink.
 %The system  relies on existing protocols for its operations.
 % <dme> ! (a new abbreviation for me---approximately "Why are you saying this? Isn't it obvious?")
 Information necessary for IDS operations are collected utilising standard transport layer protocols. 
-The IDS analyses the update time of  each of the motes in the WSN and computes the IWS using Equation~\ref{eqn2}---
+The IDS analyses the update time of  each of the motes in the WSN and computes the IWS using our proposed Equation~\ref{eqn2}---
 % and indicates the cases of a possible intrusion, i.e., a probable illegitimate update.
 %The IWS, update time and image version information can be utilised to indicate location and extent of intrusion---
 
@@ -358,8 +366,8 @@ where,
 \end{inparaenum}
 
 The intrusion detection algorithm requires some modification of the update protocol to enable an automatic reporting service in the mote by using a datagram packets to carry latest update information to the sink.
-The collection of update information can follow realistic meacanisms such as using Active Message technique\cite{tep116} or using CTP~\cite{tep123, ctptosn2014}.
-All motes in the WSN are assumed to have time synchronisation accurate to 1~$\mu$s, e.g., achieved using the TSMP~\cite{Pister08tsmp:time}.
+The collection of update information can follow realistic mechanisms such as using Active Message technique\cite{tep116} or using Collection Tree Protocol~\cite{tep123, ctptosn2014}.
+All motes in the WSN are assumed to have time synchronisation accurate to 1~$\mu$s, e.g., achieved using the Time Synchronized Mesh Protocol~\cite{Pister08tsmp:time}.
 % devices e.g., motes stay synchronised to each other} protocol 
 % <dme> !
 The timing information carried by the datagram is therefore synchronised with other nodes in the WSN and can be used readily for processing by the IDS.

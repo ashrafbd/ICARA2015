@@ -297,6 +297,13 @@ A higher score indicates a higher probability of intrusion at some point in the 
 % It can be argued that traffic analysis approach is potentially comparable to proposed timing analysis.
 % The argument can be quite intense because traffic analysis considers both throughput and latency, and latency is essentially about timing.
 % <dme> the above makes little sense to me.
+
+A cooperative distributed IDS for mobile Ad-hoc networks (MANET) detects intrusion based on a quantitative measure of packet forwarding percentage~\cite{hua03}.
+The experiment results is based on simulations in NS-2~\footnote{A network simulator}.
+The technique can be applied to resource constraint MANET.
+However, it may not be suitable for WSN because of the magnitude of data processing is very high. 
+
+
 Onat and Miri present an IDS design which considers statistical treatment similar to the one we proposed, yet the techniques have subtle differences.
 The IDS proposed by them deals with node impersonation and resource depletion attacks only.
 In this approach, each node build an expectation statistics of received packets based on the last N packets received from each neighbour.

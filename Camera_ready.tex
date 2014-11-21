@@ -273,7 +273,7 @@ The other rule-based IDSs also are often ineffective against new attacks and may
 In response to this difficulty, anomaly based IDS builds the signature based on defined normal activity.
 They use statistical probability and significance to identify anomalies. Unfortunately, a system may display previously unknown behaviour.
 For example: rare critical activities like earthquake or tsunami may raise false positive intrusion alert in sensors employed for other environmental monitoring.
-On the other hand, an intrusion that masks its pattern under the hood of normal behaviour, for example: increased packet traffic during OTA update, would go undetected~\cite{ISI:000257882502160, 1593102, 1290173, 4024996}.
+On the other hand, an intrusion that masks its pattern under the hood of normal behaviour, for example: increased packet traffic during OTA update, would go undetected~\cite{ISI:000257882502160, 1593102, 1290173, ngai07}. %4024996
 The techniques described above use different kinds of machine learning tools including support vector machine.
 In contrast, specification-based and reputation-based techniques rely on manual input for defining normal and anomalous behaviour with lesser reliance on automation.
 The techniques are inherently slow and not effective against previously unknown attack techniques.
@@ -298,11 +298,13 @@ A higher score indicates a higher probability of intrusion at some point in the 
 % The argument can be quite intense because traffic analysis considers both throughput and latency, and latency is essentially about timing.
 % <dme> the above makes little sense to me.
 
+Use of quantitative measure like the IWS to identify intruders is not new in WSN security research.
 A cooperative distributed IDS for mobile Ad-hoc networks (MANET) detects intrusion based on a quantitative measure of packet forwarding percentage~\cite{hua03}.
 The experiment results is based on simulations in NS-2~\footnote{A network simulator}.
 The technique can be applied to resource constraint MANET.
 However, it may not be suitable for WSN because of the magnitude of data processing is very high. 
-
+An algorithm for detecting the intruder in sinkhole attack identifies the intruder through analysing the network flow information and uses a mathematical function for this purpose.  According to this technique, the suspected node has a greater than threshold function value.
+For the data from this node, it is also noticeably inconsistent with other nodes in the area~\cite{ngai07}. 
 
 Onat and Miri present an IDS design which considers statistical treatment similar to the one we proposed, yet the techniques have subtle differences.
 The IDS proposed by them deals with node impersonation and resource depletion attacks only.
@@ -605,14 +607,14 @@ The resulting values from this function present an approximation of the abnormal
 \centering
 \begin{tabular}{|l|*{21}{r|}r|}
 \hline
-\bd{Node ID}           & \bd{1} & \bd{2} & \bd{3} & \bd{4} & \bd{5} & \bd{7} & \bd{8} & \bd{9} & \bd{10} & \bd{11} & \bd{12} & \bd{14} & \bd{15} & \bd{16} & \bd{17} & \bd{19} & \bd{20} & \bd{21} & \bd{22} & \bd{23} & \bd{25}\\
+\bd{Node ID}           & \bd{1} & \bd{2} & \bd{3} & \bd{4} & \bd{5} & \bd{7} & \bd{8} & \bd{9} & \bd{10} & \bd{11} & \bd{12} & \bd{14} & \bd{15} & \bd{16} & \bd{18} & \bd{19} & \bd{20} & \bd{21} & \bd{22} & \bd{23} & \bd{25}\\
 %Mote ID           & 1 & 2 & 3 & 4 & 5  & 6 & 7 & 8 & 9 & 10 & 11 & 12 & 13 & 14 & 15  & 16 & 17 & 18 & 19 & 20 \\
 \hline
-$\mu$            & 0 & 19 & 24 & 21 & 27 & 29 & 38 & 25 & 19 & 13 & 23 & 26 & 2 & 14 & 10 & 25 & 48 & 8 & 8 & 14 & 33\\
-$\sigma$		 & 0 & 28 & 31 & 80 & 84 & 146 & 38 & 32 & 29 & 77 & 87 & 192 & 18 & 26 & 74 & 208 & 96 & 73 & 73 & 131 & 201\\
+$\mu$            & 0 & 19 & 24 & 21 & 27 & 29 & 38 & 25 & 19 & 13 & 23 & 26 & 2 & 14 & 16 & 25 & 48 & 8 & 8 & 14 & 33\\
+$\sigma$		 & 0 & 28 & 31 & 80 & 84 & 146 & 38 & 32 & 29 & 77 & 87 & 192 & 18 & 26 & 140 & 208 & 96 & 73 & 73 & 131 & 201\\
 \hline
 \end{tabular}
-\caption{Time statistics of motes in Tree topology. Data from node 6, 13, 18 and 24 omitted due to space limitation.}
+\caption{Time statistics of motes in Tree topology. Data from node 6, 13, 17 and 24 omitted due to space limitation.}
 \label{tab:stat_ellip}
 \end{table*}
 

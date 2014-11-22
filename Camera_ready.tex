@@ -46,7 +46,7 @@
 
 
 \begin{document}
-\title{Securing Robots in WSN Environment through Intrusion Detection of WSN Software Update}
+\title{Helping Secure Robots in WSN Environments by Monitoring WSN Software Updates for Intrusions}
 %\title{Securing Robotics in WSN Integrated Environment: Intrusion Detection of WSN Software Update}
 
 \author{
@@ -62,11 +62,11 @@
 
 %\doublespacing
 \begin{abstract}
-Robotics and  Wireless Sensor Network (WSN) collaborations is an emerging research field in which both the technologies can benefit from integrated implementations.
-A robot operating in WSN assisted environment can dynamically push instructions using over the air (OTA) update protocols to suit to its sensing requirements.
-In this paper, an Intrusion Detection System (IDS) for WSN  software update protocol is designed and simulated. 
-%When the protocol modifies the running software in a mote, the mote sends related  information to the sink. 
-The IDS analyses the update phenomena and computes an `Intrusion Warning Score' (IWS) to indicate a possible intrusion i.e., a probable illegitimate update.
+Robotics and  Wireless Sensor Network (WSN) collaboration is an emerging research field in which both technologies can benefit from integrated implementations.
+A robot operating in WSN assisted environments can dynamically push instructions using over the air (OTA) update protocols to alter sensors to suit their requirements.
+In this paper, an Intrusion Detection System (IDS) for a WSN  software update protocol is designed and simulated. 
+When the protocol modifies the running software in a mote, the mote sends related  information to the WSN sink. 
+The IDS analyses the update phenomena of each of the motes in the network and computes an `Intrusion Warning Score' (IWS) that indicates a possible intrusion due to an illegitimate software update.
 %\notedme{Mentioning robots more than just in the first word would be good}
 \end{abstract}
 
@@ -82,103 +82,111 @@ The IDS analyses the update phenomena and computes an `Intrusion Warning Score' 
 \label{sec:intro}
 
 Wireless Sensor Networks (WSN) have attracted robotics
-researchers because of the problem solving potentials, such as
-robot localisation, path finding, sensing, mapping. Integrated
-WSNs and robotics applications augment a robot's interaction,
-decision making capabilities and services where WSNs can be
-deployed in the environment. Mission critical robotics applications in military, mining, team collaboration, or companion
-for older adults employ wireless sensors as well. Conversely,
+researchers because of problems they can potentially solve, such as
+robot localisation, path finding, sensing, and mapping. 
+%
+Integrated
+WSNs and robotics applications augment a robot's capabilities for decision-making.
+% interaction potential and decision making capabilities.
+% and services where WSNs can be deployed in the environment. 
+% <dme> I don't understand the above
+Mission critical robotics applications in military, mining, team collaboration, or applications such as companionship
+for the elderly can employ wireless sensors as well. Conversely,
 robotics can also be utilised to solve WSN problems like
-sensor deployment or relocation in hostile environment, data aggregation, acting as data mules~\cite{Shue13}.
-WSN can greatly enhance
+sensor deployment or relocation in hostile environments; assisting data aggregation; and acting as data mules~\cite{Shue13}.
+WSNs can greatly enhance
 the perception capabilities of robots and provide infrastructure
 for robust inter-robot communication. Mobile robot navigation is another emerging research area where robotics and
 wireless sensors collaborate. Multiple robots can benefit from
 navigating in WSN-assisted environments without depending
 on GPS signals. Robots can also dynamically change the
 sensor applications over the air (OTA) to suit changes
-in its environmental sensing requirements. However, security of
-technologies is one of the major concerns in such collaborative
-approach.
+in environmental sensing requirements. However, the security of
+WSN technologies is a major concern.
 
-Wireless sensor devices in WSN are known as nodes or
+Wireless sensor devices in WSNs are known as nodes or
 motes. The manager node, which is generally connected to
-a workstation and has long lasting power source is called a sink
-or base station. Every sensor node in a WSN has a unique
-identification number called `Node ID'. Intrusion in software
-update primarily indicates uploading inappropriate software
-that performs undesired actions, clandestinely replacing the
-sensor operating system (OS) software, and so on. Update time
-is the time when any mote begins executing a new version
+a workstation and a long lasting power source is called a sink
+or a base station. All sensor nodes in a WSN have a unique
+identification number---the `Node ID'. Intrusions during software
+updates primarily indicates uploading inappropriate software
+that performs undesired actions, having replacing the
+sensor operating system (OS) software. We use the term `update time'
+to denote when any mote begins executing a new version
 of the software image. Data exchange in WSN takes place
 locally using a neighbourhood discovery process, following
 an autonomous relay mechanism that does not require a routing table.
 
-WSNs usually require updating after deployment to accommodate bug-fixes, changes in requirement, alteration in
-the environment, sensing applications, or scientific requirements~\cite{ISI:000253439700120}.
-Certain protocols like Deluge can solve this problem
-by updating OTA. Deluge is an efficient and reliable protocol.
-It addresses several network programming issues e.g., deals
-with program objects larger than the sensor memory, environments with high packet loss rate, variable node density
+WSNs often need to be updated after deployment to accommodate bug-fixes, changes in requirements, or alterations to
+the environment~\cite{ISI:000253439700120}.
+%sensing applications, or scientific requirements
+% <dme> unclear intellectual structure of that list: messy overlaps between scientific requirements and requirements, for example.
+Certain protocols, such as Deluge, can solve this problem
+by facilitating OTA updates. Deluge is an efficient and reliable protocol.
+It addresses several network programming issues, e.g., dealing
+with program objects larger than the sensor memory, and working in environments with high packet loss rates, variable node density
 and asymmetric links~\cite{1031506}.
-Deluge is an interesting protocol
-to investigate any phenomena related to OTA reprogramming.
+%Deluge is an interesting protocol
+%to investigate any phenomena related to OTA reprogramming.
+% <dme> above doesn't add anything. It doesn't say why it's interesting.
 
-Software update in WSN is a vulnerable process that has
-effects beyond the updates. 
+Software update in WSNs is a tricky process that has
+effects beyond the software updates themselves. 
 The mote must reboot the OS to the new application.
 During
-this, security measures on the sensor motes are deactivated or
+this time, security measures on the sensor motes are deactivated or
 unavailable for a short period of time. Additionally, the update
 process across the whole WSN contributes to a significant
 increase in traffic that an adversary may exploit to mask his
-actions. 
-This window in time can be a potential attack target to an adversary.
-An attacker may choose this windows of opportunity to clandestinely initiate
+actions. An attacker can target this time to clandestinely initiate
 an illegitimate update and inject his own program image
-to serve his intended purpose. This enables an adversary to perform a range of undesired activities 
-such as logging network events, denying services or stealing sensitive information.
+to serve his intended purpose. This enables an adversary to
+steal sensitive information, log network events, even effect complete
+denial of service.
 
-Implementation of security techniques in WSN are critical
-and challenging because of constrained resources in the sensor.
+Implementation of security techniques in WSNs are critical
+and challenging because of constrained resources in the sensor motes.
 Moreover, capability of devices that can compromise security
-computationally grows at an enormous speed in comparison to
-that of sensors. 
+computationally grows at enormous speed in comparison to
+sensors. 
 %
 %In addition to that,
 WSNs have special vulnerabilities
 that do not exist in wired networks. Wireless channels are
-inherently considered to be less secure. Secure mechanisms
+inherently considered to be less secure. Secure protocols
 like WPS, PKM and likewise are inappropriate in WSNs.
+% <dme> needs citations ideally: you've not said what these are
 Reliability and safety critics, and other researchers, have
 frequently pointed out that security issues in WSNs have not
 been sufficiently addressed, and that WSNs are not yet secure
 enough for deployment within mission critical applications like
 robotics.
 
-In contrast to the problems described above, relatively
+In contrast to the problems described above, the relatively
 simple communication protocols and the design of WSNs
-make it easy to perform intrusion detection in them~\cite{quing09}.
+makes it easy to perform some types of intrusion detection within them~\cite{quing09}.
 An Intrusion Detection System (IDS) does not prevent the
 break-in, but it can detect break-in events and raise alerts. It
 may also be able to report the location and extent of the break-in. 
 In this paper we present an algorithm, which considers a
-centralised approach to detect the intrusion in case of WSN
+centralised approach to detect the intrusion in the case of a WSN
 software update. The algorithm requires a minor modification
 of the OTA update protocol to send back a datagram packet
 containing the update time~\cite{tep116}.
 %\notedme{broken approach? (i.e. Skipping from simulation to IDS implementation when that's not possible.)}
 
 The information carried by the
-datagram is processed and analysed to work out a `Surprise
-Score' or `Intrusion Warning Score' (IWS) to indicate a
+datagram is processed and analysed to work out an
+%`Surprise Score' 
+% <dme> quoted term introduced but used nowhere else in document.
+`Intrusion Warning Score' (IWS) to indicate a
 possible intrusion. 
 This work's contributions are two fold: 
 \begin{inparaenum}
 \item  The IDS identifies anomalies in software update patterns
 and scores them quantitatively;
 \item It is demonstrated that the IDS
-can indicate the location of intrusion point and possible extent
+can indicate the location of an intrusion point and the possible extent
 of intrusion.
 %scheme i.e., the IDS expectations can provide useful insight for designing secure WSN.
 \end{inparaenum}
@@ -205,12 +213,16 @@ Finally, we conclude our arguments in Section~\ref{sec:concl}.
 %in the field and relates it to motivation of the study.
 
 The software update process using OTA protocols is vulnerable
-and a lucrative attack target because of several reasons. First,
-the ability to infect a software update process implies effects
-beyond the updates itself. Secondly, cryptographic protection in
-sensors is inadequate. Constrained computational capacity and
-resources make it possible to compromise the cryptographic
-measures incorporated in the implemented WSN OSs~\cite{aes2011}.
+in existing networks due to a lack of cryptographic protections in sensor motes. 
+Software update is also a lucrative target in order to effect widespread attacks.
+%and a lucrative attack target for several reasons. 
+% First,
+% the ability to infect a software update process implies effects
+% beyond the updates itself. Secondly, cryptographic protection in
+% sensors is inadequate. Constrained computational capacity and
+% resources make it possible to compromise the cryptographic
+% measures incorporated in the implemented WSN OSs~\cite{aes2011}.
+% <dme> the above should have been fixed. It doesn't make sense, and isn't correct in as much as I think I know what you mean. Just because it was in the review copy doesn't mean it should stay wrong in the camera-ready.
 A  malicious intruder can replicate as an authentic
 image source and advertise new program version which the
 other motes cannot repudiate.
@@ -375,7 +387,7 @@ The timing information carried by the datagram is therefore synchronised with ot
 \begin{figure}[btp]
     \centering
 	\resizebox{\linewidth}{!}{
-	    \includegraphics[width=\linewidth]{IDS_fw.eps}	
+	    \includegraphics[width=\linewidth]{IDS_fw}	
 	}
     \caption{IDS Framework}
     \label{fig:ids_fw}
@@ -405,7 +417,7 @@ The IDS has three types of components:
 \begin{figure}[btp]
     \centering
 	\resizebox{\linewidth}{!}{
-	    \includegraphics[width=\linewidth]{IDS.eps}
+	    \includegraphics[width=\linewidth]{IDS}
 	}    
     \caption{IDS Modelling}
     \label{fig:ids_model}
@@ -662,7 +674,7 @@ The result in baseline data shows that motes closer to the sink have lower mean 
 \begin{figure}[t]
     \centering
 	\resizebox{\linewidth}{!}{
-        \includegraphics[width=\linewidth]{Tree.eps}
+        \includegraphics[width=\linewidth]{Tree}
     }    
         \caption{IWS and Relative position of nodes}
     \label{fig:elliptopo} 
@@ -681,7 +693,7 @@ However, an estimation of distance along the most probable link path based on th
 \begin{figure}[tbph!]
 	\centering
 	\resizebox{\linewidth}{!}{
-        \includegraphics[width=\linewidth]{Tree_column.eps}
+        \includegraphics[width=\linewidth]{Tree_column}
     }
      \caption{Comparison of IWS at different motes}
      \label{fig:ellipgraph}

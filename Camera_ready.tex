@@ -390,7 +390,7 @@ where,
 \end{inparaenum}
 
 The intrusion detection algorithm requires some modification of the update protocol to enable an automatic reporting service in the mote by using a datagram packets to carry latest update information to the sink.
-The collection of update information can follow realistic mechanisms such as using Active Message technique\cite{tep116} or using Collection Tree Protocol~\cite{tep123, ctptosn2014}.
+The collection of update information can follow realistic mechanisms such as using Active Message technique\cite{tep116} or using the Collection Tree Protocol~\cite{tep123, ctptosn2014}.
 All motes in the WSN are assumed to have time synchronisation accurate to 1~$\mu$s, e.g., achieved using the Time Synchronized Mesh Protocol~\cite{Pister08tsmp:time}.
 % devices e.g., motes stay synchronised to each other} protocol 
 % <dme> !
@@ -458,10 +458,10 @@ The IDS maintains an identifier to differentiate among different update times fr
 
 \subsubsection*{Identifying Intrusion}
 \label{ssc:cal_iws} 
-The IDS builds anomaly signature or baseline data from authenticated initial software update runs. % are considered to be 
-The subsequent updates are subject to verification against signature.
+The IDS builds anomaly signatures or baseline data from authenticated initial software update runs. % are considered to be 
+The subsequent updates are subject to verification against these signatures.
 The time analyser module in the IDS inspects the NDB once an update activity has been detected.
-It determines the changes in the statistics of the update time and calculates IWS based on utility function in Equation~\ref{eqn2}. IWS indicates the possibility of an intrusion. If the IWS is high enough to be considered an intrusion, the IDS sorts the timing data for that run and identifies the source of intrusion as the mote reporting from lowest update time.
+It determines the changes in the statistics of the update time and calculates IWS based on utility function in Equation~\ref{eqn2}. IWS indicates the possibility of an intrusion. If the IWS is high enough to be considered an intrusion, the IDS sorts the timing data for that run and identifies the source of intrusion as the mote reporting from the lowest update time.
 The IDS also identifies the extent of intrusion from mote ID and version information in the database.
 
 
@@ -491,7 +491,7 @@ The IDS also identifies the extent of intrusion from mote ID and version informa
 
 %\notedme{This is a start, but it's not very clearly written. Talking about the expected capabilities of attackers and vulnerabilities of the system would be good.}
 The threat model is directed towards injection of unauthorised program images to infect the entire WSN.
-The IDS is expected to handle malicious node update, node compromise, node failure.
+The IDS is expected to handle malicious node update, node compromise, and node failure.
 In addition to this, the IDS also considers a threat model where a new node pops up and injects the new software image by compromising existing WSN security mechanism.
 %The main threat scenario that the IDS is expected to handle is compromise of a particular node in the WSN and then attacker being able to utilise the same node or replicate the node to inject a new software image using Deluge protocol in the WSN.
 %However, once the new image transfer has been injected, the node may remain alive or disappear.
@@ -502,7 +502,7 @@ We assume that the nodes are physically protected and not accessible by the atta
 The only way an intruder can launch an attack is through the wireless network.
 An attacker can also use cryptanalysis to represent a false identity without physically compromising a node.
 We also assume that the sensors are equipped with a protected memory area that cannot be overwritten by the OTA update process.
-The protected area can only be programmed physically through a sensor programming board and needs to follow specific security routines which are beyond the scope of this paper.
+The protected area can only be programmed physically through a sensor programming board and needs to follow specific security routines that are beyond the scope of this paper.
 The update protocol and other security codes are housed in this protected memory area.
 This implies that the update protocol cannot be compromised by the intruder. 
 %He is able to access the code in a compromised node by employing superior computing power. 
@@ -513,17 +513,17 @@ This implies that the update protocol cannot be compromised by the intruder.
 The paper assumes several WSN settings and capabilities.
 One of the most important assumptions is that there is a single  sink. 
 It further assumes that the sink is protected from all kinds of attacks and cannot be compromised. 
-The system do not consider mote mobility scenario and assumes a static WSN.
+The system does not consider mote mobility scenarios and assumes a static WSN.
 
 
-\subsection*{Experiment Settings}
+\subsection*{Experimental Settings}
 \label{subsec:sim_env}
 
 The IDS requires Deluge to report the time when it begins  executing  a new version of some software.
-The Deluge protocol was originally implemented in TinyOS and later has been ported to other embedded operating systems including Contiki\footnote{http://www.contiki-os.org}. 
+The Deluge protocol was originally implemented in TinyOS and later has been ported to other embedded operating systems including Contiki.\footnote{http://www.contiki-os.org}
 We used Deluge protocol implemented in Contiki v2.7 on a system running on Ubuntu 12.04.
 %[So this will eventually need citation and a self-contained description.]
-`Cooja'\footnote{https://github.com/contiki-os/contiki/wiki/An-Introduction-to-Cooja}, a network simulator for Contiki, was used to simulate the software update pattern associated with Deluge protocol.
+`Cooja',\footnote{https://github.com/contiki-os/contiki/wiki/An-Introduction-to-Cooja} a network simulator for Contiki, was used to simulate the software update pattern associated with Deluge protocol.
 %\notedme{Best to give academic citations, or footnote URLs for these technologies.}
 %We also used a plugin for Contiki called Mobility to aid our experiential setup.
 %Although the plugin was designed to deal with positions over time for the nodes in the simulation, we used it to load the exact location of the sensor motes into the `Cooja' simulator. 
@@ -576,13 +576,14 @@ The diagnostic application would necessarily report its time, version number and
 
 %Step 2: Stopping the simulation
 \subsubsection*{Step 2} 
-The sink dynamically began the update process and propagated another version of the software image using Deluge protocol. %, which is also called 
+The sink dynamically began the update process and propagated another version of the software image using the Deluge protocol. %, which is also called 
 Whenever the transfer to a mote was complete, the new image would replace the old one and reboot to begin executing itself.
 The  new application also causes the motes to report their time, version number and mote ID on the serial terminal. 
-In real system, the suggested modified Deluge protocol that runs with the OS would report the information to the sink using datagram.
+In a real system, the suggested modified Deluge protocol that runs with the OS would report the information to the sink using a datagram.
 The simulator continued until all the motes in the WSN were updated and the reported events were logged. 
 %Step 3: Filtering out mote update time and distance
-The update time of each mote were filtered out  and were sorted in ascending order of update time.
+%The update time of each mote were filtered out  and were sorted in ascending order of update time.
+% <dme> no need to state the obvious
 
 %Step 4: Calculating the euclidean distance and sorting
 %A cpp application was used to take input from this semi-processed information and another file that preserved the position information of the motes in the deployment.

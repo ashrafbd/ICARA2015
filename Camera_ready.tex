@@ -9,8 +9,8 @@
 \usepackage[utf8]{inputenc}
 \usepackage{cite}
 \usepackage{paralist}
-\usepackage[pdftex]{graphicx}
-%\usepackage[dvips]{graphicx} 
+%\usepackage[pdftex]{graphicx}
+\usepackage[dvips]{graphicx} 
 %\usepackage{pslatex}
 \usepackage{caption}
 \usepackage{subcaption}
@@ -63,7 +63,7 @@
 %\doublespacing
 \begin{abstract}
 Robotics and  Wireless Sensor Network (WSN) collaboration is an emerging research field in which both technologies can benefit from integrated implementations.
-A robot operating in WSN assisted environments can dynamically push instructions using over the air (OTA) update protocols to alter sensors to suit their requirements.
+A robot operating in WSN assisted environments can dynamically push instructions using over the air (OTA) update protocols to alter sensors to suit the requirements.
 In this paper, an Intrusion Detection System (IDS) for a WSN  software update protocol is designed and simulated. 
 When the protocol modifies the running software in a mote, the mote sends related  information to the WSN sink. 
 The IDS analyses the update phenomena of each of the motes in the network and computes an Intrusion Warning Score (IWS) that indicates a possible intrusion due to an illegitimate software update.
@@ -109,8 +109,8 @@ motes. The manager node, which is generally connected to
 a workstation and a long lasting power source is called a sink
 or a base station. All sensor nodes in a WSN have a unique
 identification number---the \emph{Node ID}. Intrusions during software
-updates primarily indicates uploading inappropriate software
-that performs undesired actions, having replacing the
+updates primarily indicate uploading inappropriate software
+that perform undesired actions, having replacing the
 sensor operating system (OS) software. We use the term `update time'
 to denote when any mote begins executing a new version
 of the software image. Data exchange in WSN takes place
@@ -125,7 +125,7 @@ Certain protocols, such as Deluge, can solve this problem
 by facilitating OTA updates. Deluge is an efficient and reliable protocol.
 It addresses several network programming issues, e.g., dealing
 with program objects larger than the sensor memory, and working in environments with high packet loss rates, variable node density
-and asymmetric links~\cite{1031506}.
+and asymmetric links~\cite{1031506, 1127826}.
 %Deluge is an interesting protocol
 %to investigate any phenomena related to OTA reprogramming.
 % <dme> above doesn't add anything. It doesn't say why it's interesting.
@@ -165,8 +165,7 @@ robotics.
 In contrast to the problems described above, the relatively
 simple communication protocols and the design of WSNs
 makes it easy to perform some types of intrusion detection within them~\cite{quing09}.
-An Intrusion Detection System (IDS) does not prevent the
-break-in, but it can detect break-in events and raise alerts. It
+An Intrusion Detection System (IDS) does not prevent an attacker, but it can detect break-in events and raise alerts. It
 may also be able to report the location and extent of the break-in. 
 In this paper we present an algorithm, which considers a
 centralised approach to detect the intrusion in the case of a WSN
@@ -179,7 +178,7 @@ The information carried by the
 datagram is processed and analysed to work out an
 %`Surprise Score' 
 % <dme> quoted term introduced but used nowhere else in document.
-`Intrusion Warning Score' (IWS) to indicate a
+Intrusion Warning Score (IWS) to indicate a
 possible intrusion. 
 This work's contributions are two fold: 
 \begin{inparaenum}
@@ -274,6 +273,8 @@ Because of the epidemic propagation property in Deluge, this illegitimate image 
 In recent years, researchers
 have suggested several intrusion or anomaly detection means
 to secure WSN, alongside the other cryptographic approaches.
+The cryptographic approaches employed in resource constrained sensors do not guarantee a secure operating environment.
+An attacker with superior abilities is able to compromise the sensors. 
 Thus it is useful to employ some other security measures, for
 example: an IDS. Purpose of an IDS is to detect suspicious
 behaviour in the network, and to provides useful information about
@@ -282,7 +283,7 @@ intrusion.
 
 %%%%I WANT TO CHANGE THIS PORTION
 The proposed IDS techniques vary greatly in their ideas and approaches.
-Rule-based misuse detection  techniques identify undesired activities based  on signature.
+Rule-based misuse detection  techniques identify undesired activities based  on abnormality signature.
 They aim to detect known attacks.
 However, they are ineffective against previously unknown attacks.
 Additionally, they may wrongly identify legitimate activities as intrusion because of similarity with the signature~\cite{372146, 1515559, ISI:000298891500099, Chen:2009:NMI:1516241.1516282, 1424814, Strikos_afull}.
@@ -312,9 +313,10 @@ Hence, we propose an analytical tool that is passive in nature and can provide v
 The technique has been tested on Deluge.
 We have exploited services from standard protocols to gather timing information from motes in  the WSN and then process the timing information for intrusion detection.
 Use of timing analysis approach is a novel technique in IDS for WSN.
+The IDS identifies anomaly in software update pattern in terms of quantitative score. 
+A higher score indicates a higher probability of intrusion at some point in the WSN~\cite{aalam14, auspdc15}. 
 The IDS  gathers processed information from the sensors, is centrally controlled and resides outside the WSN.
-It  identifies anomaly in software update pattern in terms of quantitative score. 
-A higher score indicates a higher probability of intrusion at some point in the WSN~\cite{aalam14}. 
+The external placement of IDS has obvious advantage of utilising minimum amount of vital sensor resources, such as energy, for processes related to arriving at decision about some potential intrusion event.
 
 % While timing analysis mechanism is non-existent in the WSN, some of the IDSs use traffic analysis or packet inspection  techniques.
 % It can be argued that traffic analysis approach is potentially comparable to proposed timing analysis.
@@ -323,7 +325,7 @@ A higher score indicates a higher probability of intrusion at some point in the 
 
 Use of a quantitative measure such as the IWS to identify intruders is not new in WSN security research.
 A cooperative distributed IDS for mobile Ad-hoc networks (MANET) detects intrusion based on a quantitative measure of packet forwarding percentage~\cite{hua03}.
-The experimental results are based on simulations in NS-2.\footnote{NS-2 is a open-source real-time network simulation tool that can be used to define different scenario}
+The experimental results are based on simulations in NS-2.\footnote{NS-2 is an open-source real-time network simulation tool that can be used to define different scenario}
 The technique can be applied to resource constraint MANETs.
 However, requirement of very high magnitudes of data processing turns this technique into one impractical for employment in resource constrained sensors environment. 
 An algorithm for detecting the intruder in sinkhole attacks identifies the intruder through analysing the network flow information and uses a mathematical function for this purpose.  According to this technique, the suspected node has a  function  value greater than the threshold function value.
@@ -705,7 +707,7 @@ However, an estimation of distance along the most probable link path based on th
 
 
 
-\begin{figure}[tbph!]
+\begin{figure}[bh!]
 	\centering
 	\resizebox{\linewidth}{!}{
         \includegraphics[width=\linewidth]{Tree_column}

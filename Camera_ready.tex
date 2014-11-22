@@ -66,7 +66,7 @@ Robotics and  Wireless Sensor Network (WSN) collaboration is an emerging researc
 A robot operating in WSN assisted environments can dynamically push instructions using over the air (OTA) update protocols to alter sensors to suit their requirements.
 In this paper, an Intrusion Detection System (IDS) for a WSN  software update protocol is designed and simulated. 
 When the protocol modifies the running software in a mote, the mote sends related  information to the WSN sink. 
-The IDS analyses the update phenomena of each of the motes in the network and computes an `Intrusion Warning Score' (IWS) that indicates a possible intrusion due to an illegitimate software update.
+The IDS analyses the update phenomena of each of the motes in the network and computes an Intrusion Warning Score (IWS) that indicates a possible intrusion due to an illegitimate software update.
 %\notedme{Mentioning robots more than just in the first word would be good}
 \end{abstract}
 
@@ -108,7 +108,7 @@ Wireless sensor devices in WSNs are known as nodes or
 motes. The manager node, which is generally connected to
 a workstation and a long lasting power source is called a sink
 or a base station. All sensor nodes in a WSN have a unique
-identification number---the `Node ID'. Intrusions during software
+identification number---the \emph{Node ID}. Intrusions during software
 updates primarily indicates uploading inappropriate software
 that performs undesired actions, having replacing the
 sensor operating system (OS) software. We use the term `update time'
@@ -224,25 +224,34 @@ Software update is also a lucrative target in order to effect widespread attacks
 % measures incorporated in the implemented WSN OSs~\cite{aes2011}.
 % <dme> the above should have been fixed. It doesn't make sense, and isn't correct in as much as I think I know what you mean. Just because it was in the review copy doesn't mean it should stay wrong in the camera-ready.
 A  malicious intruder can replicate as an authentic
-image source and advertise new program version which the
+image source and advertise a new program version that the
 other motes cannot repudiate.
-Thirdly, there is no mechanism to check the integrity of the entire
-image object, because it is infeasible when the size of the object exceeds
-the size of available sensor memory.
-%\notedme{Interesting argument! I like it. Although it could be that _most_ of the pages get integrity-checked, and Deluge does use pages...}
-Fourthly, even if an OTA update protocol incorporates on-chip hardware based encryption,
-cryptography alone cannot prevent all attacks. 
+%
+% Thirdly, there is no mechanism to check the integrity of the entire
+% image object, because it is infeasible when the size of the object exceeds
+% the size of available sensor memory.
+% %\notedme{Interesting argument! I like it. Although it could be that _most_ of the pages get integrity-checked, and Deluge does use pages...}
+% Fourthly, even if an OTA update protocol incorporates on-chip hardware based encryption,
+% cryptography alone cannot prevent all attacks. 
 %\notedme{Weak point. No evidence is provided, and no examples given.}
+% <dme> the above points are too weak for publication, I think. You could form hash trees to fix point 3, and 4 doesn't have any evidence or context provided.
 Techniques of
-different types of attacks on WSN have been described by~\cite{DBLP:journals/corr/abs-1301-3022}. Countermeasure against these attacks are computationally
-expansive, energy intensive. It implies employing them exposes
-WSN to some other kinds of attacks, such as DoS through
-resource exhaustion. 
-Fifthly, an attacker can extract valuable
-information about the network from a physically compromised
-node. He can utilise the knowledge to initiate Sybil attack~\cite{syb02}, even
-can replace the nodes with the illegitimate and malicious ones,
-which can imitate a legal update process. Considering the above, some researchers suggest a complete redesign
+different types of attacks on WSNs have been described by~\cite{DBLP:journals/corr/abs-1301-3022}. 
+% <dme> don't use publications as nouns. Say by "blah et al.~\cite{...}"
+Countermeasures against these attacks are computationally
+expensive and energy intensive---employing them exposes
+the WSN to some other kinds of attacks, such as DoS through
+resource exhaustion.
+% <dme> above point isn't strong: sending packets does the same sort of thing, and comms is the problem, not computing.
+Once an attacker has compromised a node, they can utilise the knowledge that they gain
+%Fifthly, an attacker can extract valuable
+%information about the network from a physically compromised
+%node. He can utilise the knowledge 
+to initiate Sybil attacks~\cite{syb02}.
+%, even
+%can replace the nodes with the illegitimate and malicious ones,
+%which can imitate a legal update process. 
+Considering the above, some researchers suggest a complete redesign
 of security mechanisms in WSNs~\cite{quing09}.
 
 
@@ -258,9 +267,10 @@ It follows that breach at any one point weakens
 the whole WSN. An attacker may pretend to be an authentic
 source and disappear after successful introduction of the illegitimate image to one mote in the network. 
 Because of the epidemic propagation property in Deluge, this illegitimate image will spread over the entire network.
-OTA protocol security mechanisms, which are cryptographic, would be unable to
-detect the breach and would allow the network to be flooded
-by the malicious application~\cite{Karlof:2004:TLL:1031495.1031515}.
+% OTA protocol security mechanisms, which are cryptographic, would be unable to
+% detect the breach and would allow the network to be flooded
+% by the malicious application~\cite{Karlof:2004:TLL:1031495.1031515}.
+% <dme> no idea what the above means.
 In recent years, researchers
 have suggested several intrusion or anomaly detection means
 to secure WSN, alongside the other cryptographic approaches.
@@ -276,27 +286,28 @@ Rule-based misuse detection  techniques identify undesired activities based  on 
 They aim to detect known attacks.
 However, they are ineffective against previously unknown attacks.
 Additionally, they may wrongly identify legitimate activities as intrusion because of similarity with the signature~\cite{372146, 1515559, ISI:000298891500099, Chen:2009:NMI:1516241.1516282, 1424814, Strikos_afull}.
-A decentralized, hierarchical, rule-based IDS follows a network-based approach  and monitors exchanged  messages to detect intrusion. 
+A decentralised, hierarchical, rule-based IDS follows a network-based approach  and monitors exchanged  messages to detect intrusion. 
 The technique relies on hierarchical routing  and monitors the cluster heads to trace messages~\cite{ioa07}.
 However, rule-based hierarchical routing method does not guarantee using the best energy path.
 %}ISI:000298891500099, Chen:2009:NMI:1516241.1516282, 1424814, Strikos_afull}. %Rule-based, node-based traffic
 They also are often ineffective against novel attacks and may wrongly identify legitimate activities as intrusion because of similarities with a malicious signature. 
 The other rule-based IDSs also are often ineffective against new attacks and may wrongly identify legitimate activities as intrusion because of similarities with a malicious signature. 
-In response to this difficulty, anomaly based IDS builds the signature based on defined normal activity.
+In response to this difficulty, anomaly based IDSs build signatures based on defined normal activity.
 They use statistical probability and significance to identify anomalies. Unfortunately, a system may display previously unknown behaviour.
-For example: rare critical activities like earthquake or tsunami may raise false positive intrusion alert in sensors employed for other environmental monitoring.
+For example: rare critical events like earthquakes or tsunamis may raise false positive intrusion alert in sensors employed for other environmental monitoring.
 On the other hand, an intrusion that masks its pattern under the hood of normal behaviour, for example: increased packet traffic during OTA update, would go undetected~\cite{ISI:000257882502160, 1593102, 1290173, ngai07}. %4024996
-The techniques described above use different kinds of machine learning tools including support vector machine.
+The techniques described above use different kinds of machine learning tools, such as support vector machines.
 In contrast, specification-based and reputation-based techniques rely on manual input for defining normal and anomalous behaviour with lesser reliance on automation.
 The techniques are inherently slow and not effective against previously unknown attack techniques.
 However, these techniques also have not been proved to be very effective because human interaction are more prone to errors and require more learning time~\cite{Chen:2009:NMI:1516241.1516282, 4085803, Ko2001}. 
 
 
-Approaches to design of IDS mechanisms %are either distributed or centrally controlled. They 
-employ techniques like key management, encryption and authentication to protect services like localisation, data aggregation, cluster formation, time synchronisation.
-It is considered that specific services are protected against specific attacks e.g, forwarding, sinkhole, wormhole under certain conditions~\cite{1639675, 6096939, sink08, 5172466}.
+Approaches to the design of IDS mechanisms %are either distributed or centrally controlled. They 
+employ techniques like key management, encryption and authentication to protect services like localisation, data aggregation, cluster formation, and time synchronisation.
+%It is considered that 
+The goal is to protect specific services against specific attacks e.g, forwarding, sinkhole, and wormholes, under certain conditions~\cite{1639675, 6096939, sink08, 5172466}.
 %Although approaches described above
-Despite innovative ideas, only few IDSs are able to address the security issues related to software update in WSN.
+Despite innovative ideas, only a few IDSs are able to address the security issues related to software updates in WSNs.
 Hence, we propose an analytical tool that is passive in nature and can provide valuable insight into the propagation characteristics of OTA reprogramming protocol. 
 The technique has been tested on Deluge.
 We have exploited services from standard protocols to gather timing information from motes in  the WSN and then process the timing information for intrusion detection.
@@ -310,29 +321,30 @@ A higher score indicates a higher probability of intrusion at some point in the 
 % The argument can be quite intense because traffic analysis considers both throughput and latency, and latency is essentially about timing.
 % <dme> the above makes little sense to me.
 
-Use of quantitative measure like the IWS to identify intruders is not new in WSN security research.
+Use of a quantitative measure such as the IWS to identify intruders is not new in WSN security research.
 A cooperative distributed IDS for mobile Ad-hoc networks (MANET) detects intrusion based on a quantitative measure of packet forwarding percentage~\cite{hua03}.
-The experiment results are based on simulations in NS-2~\footnote{NS-2 is a open-source real-time network simulation tool that can be used to define different scenario}.
-The technique can be applied to resource constraint MANET.
-However, requirement of very high magnitude of data processing turns this technique impractical for employment in resource constrained sensors environment. 
-An algorithm for detecting the intruder in sinkhole attack identifies the intruder through analysing the network flow information and uses a mathematical function for this purpose.  According to this technique, the suspected node has a  function  value greater than the threshold function value.
+The experimental results are based on simulations in NS-2.\footnote{NS-2 is a open-source real-time network simulation tool that can be used to define different scenario}
+The technique can be applied to resource constraint MANETs.
+However, requirement of very high magnitudes of data processing turns this technique into one impractical for employment in resource constrained sensors environment. 
+An algorithm for detecting the intruder in sinkhole attacks identifies the intruder through analysing the network flow information and uses a mathematical function for this purpose.  According to this technique, the suspected node has a  function  value greater than the threshold function value.
 For the data from this node, it is also noticeably inconsistent with other nodes in the area~\cite{ngai07}. 
 The authors claim to evaluate the performance of the proposed algorithm through simulations, but they have not presented any details of the simulation environment or framework.
-Moreover, in the simulation the sensors adopted IEEE 802.11 standard compliant MAC protocol, which is used for WiFi networks and not WSN.
-It is worth mentioning that WSN is compliant with IEEE 802.15.4 standard, which was defined four years before the publication~\cite{893287}.
+Moreover, in the simulation the sensors adopted IEEE 802.11 standard compliant MAC protocol, which is used for Wi-Fi networks and not WSNs.
+It is worth mentioning that WSNs are typically compliant with the IEEE 802.15.4 standard, which was defined four years before the publication~\cite{893287}.
 However, the systems referred above use quantitative measures to compare against some threshold value to decide on  the possibility of an intrusion.
-The techniques are quite different in its usage from the approach we have presented where the measure of quantitative score or the IWS additionally indicates severity or possibility of an intrusion.
+The techniques are quite different in their usage from the approach we have presented where the measure of quantitative score or the IWS additionally indicates possibility or severity of an intrusion.
 The quantitative calculation that we have presented is very simple. 
-In our perception, any computation task employed in WSN needs to be simple and computationally light-weight.
-Otherwise, it is expected to cut down upon  so much of energy resources that the scheme will render the detection system to be practically unemployable.
+In our view, any computation task employed in WSN needs to be simple and computationally lightweight.
+Otherwise, there is a risk that the scheme is so energy expensive that the detection system will not be deployable in practice.
+%expected to cut down upon  so much of energy resources that the scheme will render the detection system to be practically unemployable.
 
 
-Onat and Miri present an IDS design which considers statistical treatment similar to the one we proposed, yet the techniques have subtle differences.
-The IDS proposed by them deals with node impersonation and resource depletion attacks only.
-In this approach, each node build an expectation statistics of received packets based on the last N packets received from each neighbour.
-If packets received from any neighbour display anomalous patterns after a predefined number of consecutive packets, intrusion alarms may be raised \cite{1512911}.
-Unfortunately, the  packet count statistics is not suitable in OTA software update scenario.
-There is a significant increase in packet traffic owing to software update process. 
+Onat and Miri~\cite{1512911} present an IDS design that considers a statistical treatment similar to the one we proposed, yet the techniques have subtle differences.
+Their IDS deals with node impersonation and resource depletion attacks only.
+In this approach, each node builds an expectation of the statistics of received packets based on the last $N$ packets received from each neighbour.
+If packets received from any neighbour display anomalous patterns after a predefined number of consecutive packets, intrusion alarms may be raised.
+Unfortunately, the  packet count statistics are not suitable in the OTA software update scenario.
+There is a significant increase in packet traffic owing to software update process itself. 
 This puts the mechanism off balance.
 However, the mechanism of statistical treatment on information over a time period motivates us to employ timing analysis approach on the context of OTA update protocol.
 

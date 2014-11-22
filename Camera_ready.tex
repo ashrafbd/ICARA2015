@@ -651,10 +651,13 @@ $\sigma$		 & 0 & 28 & 31 & 80 & 84 & 146 & 38 & 32 & 29 & 77 & 87 & 192 & 18 & 2
 \label{tab:stat_ellip}
 \end{table*}
 
-In this section, we presents the data found in the course of this investigation, their interpretation and evaluate the contribution.
-Discussing the performance and effects of the proposed IDS in different topologies are useful.
-However, any of the experimented topologies also presents fair idea about the outcomes from the others. 
-Hence, we shall concentrate our discussion on results and findings of a single, tree topology only.
+In this section, we present and analyse our experimental data.
+%the data found in the course of this investigation, their interpretation and evaluate the contribution.
+%Discussing the performance and effects of the proposed IDS in different topologies are useful.
+%However, any of the experimented topologies also presents fair idea about the outcomes from the others. 
+%Hence, w
+% <dme> you don't say why it's useful, or why it's OK not to discuss. too confusing in intent.
+We shall concentrate our discussion on results and findings of a single, tree topology only in this paper.
 We shall mention the cases in other topologies when the outcome was considered contrary to our expectations.
 
 The tree shaped deployment has 25 nodes with four major branches as shown in Figure~\ref{fig:elliptopo}. 
@@ -677,7 +680,7 @@ The nodes were placed with an aim of making them useful for WSN-assisted robot n
 Table~\ref{tab:stat_ellip} shows the baseline statistical measurements obtained at different motes: all times are in seconds.
 %The numbers indicate the measurements in time unit of seconds.
 The first row in Table~\ref{tab:stat_ellip} contains the Node IDs that are headers for the data displayed underneath.
-The next two rows show the baseline data i.e., mean and standard deviation computed from the 20 legitimate updates initiated from the sink.
+The next two rows show the baseline data, i.e., mean and standard deviation computed from the 20 legitimate updates initiated from the sink.
 It is observed that the motes further away from the sink have higher mean and standard deviation.  
 However, standard deviation increases gently.
 The stability observed in standard deviation results from efficient and reliable image transfer effected by OTA protocol.
@@ -692,9 +695,8 @@ The result in baseline data shows that motes closer to the sink have lower mean 
         \caption{IWS and Relative position of nodes}
     \label{fig:elliptopo} 
 \end{figure} 
-Figure~\ref{fig:elliptopo} shows the relative positions of the motes with mote ID written at the centre of the tiny circle and IWS beneath the circle.
-IWS has been calculated using  the utility function shown in Equation~\ref{eqn2}.
-Each of the motes were considered as intrusion point in the process of measuring IWS.
+Figure~\ref{fig:elliptopo} shows the relative positions of the motes with mote ID written at the centre of the tiny circle and IWS beneath the circle---the IWS has been calculated using  the utility function shown in Equation~\ref{eqn2}.
+Each of the motes were considered as intrusion point in the process of measuring the IWS.
 The IWS increases linearly with the increase in distance from the sink.
 The `distance' term can be misleading without further clarification.
 Euclidean distance between a mote and the sink does not make useful sense as the packets in the network must travel using a relay mechanism through other motes in the network.
@@ -712,35 +714,35 @@ However, an estimation of distance along the most probable link path based on th
      \label{fig:ellipgraph}
 \end{figure}
 
-The IWS is considerably higher for intrusion at distant motes than those which are close to the sink.
+The IWS is considerably higher for intrusion at distant motes than those that are close to the sink.
 This phenomena is topology dependent, which also implies  that it is connectivity dependent.
-It is possible that if IWS in a network are organised in a specific order, it would represent the original topology in some fashion.
+It is possible that if the IWS distribution in a network is organised in a specific order, it would represent the original topology in some fashion.
 For example, in the tree topology, the major branches are represented by linear rising slope in Figure~\ref{fig:ellipgraph}.
-The branch along node ID 1 to 7 can be imagined as a line from point `A' to `B'. Similarly, distant point of other branches can also be imagined at points `C',`D',`E'.
+The branch along node ID 1 to 7 can be imagined as a line from point `A' to `B'. Similarly, distant point of other branches can also be imagined at points `C',`D', and`E'.
 
 %IWS at different motes differ considerably: the motes close to the sink have very low IWS in comparison to the distant motes.
 %The observation is also evident from Figure~\ref{fig:ellipgraph}.
 % <dme> covered indirectly in the paragraphs below, I think.
 
-The main contribution of this research project comes from the ability to report anomaly in quantitative term like the IWS.
-For example:  a regular legitimate update, initiated from node ID 1, resulted into a IWS of 13.
-The result matched the theoretical expectation of very low IWS.
-In addition to this, when intrusion scenario were simulated from the nodes near the sink, the IWS reported was fairly low, e.g. 30 for mote ID 3, 8, 9, and 15
+The main contribution of this research comes from the ability to report an anomaly using a quantitative term such as the IWS.
+For example:  a regular legitimate update, initiated from node ID 1, resulted in an IWS of 13.
+The result matched the theoretical expectation of a very low IWS.
+In addition to this, when intrusion scenarios were simulated from the nodes near the sink, the IWS reported was fairly low, e.g. 30 for mote ID 3, 8, 9, and 15
  and 45 for node 2. 
-Because of the fact that IWS of the motes close to the sink are likely to be very low, which is in line with the theoretical expectation, it is quite difficult to conclude if such an IWS indicate an intrusion. 
-However, for the distant motes, the IWS is quite high and the IDS can conclude such cases as intrusion, e.g. IWS of 408 for mote ID 7, 390 for mote ID 14, 322 for mote ID 18, 
+Because of the fact that the IWS of the motes close to the sink are likely to be very low---which is inline with the theoretical expectation---it is quite difficult to conclude if such an IWS indicates an intrusion. 
+However, for the distant motes, the IWS is quite high and the IDS can conclude that such cases are intrusions, e.g.\ an IWS of 408 for mote ID 7, 390 for mote ID 14, and 322 for mote ID 18.
 %277 for mote ID 23
-and likewise indicate intrusion.
+%and likewise indicate intrusion.
 
 
-While reporting severity or likelihood of an intrusion in quantitative term like the IWS is useful, the IDS can also detect the source of intrusion and its extent. 
+While reporting severity or likelihood of an intrusion in quantitative terms like the IWS is useful itself, the IDS can also detect the source of intrusion and its extent. 
 The IDS analyses update timing of all motes to identify the source of intrusion. 
-For example, Table~\ref{tab:tree_time_18} presents the update time recorded at different motes when intrusion was initiated from note 18.
-The timing data shows that lowest timing was recorded at node 17 and 19 which was equal to 15 seconds.
+For example, Table~\ref{tab:tree_time_18} presents the update time recorded at different motes when an intrusion was initiated from note 18.
+The timing data shows that the lowest timing was recorded at node 17 and 19 which was equal to 15 seconds.
 Node 18 is not expected to report any time because of three practical reasons: 
 %<Ash> I am not comfortable with this arguments anow because of the way we've changed the assumptions now. Well, I'll revisit the assumptions again and then come back here later.
 \begin{inparaenum}
-\item node 18 initiated the update, so it was updated at $0$ second;
+\item node 18 initiated the update, so it was updated at $0$ seconds;
 \item it acted as a sink, according to the protocol it did not require notifying its update time to any other mote; and 
 \item it is the compromised node whose protocol is expected to be altered.
 \end{inparaenum}
@@ -781,7 +783,7 @@ The extent of intrusion, as specified earlier, is found out from reported versio
 \label{sec:concl}
 
 Collaboration between wireless sensors and robotics can offer great advantages. 
-With collaborative robotics increasing rapidly, security of environment in sensor assisted navigation or inter-robot communication over wireless media is of great importance.
+With adoption of collaborative robotics increasing rapidly, the security of the environment in sensor assisted navigation or inter-robot communication over wireless media is of great importance.
 Supporting a group of robots with WSNs  can extend the capability of both. 
 %Sensors can sense, they cannot react. 
 %Sensors have huge limitations in their capability to be in dependently useful. 
@@ -795,17 +797,18 @@ Combining the capabilities of WSN and robots is appealing.
 
 
 In this paper, we modelled an IDS solution to intrusion in WSN software update protocols.
-We discussed the potential danger that is associated with WSN OTA software update.
+We discussed the potential dangers that are associated with WSN OTA software updates.
 While OTA update protocols make certain WSN management tasks easy, they also remain vulnerable to intrusion attempts.
-An adversary can take advantage of the resource constrained nature of the sensor motes and employ enough resources to break in through the limited protection the sensors are armed with.
+%An adversary can take advantage of the resource constrained nature of the sensor motes and employ enough resources to break in through the limited protection the sensors are armed with.
+% <dme> don't believe this
 To help manage this problem, we have suggested a passive security mechanism---an IDS.
 A robot can also host the IDS in a collaborative environment.
 The IDS is generally housed in a server that remains physically connected to the  sink. 
 The system watches over the timing of software update patterns using a modified version of the Deluge protocol.
-Whenever a mote is updated, it sends an update related information to designated sink using a datagram.  
-Related information from the datagram is filtered by the ITC for further processing at IDS.
+Whenever a mote is updated, it sends update-related information to a designated sink using a datagram.  
+Related information from the datagram is filtered by the ITC for further processing at the IDS.
 
-The first contribution of the research is quantifying intrusion probability through a quantitative IWS metric. 
+The first contribution of this research is quantifying intrusion probability through a quantitative IWS metric. 
 %The IWS is a quantitative indicator of possible intrusion.
 The utility function that computes the IWS is designed to neutralise the undesired %/unexpected
 changes in mean and standard deviation which are expected to contribute to a near zero IWS.%\notedme{unclear}
@@ -815,20 +818,24 @@ The IDS can indicate the approximate location from where the intrusion was initi
 It can also decide on the extent of intrusion based on reported software version information.
 %Besides, the IDS also can indicate some other kinds of anomalies such as node relocation, node repudiation, node compromise and so on.
 
-While identifying intrusion in OTA software update is a difficult task, under certain conditions removing the effects is quite easy.
-Unless, an intrusion leads to DoS attack, the intrusion effect can be easily removed by initiating another update of the legitimate software from the sink.
-However, in case of DoS attack, generally the network is lost and needs major effort to recover, which is beyond the scope of this paper.
+While identifying intrusions in OTA software updates is a difficult task, under certain conditions it is practical.
+% removing the effects is quite easy.
+%Unless an intrusion leads to a DoS attack, the intrusion effect can be easily removed by initiating another update of the legitimate software from the sink.
+% <dme> it's too risky to say something that sounds so wrong if readers might not have seen the part that says sections of the WSN OS don't get updaded.
+There are still other potential security problems to investigate, of course. For example, protection against DoS attacks in which the use of the network is lost and needs major effort to recover, is beyond the scope of this paper.
 
 The IDS we described here has several limitations. 
 It assumes some special cases like a static WSN with a single sink.
 It also assumes that network-wide information will not be forged. %to have network wide transparent knowledge.
 These assumptions may not hold in a real WSN.
-In addition to this, assumptions about the attacker are: the attacker can employ enough resources to break in the cryptographic protections in sensors; however, he is not able to modify the protocols in an uncompromised sensor.
+%In addition to this, assumptions about the attacker are:
+%the attacker can employ enough resources to break in the cryptographic protections in sensors; however, he is not able to modify the protocols in an uncompromised sensor.
+% <dme> not correct
 The IDS has an obvious functional limitation.
 It cannot identify an intrusion in certain scenarios.
-For example, when an intrusion takes place in close vicinity of the sink, this IWS may not always be sufficiently large to be identified as an intrusion.
+For example, when an intrusion takes place in close vicinity of the sink, theIWS may not always be sufficiently large to be identified as an intrusion.
 Another limitation stems from the fact that the results are based on simulated data and needs support from real world implementation.
-In future,  the IDS can be implemented to examine real world performance including cases of multiple sinks with mobile sensors.
+In future,  the IDS will be implemented and deployed to examine real-world performance including cases of multiple sinks and mobile sensors.
 
 
 \bibliographystyle{IEEEtran}
